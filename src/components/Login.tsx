@@ -9,3 +9,5 @@ class Login extends Component<LoginProps, LoginState> {
 		return <p>Sample</p>;
 	}
 }
+
+export default Login;
