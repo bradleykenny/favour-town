@@ -1,16 +1,36 @@
 import React, { Component } from "react";
-import "./style/App.css";
+import { Router, Switch, Route, Redirect } from "react-router-dom";
+
 import "bootstrap/dist/css/bootstrap.css";
 import NavBar from "./components/NavBar";
 import FeedList from "./components/FeedList";
+import Profile from "./components/Profile";
 
-class App extends Component {
+import { history } from "./services/history";
+
+import "./style/App.css";
+
+class App extends Component<{ dispatch: any }, {}> {
+	constructor(props: any) {
+		super(props);
+	}
+
 	render() {
 		return (
-			<div className="App">
-				<NavBar />
-				<FeedList />
-			</div>
+			<Router history={history}>
+				<Switch>
+					<Route path="/home">
+						<NavBar />
+						<FeedList />
+					</Route>
+					<Route path="/profile">
+						<Profile username="bradknny" />
+					</Route>
+					<Route path="/">
+						<Redirect to="/home" />
+					</Route>
+				</Switch>
+			</Router>
 		);
 	}
 }

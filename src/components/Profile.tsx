@@ -13,7 +13,7 @@ class Profile extends Component<ProfileProps, ProfileState> {
 		return (
 			<Jumbotron>
 				<h1>Firstname Lastname</h1>
-				<h2>Username</h2>
+				<h2>{this.props.username}</h2>
 			</Jumbotron>
 		);
 	}
