@@ -14,7 +14,7 @@ class FeedList extends Component<FeedListProps, FeedListState> {
 				<FeedCard
 					title="Example Card"
 					text="Some example text"
-					username="Brad"
+					username="bradknny"
 				/>
 			</div>
 		);

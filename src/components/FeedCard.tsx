@@ -17,7 +17,7 @@ class FeedCard extends Component<FeedCardProps, FeedCardState> {
 				<Card.Body>
 					<Card.Title>{this.props.title}</Card.Title>
 					<Card.Subtitle className="mb-2 text-muted">
-						{this.props.username}
+						@{this.props.username}
 					</Card.Subtitle>
 					<Card.Text>{this.props.text}</Card.Text>
 				</Card.Body>
