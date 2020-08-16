@@ -24,6 +24,7 @@ class App extends Component<{ dispatch: any }, {}> {
 						<FeedList />
 					</Route>
 					<Route path="/profile">
+						<NavBar />
 						<Profile username="bradknny" />
 					</Route>
 					<Route path="/">
