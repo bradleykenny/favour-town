@@ -28,9 +28,9 @@ class App extends Component<{ dispatch: any }, {}> {
 						<NavBar />
 						<Profile username="bradknny" />
 					</Route>
-					{/* <Route path="/">
+					<Route path="/">
 						<Redirect to="/home" />
-					</Route> */}
+					</Route>
 					<Route path="/login">
 						<Login />
 					</Route>
