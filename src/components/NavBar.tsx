@@ -18,7 +18,7 @@ function NavBar() {
 				<Nav className="mr-auto">
 					<Nav.Link href="/profile">Profile</Nav.Link>
 					<Nav.Link href="#features">Friends</Nav.Link>
-					<Nav.Link href="#pricing">Favors</Nav.Link>
+					<Nav.Link href="#pricing">Favours</Nav.Link>
 					<NavDropdown title="Dropdown" id="collasible-nav-dropdown">
 						<NavDropdown.Item href="#action/3.1">
 							Action

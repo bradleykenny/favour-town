@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import NavBar from "./components/NavBar";
 import FeedList from "./components/FeedList";
 import Profile from "./components/Profile";
+import Login from "./components/Login";
 
 import { history } from "./services/history";
 
@@ -27,13 +28,16 @@ class App extends Component<{ dispatch: any }, {}> {
 						<NavBar />
 						<Profile username="bradknny" />
 					</Route>
-					<Route path="/">
+					{/* <Route path="/">
 						<Redirect to="/home" />
+					</Route> */}
+					<Route path="/login">
+						<Login />
 					</Route>
 				</Switch>
 			</Router>
 		);
-	}
+	}  
 }
 
 export default App;
