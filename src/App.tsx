@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import { Router, Switch, Route, Redirect } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.css";
-import NavBar from "./components/NavBar";
-import FeedList from "./components/FeedList";
-import Profile from "./components/Profile";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import { NavBar, FeedList, Profile, Login, Register } from "./components/";
 
 import { history } from "./services/history";
 

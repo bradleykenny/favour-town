@@ -8,7 +8,7 @@ type ProfileProps = {
 
 type ProfileState = {};
 
-class Profile extends Component<ProfileProps, ProfileState> {
+export class Profile extends Component<ProfileProps, ProfileState> {
 	render() {
 		return (
 			<Jumbotron>
@@ -18,5 +18,3 @@ class Profile extends Component<ProfileProps, ProfileState> {
 		);
 	}
 }
-
-export default Profile;

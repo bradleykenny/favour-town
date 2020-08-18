@@ -3,7 +3,7 @@ import "../style/Register.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { Button, Form, Container, Row, Col, Card } from "react-bootstrap";
 
-class Register extends Component<any> {
+export class Register extends Component<any> {
 	render() {
 		return (
 			<Container>
@@ -65,5 +65,3 @@ class Register extends Component<any> {
 		);
 	}
 }
-
-export default Register;

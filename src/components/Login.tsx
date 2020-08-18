@@ -9,7 +9,7 @@ type LoginProps = {
 };
 type LoginState = boolean;
 
-class Login extends Component<LoginProps, LoginState> {
+export class Login extends Component<LoginProps, LoginState> {
 	render() {
 		return (
 			<Container>
@@ -64,5 +64,3 @@ class Login extends Component<LoginProps, LoginState> {
 		);
 	}
 }
-
-export default Login;

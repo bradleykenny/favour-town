@@ -10,7 +10,7 @@ type FeedCardProps = {
 
 type FeedCardState = {};
 
-class FeedCard extends Component<FeedCardProps, FeedCardState> {
+export class FeedCard extends Component<FeedCardProps, FeedCardState> {
 	render() {
 		return (
 			<Card style={{ width: "32rem" }}>
@@ -25,5 +25,3 @@ class FeedCard extends Component<FeedCardProps, FeedCardState> {
 		);
 	}
 }
-
-export default FeedCard;

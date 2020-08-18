@@ -9,7 +9,7 @@ import {
 	Button,
 } from "react-bootstrap";
 
-function NavBar() {
+export function NavBar() {
 	return (
 		<Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
 			<Navbar.Brand href="/home">Favour Town</Navbar.Brand>
@@ -47,5 +47,3 @@ function NavBar() {
 		</Navbar>
 	);
 }
-
-export default NavBar;
