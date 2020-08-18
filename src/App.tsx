@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import FeedList from "./components/FeedList";
 import Profile from "./components/Profile";
 import Login from "./components/Login";
+import Register from "./components/Register";
 
 import { history } from "./services/history";
 
@@ -31,13 +32,16 @@ class App extends Component<{ dispatch: any }, {}> {
 					<Route path="/login">
 						<Login />
 					</Route>
+					<Route path="/register">
+						<Register />
+					</Route>
 					<Route path="/">
 						<Redirect to="/home" />
 					</Route>
 				</Switch>
 			</Router>
 		);
-	}  
+	}
 }
 
 export default App;
