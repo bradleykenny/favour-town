@@ -35,6 +35,8 @@ class App extends Component<{ dispatch: any }, {}> {
 					<Route path="/register">
 						<Register />
 					</Route>
+
+					{/* ALWAYS LEAVE `/` LAST */}
 					<Route path="/">
 						<Redirect to="/home" />
 					</Route>
