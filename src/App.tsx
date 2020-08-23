@@ -9,10 +9,6 @@ import { history } from "./services/history";
 import "./style/App.css";
 
 class App extends Component<{ dispatch: any }, {}> {
-	constructor(props: any) {
-		super(props);
-	}
-
 	render() {
 		return (
 			<Router history={history}>
@@ -23,7 +19,13 @@ class App extends Component<{ dispatch: any }, {}> {
 					</Route>
 					<Route path="/profile">
 						<NavBar />
-						<Profile username="bradknny" />
+						<Profile
+							user={{
+								username: "bradknny",
+								firstName: "Brad",
+								lastName: "Kenny",
+							}}
+						/>
 					</Route>
 					<Route path="/login">
 						<Login />

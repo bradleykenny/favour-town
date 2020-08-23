@@ -16,6 +16,11 @@ export class FeedList extends Component<FeedListProps, FeedListState> {
 					text="Some example text"
 					username="bradknny"
 				/>
+				<FeedCard
+					title="Example Card"
+					text="Some example text"
+					username="bradknny"
+				/>
 			</div>
 		);
 	}

@@ -9,10 +9,17 @@ import {
 	Button,
 } from "react-bootstrap";
 
+import "../style/NavBar.css";
+
 export function NavBar() {
 	return (
 		<Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
-			<Navbar.Brand href="/home">Favour Town</Navbar.Brand>
+			<Navbar.Brand href="/home">
+				<span className="nav_logo">
+					<span className="logo_f">favour</span>{" "}
+					<span className="logo_t">town</span>
+				</span>
+			</Navbar.Brand>
 			<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="mr-auto">
