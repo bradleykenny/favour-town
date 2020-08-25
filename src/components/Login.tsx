@@ -38,9 +38,9 @@ export class Login extends Component<LoginProps, LoginState> {
 	render() {
 		// const [loginDetails, setLoginDetails] = useState(state);
 
-		const handleChange = (e: any) => {
+		const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
 			e.preventDefault();
-			const { name, value } = e.target;
+			const { name, value } = e.currentTarget;
 			let errors = this.state.errors;
 
 			switch (name) {
@@ -61,7 +61,7 @@ export class Login extends Component<LoginProps, LoginState> {
 				default:
 					break;
 			}
-			this.setState({ errors, [name]: value });
+			this.setState({ ...errors, [name]: value });
 			// this.setState({ errors, [name]: value }, () => {
 			// 	console.log(errors);
 			// });
