@@ -15,7 +15,6 @@ type LoginState = {
 
 const validateForm = (errors: any) => {
 	let valid = true;
-	console.log(errors);
 	Object.values(errors).forEach(
 		// if we have an error string set valid to false
 		(val: any) => val.length > 0 && (valid = false)
@@ -36,9 +35,9 @@ export class Login extends Component<LoginProps, LoginState> {
 		};
 	}
 	render() {
-		// const [loginDetails, setLoginDetails] = useState(state);
+		// const [loginDetails, setLoginDetails] = useState(this.state);
 
-		const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+		const handleChange = (e: any) => {
 			e.preventDefault();
 			const { name, value } = e.currentTarget;
 			let errors = this.state.errors;
