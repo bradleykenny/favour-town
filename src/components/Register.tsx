@@ -50,42 +50,69 @@ export class Register extends Component<LoginProps, LoginState> {
 			e.preventDefault();
 			const { name, value } = e.currentTarget;
 			let errors = this.state.errors;
+			let loginInfo = this.state;
 
 			switch (name) {
 				case "username":
-					errors.username =
-						value.length < 5
-							? "Username must be 5 characters long!"
-							: "";
+					// errors.username =
+					// 	value.length < 5
+					// 		? "Username must be 5 characters long!"
+					// 		: "";
+					if (value.length < 5) {
+						errors.username = "Username must be 5 characters long!";
+						this.setState({ ...loginInfo, username: "" });
+					} else {
+						errors.username = "";
+						this.setState({ ...loginInfo, username: value });
+					}
 					break;
 
 				case "email":
-					errors.email = validEmailRegex.test(value)
-						? ""
-						: "Email is not valid!";
+					// errors.email = validEmailRegex.test(value)
+					// 	? ""
+					// 	: "Email is not valid!";
+					if (validEmailRegex.test(value)) {
+						errors.email = "";
+						this.setState({ ...loginInfo, email: value });
+					} else {
+						errors.email = "Email is not valid!";
+						this.setState({ ...loginInfo, email: "" });
+					}
 					break;
 
 				case "password":
-					errors.password =
-						value.length < 8
-							? "Password must be 8 characters long!"
-							: "";
+					// errors.password =
+					// 	value.length < 8
+					// 		? "Password must be 8 characters long!"
+					// 		: "";
+					if (value.length < 8) {
+						errors.password = "Password must be 8 characters long!";
+						this.setState({ ...loginInfo, password: "" });
+					} else {
+						errors.password = "";
+						this.setState({ ...loginInfo, password: value });
+					}
 					break;
 
 				case "confirmPassword":
-					errors.confirmPassword =
-						value.length < 8
-							? "Password must be 8 characters long!"
-							: "";
+					// errors.confirmPassword =
+					// 	value.length < 8
+					// 		? "Password must be 8 characters long!"
+					// 		: "";
+					if (value.length < 8) {
+						errors.confirmPassword =
+							"Password must be 8 characters long!";
+						this.setState({ ...loginInfo, confirmPassword: "" });
+					} else {
+						errors.confirmPassword = "";
+						this.setState({ ...loginInfo, confirmPassword: value });
+					}
 					break;
 
 				default:
 					break;
 			}
-			this.setState({ ...errors, [name]: value });
-			// this.setState({ errors, [name]: value }, () => {
-			// 	console.log(errors);
-			// });
+			// this.setState({ ...errors, [name]: value });
 		};
 
 		const handleSubmit = (e: any) => {
@@ -98,8 +125,12 @@ export class Register extends Component<LoginProps, LoginState> {
 			}
 			console.log("Submit username: ", this.state.username);
 			console.log("Submit password: ", this.state.password);
-			console.log("Submit error: ", this.state.errors);
+			console.log(
+				"Submit confirm password: ",
+				this.state.confirmPassword
+			);
 			console.log("Submit email", this.state.email);
+			console.log("Submit error: ", this.state.errors);
 		};
 
 		return (
