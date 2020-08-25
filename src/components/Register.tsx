@@ -58,6 +58,14 @@ export class Register extends Component<any> {
 									</Button>
 								</Form>
 							</Card.Body>
+							<Card.Footer>
+								<p className="font-small grey-text d-flex justify-content-end">
+									Already have an account?
+									<a href="/login" className="blue-text ml-1">
+										Login
+									</a>
+								</p>
+							</Card.Footer>
 						</Card>
 					</Col>
 				</Row>
