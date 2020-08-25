@@ -34,36 +34,46 @@ export class Login extends Component<LoginProps, LoginState> {
 			},
 		};
 	}
-	render() {
-		// const [loginDetails, setLoginDetails] = useState(this.state);
 
+	// const initialState: any = this.state;
+	// const [loginDetails: any, setLoginDetails: any] = useState(initialState);
+
+	render() {
 		const handleChange = (e: any) => {
 			e.preventDefault();
-			const { name, value } = e.currentTarget;
+			const { name, value } = e.target;
 			let errors = this.state.errors;
+			let loginInfo = this.state;
 
 			switch (name) {
 				case "username":
-					errors.username =
-						value.length < 5
-							? "Username must be 5 characters long!"
-							: "";
+					if (value.length < 5) {
+						errors.username = "Username must be 5 characters long!";
+						this.setState({ ...loginInfo, username: "" });
+					} else {
+						errors.username = "";
+						this.setState({ ...loginInfo, username: value });
+					}
 					break;
 
 				case "password":
-					errors.password =
-						value.length < 8
-							? "Password must be 8 characters long!"
-							: "";
+					if (value.length < 8) {
+						errors.password = "Password must be 8 characters long!";
+						this.setState({ ...loginInfo, password: "" });
+					} else {
+						errors.password = "";
+						this.setState({ ...loginInfo, password: value });
+					}
 					break;
 
 				default:
 					break;
 			}
-			this.setState({ ...errors, [name]: value });
-			// this.setState({ errors, [name]: value }, () => {
-			// 	console.log(errors);
-			// });
+			// this.setState({ ...errors, [name]: value });
+			/* // logging
+			console.log("State username ", loginInfo.username);
+			console.log("State password ", loginInfo.password);
+			*/
 		};
 
 		const handleSubmit = (e: any) => {
@@ -74,6 +84,10 @@ export class Login extends Component<LoginProps, LoginState> {
 			} else {
 				console.error("Invalid Form");
 			}
+			// logging
+			console.log("Submit username: ", this.state.username);
+			console.log("Submit password: ", this.state.password);
+			console.log("Submit error: ", this.state.errors);
 		};
 
 		return (

@@ -96,6 +96,10 @@ export class Register extends Component<LoginProps, LoginState> {
 			} else {
 				console.error("Invalid Form");
 			}
+			console.log("Submit username: ", this.state.username);
+			console.log("Submit password: ", this.state.password);
+			console.log("Submit error: ", this.state.errors);
+			console.log("Submit email", this.state.email);
 		};
 
 		return (
