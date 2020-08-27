@@ -2,6 +2,11 @@ import React, { Component, useState } from "react";
 import "../style/Login.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { Button, Form, Container, Row, Col, Card } from "react-bootstrap";
+import axios from "axios";
+import { Redirect, Router, Route, Link } from "react-router-dom";
+import ReactDOM, { render } from "react-dom";
+import { history } from "../services/history";
+import { createPath } from "history";
 
 type LoginProps = {};
 type LoginState = {
@@ -81,13 +86,34 @@ export class Login extends Component<LoginProps, LoginState> {
 			e.preventDefault();
 			if (validateForm(this.state.errors)) {
 				console.info("Valid Form");
+				axios
+					.post("http://localhost:5000/login", {
+						username: this.state.username,
+						password: this.state.password,
+					})
+					.then(
+						(response) => {
+							const location = {
+								pathname: "/home",
+								state: { fromLogin: true },
+							};
+							if (response.statusText == "OK") {
+								//TODO: Update session to be logged in with response.data
+								console.log(response.data);
+								history.push(location);
+							}
+						},
+						(error) => {
+							console.log(error);
+						}
+					);
 			} else {
 				console.error("Invalid Form");
 			}
 			// logging
 			console.log("Submit username: ", this.state.username);
 			console.log("Submit password: ", this.state.password);
-			console.log("Submit error: ", this.state.errors);
+			//console.log("Submit error: ", this.state.errors);
 		};
 
 		return (
