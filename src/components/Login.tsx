@@ -28,8 +28,8 @@ const validateForm = (errors: any) => {
 };
 
 export class Login extends Component<LoginProps, LoginState> {
-	constructor(state: any) {
-		super(state);
+	constructor(props: LoginProps) {
+		super(props);
 		this.state = {
 			username: "",
 			password: "",
