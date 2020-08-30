@@ -5,6 +5,8 @@ import { Button, Form, Container, Row, Col, Card } from "react-bootstrap";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 
+import "../style/Login.css";
+
 type LoginProps = {};
 
 const validateForm = (errors: any) => {
@@ -94,65 +96,77 @@ export const Login = (props: LoginProps) => {
 	};
 
 	return (
-		<Container>
-			<Row className="d-flex justify-content-center">
-				<Col sm={4} className="align-items-center">
-					<Card bg="light">
-						<Card.Body>
-							<Card.Title className="text-center">
-								<h1>Login</h1>
-							</Card.Title>
-							<Form onSubmit={handleSubmit}>
-								<Form.Group controlId="formUsername">
-									<Form.Label>Username</Form.Label>
-									<Form.Control
-										name="username"
-										type="username"
-										placeholder="Username"
-										onChange={handleChange}
-									/>
-									{errors.username.length > 0 && (
-										<Form.Text className="error">
-											{errors.username}
-										</Form.Text>
-									)}
-								</Form.Group>
+		<div
+			style={{
+				backgroundImage:
+					"url(https://www.xmple.com/wallpaper/blue-purple-linear-gradient-1920x1080-c2-ee82ee-40e0d0-a-15-f-14.svg)",
+				height: "100%",
+				width: "100%",
+			}}
+		>
+			<Container>
+				<Row className="d-flex justify-content-center">
+					<Col sm={4} className="align-items-center">
+						<Card bg="light" className="loginCard">
+							<Card.Body>
+								<Card.Title className="text-center">
+									<h1>Login</h1>
+								</Card.Title>
+								<Form onSubmit={handleSubmit}>
+									<Form.Group controlId="formUsername">
+										<Form.Label>Username</Form.Label>
+										<Form.Control
+											name="username"
+											type="username"
+											placeholder="Username"
+											onChange={handleChange}
+										/>
+										{errors.username.length > 0 && (
+											<Form.Text className="error">
+												{errors.username}
+											</Form.Text>
+										)}
+									</Form.Group>
 
-								<Form.Group controlId="formPassword">
-									<Form.Label>Password</Form.Label>
-									<Form.Control
-										name="password"
-										type="password"
-										placeholder="Password"
-										onChange={handleChange}
-									/>
-									{errors.password.length > 0 && (
-										<Form.Text className="error">
-											{errors.password}
-										</Form.Text>
-									)}
-								</Form.Group>
+									<Form.Group controlId="formPassword">
+										<Form.Label>Password</Form.Label>
+										<Form.Control
+											name="password"
+											type="password"
+											placeholder="Password"
+											onChange={handleChange}
+										/>
+										{errors.password.length > 0 && (
+											<Form.Text className="error">
+												{errors.password}
+											</Form.Text>
+										)}
+									</Form.Group>
 
-								<Button
-									variant="primary"
-									type="submit"
-									className="btn-block"
-								>
-									Submit
-								</Button>
-							</Form>
-						</Card.Body>
-						<Card.Footer>
-							<p className="font-small grey-text d-flex justify-content-end">
-								Don't have an account?
-								<a href="/register" className="blue-text ml-1">
-									Sign Up
-								</a>
-							</p>
-						</Card.Footer>
-					</Card>
-				</Col>
-			</Row>
-		</Container>
+									<Button
+										variant="primary"
+										type="submit"
+										className="btn-block"
+									>
+										Submit
+									</Button>
+								</Form>
+							</Card.Body>
+							<Card.Footer>
+								<p className="font-small grey-text d-flex justify-content-end">
+									Don't have an account?
+									<a
+										href="/register"
+										className="blue-text ml-1"
+									>
+										Sign Up
+									</a>
+								</p>
+							</Card.Footer>
+						</Card>
+					</Col>
+				</Row>
+			</Container>
+		</div>
 	);
 };
