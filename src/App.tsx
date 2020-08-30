@@ -1,16 +1,20 @@
 import React, { Component } from "react";
-import { Router, Switch, Route, Redirect, useHistory } from "react-router-dom";
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Redirect,
+	useHistory,
+} from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.css";
-import { NavBar, FeedList, Profile, Login, Register } from "./components/";
-
-import { history } from "./services/history";
+import { NavBar, FeedList, Profile, Login, Register } from "./components";
 
 import "./style/App.css";
 
 const App = () => {
 	return (
-		<Router history={history}>
+		<Router>
 			<Switch>
 				<Route path="/home">
 					<NavBar />

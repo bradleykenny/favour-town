@@ -64,7 +64,6 @@ export const Login = (props: LoginProps) => {
 	};
 
 	const handleSubmit = (e: any) => {
-		// console.log("Form submitted: ", loginDetails);
 		e.preventDefault();
 		if (validateForm(errors)) {
 			console.info("Valid Form");
@@ -88,10 +87,10 @@ export const Login = (props: LoginProps) => {
 		} else {
 			console.error("Invalid Form");
 		}
-		// logging
+
+		// Logging
 		console.log("Submit username: ", loginInfo.username);
 		console.log("Submit password: ", loginInfo.password);
-		//console.log("Submit error: ", this.state.errors);
 	};
 
 	return (
