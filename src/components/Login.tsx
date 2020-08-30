@@ -3,7 +3,7 @@ import "../style/Login.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { Button, Form, Container, Row, Col, Card } from "react-bootstrap";
 import axios from "axios";
-import { Redirect, Router, Route, Link } from "react-router-dom";
+import { Redirect, Router, Route, Link, useHistory } from "react-router-dom";
 import ReactDOM, { render } from "react-dom";
 import { history } from "../services/history";
 import { createPath } from "history";
@@ -40,82 +40,7 @@ export class Login extends Component<LoginProps, LoginState> {
 		};
 	}
 
-	// const initialState: any = this.state;
-	// const [loginDetails: any, setLoginDetails: any] = useState(initialState);
-
 	render() {
-		const handleChange = (e: any) => {
-			e.preventDefault();
-			const { name, value } = e.target;
-			let errors = this.state.errors;
-			let loginInfo = this.state;
-
-			switch (name) {
-				case "username":
-					if (value.length < 5) {
-						errors.username = "Username must be 5 characters long!";
-						this.setState({ ...loginInfo, username: "" });
-					} else {
-						errors.username = "";
-						this.setState({ ...loginInfo, username: value });
-					}
-					break;
-
-				case "password":
-					if (value.length < 8) {
-						errors.password = "Password must be 8 characters long!";
-						this.setState({ ...loginInfo, password: "" });
-					} else {
-						errors.password = "";
-						this.setState({ ...loginInfo, password: value });
-					}
-					break;
-
-				default:
-					break;
-			}
-			// this.setState({ ...errors, [name]: value });
-			/* // logging
-			console.log("State username ", loginInfo.username);
-			console.log("State password ", loginInfo.password);
-			*/
-		};
-
-		const handleSubmit = (e: any) => {
-			// console.log("Form submitted: ", loginDetails);
-			e.preventDefault();
-			if (validateForm(this.state.errors)) {
-				console.info("Valid Form");
-				axios
-					.post("http://localhost:5000/login", {
-						username: this.state.username,
-						password: this.state.password,
-					})
-					.then(
-						(response) => {
-							const location = {
-								pathname: "/home",
-								state: { fromLogin: true },
-							};
-							if (response.statusText == "OK") {
-								//TODO: Update session to be logged in with response.data
-								console.log(response.data);
-								history.push(location);
-							}
-						},
-						(error) => {
-							console.log(error);
-						}
-					);
-			} else {
-				console.error("Invalid Form");
-			}
-			// logging
-			console.log("Submit username: ", this.state.username);
-			console.log("Submit password: ", this.state.password);
-			//console.log("Submit error: ", this.state.errors);
-		};
-
 		return (
 			<Container>
 				<Row className="d-flex justify-content-center">
@@ -125,14 +50,14 @@ export class Login extends Component<LoginProps, LoginState> {
 								<Card.Title className="text-center">
 									<h1>Login</h1>
 								</Card.Title>
-								<Form onSubmit={handleSubmit}>
+								<Form onSubmit={this.handleSubmit}>
 									<Form.Group controlId="formUsername">
 										<Form.Label>Username</Form.Label>
 										<Form.Control
 											name="username"
 											type="username"
 											placeholder="Username"
-											onChange={handleChange}
+											onChange={this.handleChange}
 										/>
 										{this.state.errors.username.length >
 											0 && (
@@ -148,7 +73,7 @@ export class Login extends Component<LoginProps, LoginState> {
 											name="password"
 											type="password"
 											placeholder="Password"
-											onChange={handleChange}
+											onChange={this.handleChange}
 										/>
 										{this.state.errors.password.length >
 											0 && (
@@ -184,4 +109,72 @@ export class Login extends Component<LoginProps, LoginState> {
 			</Container>
 		);
 	}
+
+	handleChange = (e: any) => {
+		e.preventDefault();
+		const { name, value } = e.target;
+		let errors = this.state.errors;
+		let loginInfo = this.state;
+
+		switch (name) {
+			case "username":
+				if (value.length < 5) {
+					errors.username = "Username must be 5 characters long!";
+					this.setState({ ...loginInfo, username: "" });
+				} else {
+					errors.username = "";
+					this.setState({ ...loginInfo, username: value });
+				}
+				break;
+
+			case "password":
+				if (value.length < 8) {
+					errors.password = "Password must be 8 characters long!";
+					this.setState({ ...loginInfo, password: "" });
+				} else {
+					errors.password = "";
+					this.setState({ ...loginInfo, password: value });
+				}
+				break;
+
+			default:
+				break;
+		}
+		// this.setState({ ...errors, [name]: value });
+		/* // logging
+		console.log("State username ", loginInfo.username);
+		console.log("State password ", loginInfo.password);
+		*/
+	};
+
+	handleSubmit = (e: any) => {
+		// console.log("Form submitted: ", loginDetails);
+		e.preventDefault();
+		if (validateForm(this.state.errors)) {
+			console.info("Valid Form");
+			axios
+				.post("http://localhost:5000/login", {
+					username: this.state.username,
+					password: this.state.password,
+				})
+				.then(
+					(response) => {
+						if (response.statusText == "OK") {
+							//TODO: Update session to be logged in with response.data
+							console.log(response.data);
+							history.push("/home");
+						}
+					},
+					(error) => {
+						console.log(error);
+					}
+				);
+		} else {
+			console.error("Invalid Form");
+		}
+		// logging
+		console.log("Submit username: ", this.state.username);
+		console.log("Submit password: ", this.state.password);
+		//console.log("Submit error: ", this.state.errors);
+	};
 }
