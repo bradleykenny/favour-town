@@ -74,7 +74,7 @@ export const Login = (props: LoginProps) => {
 				})
 				.then(
 					(response) => {
-						if (response.statusText === "OK") {
+						if (response.data !== "ERROR: Login failed") {
 							//TODO: Update session to be logged in with response.data
 							console.log(response.data);
 							history.push("/home");
