@@ -118,8 +118,15 @@ export class Register extends Component<LoginProps, LoginState> {
 		const handleSubmit = (e: any) => {
 			// console.log("Form submitted: ", loginDetails);
 			e.preventDefault();
-			if (validateForm(this.state.errors)) {
+			let passwordsMatch =
+				this.state.password.localeCompare(
+					this.state.confirmPassword
+				) === 0;
+			console.log(passwordsMatch);
+			if (validateForm(this.state.errors) && passwordsMatch) {
 				console.info("Valid Form");
+			} else if (!passwordsMatch) {
+				console.info("Passwords dont match!");
 			} else {
 				console.error("Invalid Form");
 			}
@@ -210,7 +217,6 @@ export class Register extends Component<LoginProps, LoginState> {
 											</Form.Text>
 										)}
 									</Form.Group>
-
 									<Button
 										variant="primary"
 										type="submit"
