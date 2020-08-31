@@ -11,7 +11,7 @@ import {
 
 import "../style/NavBar.css";
 
-export function NavBar() {
+export const NavBar = () => {
 	return (
 		<Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
 			<Navbar.Brand href="/home">
@@ -53,4 +53,4 @@ export function NavBar() {
 			</Navbar.Collapse>
 		</Navbar>
 	);
-}
+};

@@ -10,20 +10,18 @@ type FeedCardProps = {
 	text: string;
 };
 
-type FeedCardState = {};
+export const FeedCard = (props: FeedCardProps) => {
+	const { title, username, text } = props;
 
-export class FeedCard extends Component<FeedCardProps, FeedCardState> {
-	render() {
-		return (
-			<Card style={{ width: "32rem" }} className="feedCard">
-				<Card.Body>
-					<Card.Title>{this.props.title}</Card.Title>
-					<Card.Subtitle className="mb-2 text-muted">
-						@{this.props.username}
-					</Card.Subtitle>
-					<Card.Text>{this.props.text}</Card.Text>
-				</Card.Body>
-			</Card>
-		);
-	}
-}
+	return (
+		<Card style={{ width: "32rem" }} className="feedCard">
+			<Card.Body>
+				<Card.Title>{title}</Card.Title>
+				<Card.Subtitle className="mb-2 text-muted">
+					@{username}
+				</Card.Subtitle>
+				<Card.Text>{text}</Card.Text>
+			</Card.Body>
+		</Card>
+	);
+};
