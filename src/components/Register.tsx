@@ -127,7 +127,7 @@ export const Register = (props: RegisterProps) => {
 			<Container className="align-items-center">
 				<Row className="d-flex justify-content-center">
 					<Col sm={4} className="align-items-center">
-						<Card bg="light">
+						<Card bg="light" className="loginCard">
 							<Card.Body>
 								<Card.Title className="text-center">
 									<h1>Create Account</h1>
