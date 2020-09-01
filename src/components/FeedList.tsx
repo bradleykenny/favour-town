@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import { Container, Row, Col } from "react-bootstrap";
 import { FeedCard } from "./FeedCard";
 import axios from "axios";
 
@@ -38,14 +39,20 @@ export const FeedList = (props: FeedListProps) => {
 	}, []);
 
 	return (
-		<div id="feedList">
-			{cards.map((favour: Favour) => (
-				<FeedCard
-					title={favour.title}
-					text={favour.description}
-					username={favour.user_id}
-				/>
-			))}
-		</div>
+		<Container>
+			<Row className="d-flex justify-content-center">
+				<Col sm={4} className="align-items-center">
+					<div id="feedList">
+						{cards.map((favour: Favour) => (
+							<FeedCard
+								title={favour.title}
+								text={favour.description}
+								username={favour.user_id}
+							/>
+						))}
+					</div>
+				</Col>
+			</Row>
+		</Container>
 	);
 };
