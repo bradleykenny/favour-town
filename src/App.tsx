@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
 	Redirect,
-	useHistory,
 } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.css";
