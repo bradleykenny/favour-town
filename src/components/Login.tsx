@@ -70,10 +70,14 @@ export const Login = (props: LoginProps) => {
 		if (validateForm(errors)) {
 			console.info("Valid Form");
 			axios
-				.post("http://localhost:5000/login", {
-					username: loginInfo.username,
-					password: loginInfo.password,
-				})
+				.post(
+					"http://localhost:5000/login/",
+					{
+						username: loginInfo.username,
+						password: loginInfo.password,
+					},
+					{ withCredentials: true } //Send cookies with request
+				)
 				.then(
 					(response) => {
 						if (response.data !== "ERROR: Login failed") {
