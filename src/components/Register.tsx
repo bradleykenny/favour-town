@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "../style/Register.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { Button, Form, Container, Row, Col, Card } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 type RegisterProps = {};
 
@@ -31,6 +33,7 @@ export const Register = (props: RegisterProps) => {
 		password: "",
 		confirmPassword: "",
 	});
+	const history = useHistory();
 
 	const handleChange = (e: any) => {
 		e.preventDefault();
@@ -105,6 +108,31 @@ export const Register = (props: RegisterProps) => {
 		console.log(passwordsMatch);
 		if (validateForm(errors) && passwordsMatch) {
 			console.info("Valid Form");
+			axios
+				.post(
+					"http://localhost:5000/register/",
+					{
+						username: registerInfo.username,
+						email: registerInfo.email,
+						password: registerInfo.password,
+						confirmPassword: registerInfo.confirmPassword,
+					},
+					{ withCredentials: true } //Send cookies with request
+				)
+				.then(
+					(response) => {
+						if (response.data == "OK") {
+							//TODO: Update session to be logged in with registerInfo/alternatively redirect to login page (not sure)
+							alert("Registration Successful");
+							history.push("/home");
+						} else {
+							//Unsuccessful Registration
+						}
+					},
+					(error) => {
+						console.log(error);
+					}
+				);
 		} else if (!passwordsMatch) {
 			console.info("Passwords dont match!");
 			setErrors({ ...errors, confirmPassword: "Passwords dont match!" });
