@@ -22,12 +22,16 @@ const validateForm = (errors: any) => {
 
 export const Register = (props: RegisterProps) => {
 	const [registerInfo, setRegisterInfo] = useState({
+		f_name: "",
+		l_name: "",
 		username: "",
 		email: "",
 		password: "",
 		confirmPassword: "",
 	});
 	const [errors, setErrors] = useState({
+		f_name: "",
+		l_name: "",
 		username: "",
 		email: "",
 		password: "",
@@ -40,11 +44,25 @@ export const Register = (props: RegisterProps) => {
 		const { name, value } = e.currentTarget;
 
 		switch (name) {
-			case "username":
-				if (value.length < 5) {
+			case "f_name":
+				if (value.length < 1) {
 					setErrors({
 						...errors,
-						username: "Username must be 5 characters long!",
+						f_name: "First Name cannot be blank!",
+					});
+					setRegisterInfo({ ...registerInfo, f_name: "" });
+				} else {
+					errors.f_name = "";
+					setErrors({ ...errors, username: "" });
+					setRegisterInfo({ ...registerInfo, f_name: value });
+				}
+				break;
+
+			case "l_name":
+				if (value.length < 1) {
+					setErrors({
+						...errors,
+						username: "Last Name cannot be blank!",
 					});
 					setRegisterInfo({ ...registerInfo, username: "" });
 				} else {
@@ -112,6 +130,8 @@ export const Register = (props: RegisterProps) => {
 				.post(
 					"http://localhost:5000/register/",
 					{
+						f_name: registerInfo.f_name,
+						l_name: registerInfo.l_name,
 						username: registerInfo.username,
 						email: registerInfo.email,
 						password: registerInfo.password,
@@ -124,7 +144,7 @@ export const Register = (props: RegisterProps) => {
 						if (response.data == "OK") {
 							//TODO: Update session to be logged in with registerInfo/alternatively redirect to login page (not sure)
 							alert("Registration Successful");
-							history.push("/home");
+							history.push("/Login");
 						} else {
 							//Unsuccessful Registration
 						}
@@ -161,6 +181,35 @@ export const Register = (props: RegisterProps) => {
 									<h1>Create Account</h1>
 								</Card.Title>
 								<Form onSubmit={handleSubmit}>
+									<Form.Group controlId="f_name">
+										<Form.Label>First Name</Form.Label>
+										<Form.Control
+											name="f_name"
+											type="f_name"
+											placeholder="First Name"
+											onChange={handleChange}
+										/>
+										{errors.f_name.length > 0 && (
+											<Form.Text className="error">
+												{errors.f_name}
+											</Form.Text>
+										)}
+									</Form.Group>
+									<Form.Group controlId="l_name">
+										<Form.Label>Last Name</Form.Label>
+										<Form.Control
+											name="l_name"
+											type="l_name"
+											placeholder="Last Name"
+											onChange={handleChange}
+										/>
+										{errors.l_name.length > 0 && (
+											<Form.Text className="error">
+												{errors.l_name}
+											</Form.Text>
+										)}
+									</Form.Group>
+
 									<Form.Group controlId="formUsername">
 										<Form.Label>Username</Form.Label>
 										<Form.Control
