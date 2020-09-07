@@ -30,7 +30,7 @@ export const FavourForm = (props: FavourFormProps) => {
 					favour_coins: coins,
 					type: type,
 				},
-				{ withCredentials: true } //Send cookies with request
+				{ withCredentials: true }
 			)
 			.then((res) => {
 				alert("Favour posted!");
