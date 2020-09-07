@@ -141,7 +141,7 @@ export const Register = (props: RegisterProps) => {
 				)
 				.then(
 					(response) => {
-						if (response.data == "OK") {
+						if (response.data === "OK") {
 							//TODO: Update session to be logged in with registerInfo/alternatively redirect to login page (not sure)
 							alert("Registration Successful");
 							history.push("/Login");
