@@ -12,6 +12,7 @@ type FavourFormProps = {
 
 export const FavourForm = (props: FavourFormProps) => {
 	const [title, setTitle] = useState("");
+	const [description, setDescription] = useState("");
 	const [location, setLocation] = useState("");
 	const [coins, setCoins] = useState(0);
 	const [type, setType] = useState("");
@@ -26,6 +27,7 @@ export const FavourForm = (props: FavourFormProps) => {
 				"http://localhost:5000/favours/",
 				{
 					title: title,
+					description: description,
 					location: location,
 					favour_coins: coins,
 					type: type,
@@ -36,6 +38,7 @@ export const FavourForm = (props: FavourFormProps) => {
 				alert("Favour posted!");
 				console.log(res);
 				setTitle("");
+				setDescription("");
 				setLocation("");
 				setCoins(0);
 				setType("");
@@ -50,6 +53,9 @@ export const FavourForm = (props: FavourFormProps) => {
 		switch (name) {
 			case "title":
 				setTitle(value);
+				break;
+			case "description":
+				setDescription(value);
 				break;
 			case "location":
 				setLocation(value);
@@ -97,6 +103,18 @@ export const FavourForm = (props: FavourFormProps) => {
 													name="title"
 													type="text"
 													placeholder="Title"
+													onChange={handleChange}
+												/>
+											</Form.Group>
+
+											<Form.Group controlId="formUsername">
+												<Form.Label>
+													Description
+												</Form.Label>
+												<Form.Control
+													name="description"
+													type="text"
+													placeholder="Description"
 													onChange={handleChange}
 												/>
 											</Form.Group>
