@@ -3,5 +3,4 @@ export type ProfileType = {
 	_id: string;
 	email_addr: string;
 	favour_counter: number;
-	title: string;
 };

@@ -8,7 +8,14 @@ import {
 import axios from "axios";
 
 import "bootstrap/dist/css/bootstrap.css";
-import { NavBar, FeedList, Profile, Login, Register } from "./components";
+import {
+	NavBar,
+	FeedList,
+	Profile,
+	Login,
+	Register,
+	FavourForm,
+} from "./components";
 import { ProfileType } from "./types/Profile";
 
 import "./style/App.css";
@@ -19,15 +26,14 @@ const App = () => {
 		_id: "",
 		email_addr: "",
 		favour_counter: 0,
-		title: "",
 	};
 	const [user, setUser] = useState(blankUser);
 
 	useEffect(() => {
 		axios
-			.get("http://localhost:5000/profile/" + "John Test")
+			.get("http://localhost:5000/profile/" + "FakeJohn")
 			.then((response) => {
-				setUser(response.data);
+				setUser(response.data[0]);
 			});
 	}, []);
 
@@ -36,19 +42,12 @@ const App = () => {
 			<Switch>
 				<Route path="/home">
 					<NavBar username={user.username} />
+					<FavourForm user={user} />
 					<FeedList />
 				</Route>
 				<Route path="/profile">
 					<NavBar username="sample" />
-					<Profile
-						user={{
-							username: "bradknny",
-							_id: "12345",
-							email_addr: "example@favourtown.com",
-							favour_counter: 100,
-							title: "Some title",
-						}}
-					/>
+					<Profile user={user} />
 				</Route>
 				<Route path="/login">
 					<Login />
