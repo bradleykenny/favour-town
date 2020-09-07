@@ -5,17 +5,15 @@ import { Jumbotron, Image } from "react-bootstrap";
 import { FeedList } from ".";
 
 import "../style/Profile.css";
+import { ProfileType } from "../types/Profile";
 
 type ProfileProps = {
-	user: {
-		username: string;
-		firstName: string;
-		lastName: string;
-	};
+	user: ProfileType;
 };
 
 export const Profile = (props: ProfileProps) => {
-	const { username, firstName, lastName } = props.user;
+	const { username } = props.user;
+	const [firstName, lastName] = ["John", "Test"];
 	const profilePicture =
 		"https://i2-prod.manchestereveningnews.co.uk/incoming/article18777872.ece/ALTERNATES/s1200c/0_pepfrust.jpg";
 

@@ -11,7 +11,11 @@ import {
 
 import "../style/NavBar.css";
 
-export const NavBar = () => {
+type NavBarProps = {
+	username: string;
+};
+
+export const NavBar = (props: NavBarProps) => {
 	return (
 		<Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
 			<Navbar.Brand href="/home">
@@ -23,7 +27,9 @@ export const NavBar = () => {
 			<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="mr-auto">
-					<Nav.Link href="/profile">Profile</Nav.Link>
+					<Nav.Link href="/profile">
+						{props.username ? props.username : "Profile"}
+					</Nav.Link>
 					<Nav.Link href="#features">Friends</Nav.Link>
 					<Nav.Link href="#favours">Favours</Nav.Link>
 					<NavDropdown title="Dropdown" id="collasible-nav-dropdown">
