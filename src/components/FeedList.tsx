@@ -23,6 +23,8 @@ export const FeedList = (props: FeedListProps) => {
 			<Row className="d-flex justify-content-center">
 				<Col sm={4} className="align-items-center">
 					<div id="feedList">
+						<h2>Favours</h2>
+						<br />
 						{cards.map((favour: FavourType) => (
 							<FeedCard
 								title={favour.title}

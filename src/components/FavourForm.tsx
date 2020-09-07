@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import { Card, Container, Row, Col, Form, Button } from "react-bootstrap";
 
@@ -20,6 +21,26 @@ export const FavourForm = (props: FavourFormProps) => {
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
+		axios
+			.post(
+				"http://localhost:5000/favours/",
+				{
+					title: title,
+					location: location,
+					favour_coins: coins,
+					type: type,
+				},
+				{ withCredentials: true } //Send cookies with request
+			)
+			.then((res) => {
+				alert("Favour posted!");
+				console.log(res);
+				setTitle("");
+				setLocation("");
+				setCoins(0);
+				setType("");
+				setDatetime("");
+			});
 	};
 
 	const handleChange = (e: any) => {
@@ -47,80 +68,124 @@ export const FavourForm = (props: FavourFormProps) => {
 		}
 	};
 
+	const handleShowHide = () => {
+		setShowForm(!showForm);
+	};
+
 	if (props.user) {
-		return (
-			<Container>
-				<Row className="d-flex justify-content-center">
-					<Col sm={4} className="align-items-center">
-						<div id="favourForm">
-							<Card style={{ width: "32rem" }}>
-								<Card.Body>
-									<Form onSubmit={handleSubmit}>
-										<Form.Group controlId="formUsername">
-											<Form.Label>Title</Form.Label>
-											<Form.Control
-												name="title"
-												type="text"
-												placeholder="Title"
-												onChange={handleChange}
-											/>
-										</Form.Group>
-
-										<Form.Group controlId="formUsername">
-											<Form.Label>Location</Form.Label>
-											<Form.Control
-												name="location"
-												type="text"
-												placeholder="Location"
-												onChange={handleChange}
-											/>
-										</Form.Group>
-
-										<Form.Group controlId="formUsername">
-											<Form.Label>Coins</Form.Label>
-											<Form.Control
-												name="coins"
-												type="number"
-												placeholder="Coins"
-												onChange={handleChange}
-											/>
-										</Form.Group>
-
-										<Form.Group controlId="formUsername">
-											<Form.Label>Type</Form.Label>
-											<Form.Control
-												name="type"
-												type="text"
-												placeholder="Type"
-												onChange={handleChange}
-											/>
-										</Form.Group>
-
-										<Form.Group controlId="formUsername">
-											<Form.Label>Date/Time</Form.Label>
-											<Form.Control
-												name="datetime"
-												type="datetime-local"
-												placeholder="Date/Time"
-												onChange={handleChange}
-											/>
-										</Form.Group>
-
-										<Button
-											variant="primary"
-											type="submit"
-											className="btn-block"
+		if (showForm) {
+			return (
+				<Container>
+					<Row className="d-flex justify-content-center">
+						<Col sm={4} className="align-items-center">
+							<div id="favourForm">
+								<Card style={{ width: "32rem" }}>
+									<Card.Body>
+										<p
+											style={{ float: "right" }}
+											onClick={handleShowHide}
 										>
-											Submit
-										</Button>
-									</Form>
-								</Card.Body>
-							</Card>
-						</div>
-					</Col>
-				</Row>
-			</Container>
-		);
+											Hide Form
+										</p>
+										<Card.Title className="text-center">
+											<h1>New Favour</h1>
+										</Card.Title>
+										<Form onSubmit={handleSubmit}>
+											<Form.Group controlId="formUsername">
+												<Form.Label>Title</Form.Label>
+												<Form.Control
+													name="title"
+													type="text"
+													placeholder="Title"
+													onChange={handleChange}
+												/>
+											</Form.Group>
+
+											<Form.Group controlId="formUsername">
+												<Form.Label>
+													Location
+												</Form.Label>
+												<Form.Control
+													name="location"
+													type="text"
+													placeholder="Location"
+													onChange={handleChange}
+												/>
+											</Form.Group>
+
+											<Form.Group controlId="formUsername">
+												<Form.Label>Coins</Form.Label>
+												<Form.Control
+													name="coins"
+													type="number"
+													placeholder="Coins"
+													onChange={handleChange}
+												/>
+											</Form.Group>
+
+											<Form.Group controlId="formUsername">
+												<Form.Label>Type</Form.Label>
+												<Form.Control
+													as="select"
+													name="type"
+													placeholder="Type"
+													onChange={handleChange}
+												>
+													<option value="request">
+														Request
+													</option>
+													<option value="offer">
+														Offer
+													</option>
+												</Form.Control>
+											</Form.Group>
+
+											<Form.Group controlId="formUsername">
+												<Form.Label>
+													Date/Time
+												</Form.Label>
+												<Form.Control
+													name="datetime"
+													type="datetime-local"
+													placeholder="Date/Time"
+													onChange={handleChange}
+												/>
+											</Form.Group>
+
+											<Button
+												variant="primary"
+												type="submit"
+												className="btn-block"
+											>
+												Submit
+											</Button>
+										</Form>
+									</Card.Body>
+								</Card>
+							</div>
+						</Col>
+					</Row>
+				</Container>
+			);
+		} else {
+			return (
+				<Container>
+					<Row className="d-flex justify-content-center">
+						<Col sm={4} className="align-items-center">
+							<Button
+								variant="primary"
+								type="submit"
+								className="btn-block"
+								onClick={handleShowHide}
+								style={{ marginTop: "25px" }}
+							>
+								Post a new favour
+							</Button>
+						</Col>
+					</Row>
+				</Container>
+			);
+		}
 	} else {
 		return <p>Out</p>;
 	}
