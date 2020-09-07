@@ -36,7 +36,6 @@ export const FavourForm = (props: FavourFormProps) => {
 			)
 			.then((res) => {
 				alert("Favour posted!");
-				console.log(res);
 				setTitle("");
 				setDescription("");
 				setLocation("");
@@ -205,6 +204,6 @@ export const FavourForm = (props: FavourFormProps) => {
 			);
 		}
 	} else {
-		return <p>Out</p>;
+		return <p>Not logged in</p>;
 	}
 };
