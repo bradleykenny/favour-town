@@ -46,8 +46,8 @@ const App = () => {
 					<FavourForm user={user} />
 					<FeedList />
 				</Route>
-				<Route path="/profile">
-					<NavBar username="sample" />
+				<Route path="/profile/:username">
+					<NavBar username="bradknny" />
 					<Profile user={user} />
 				</Route>
 				<Route path="/login">

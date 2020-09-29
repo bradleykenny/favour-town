@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { Jumbotron, Image } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
 import { FeedList } from ".";
 
@@ -12,8 +13,9 @@ type ProfileProps = {
 };
 
 export const Profile = (props: ProfileProps) => {
-	const { username } = props.user;
+	const { username } = useParams<{ username: string }>();
 	const [firstName, lastName] = ["John", "Test"];
+
 	// TODO: read in user profile picture dynamically
 	const profilePicture =
 		"https://i2-prod.manchestereveningnews.co.uk/incoming/article18777872.ece/ALTERNATES/s1200c/0_pepfrust.jpg";

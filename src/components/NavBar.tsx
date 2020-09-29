@@ -16,6 +16,7 @@ type NavBarProps = {
 };
 
 export const NavBar = (props: NavBarProps) => {
+	const { username } = props;
 	return (
 		<Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
 			<Navbar.Brand href="/home">
@@ -27,8 +28,8 @@ export const NavBar = (props: NavBarProps) => {
 			<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="mr-auto">
-					<Nav.Link href="/profile">
-						{props.username ? props.username : "Profile"}
+					<Nav.Link href={"/profile/" + username}>
+						{username ? username : "Profile"}
 					</Nav.Link>
 					<Nav.Link href="#features">Friends</Nav.Link>
 					<Nav.Link href="#favours">Favours</Nav.Link>
