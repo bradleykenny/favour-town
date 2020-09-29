@@ -7,16 +7,26 @@ import axios from "axios";
 import "../style/FeedList.css";
 import { FavourType, defaultFavour } from "../types/Favour";
 
-type FeedListProps = {};
+type FeedListProps = {
+	filter?: string;
+};
 
 export const FeedList = (props: FeedListProps) => {
 	const [cards, setCards] = useState([defaultFavour]);
 
 	useEffect(() => {
-		axios.get("http://localhost:5000/favours").then((response) => {
-			setCards(response.data);
-		});
-	}, []);
+		if (props.filter) {
+			axios
+				.get("http://localhost:5000/listings/" + props.filter)
+				.then((response) => {
+					setCards(response.data);
+				});
+		} else {
+			axios.get("http://localhost:5000/favours").then((response) => {
+				setCards(response.data);
+			});
+		}
+	}, [props.filter]);
 
 	return (
 		<Container>

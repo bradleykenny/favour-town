@@ -30,8 +30,9 @@ const App = () => {
 	const [user, setUser] = useState(blankUser);
 
 	useEffect(() => {
+		// TODO: read in user dynamically
 		axios
-			.get("http://localhost:5000/profile/" + "FakeJohn")
+			.get("http://localhost:5000/profile/" + "bradknny")
 			.then((response) => {
 				setUser(response.data[0]);
 			});

@@ -44,6 +44,20 @@ export const Register = (props: RegisterProps) => {
 		const { name, value } = e.currentTarget;
 
 		switch (name) {
+			case "username":
+				if (value.length < 1) {
+					setErrors({
+						...errors,
+						username: "Username cannot be blank!",
+					});
+					setRegisterInfo({ ...registerInfo, username: "" });
+				} else {
+					errors.username = "";
+					setErrors({ ...errors, username: "" });
+					setRegisterInfo({ ...registerInfo, username: value });
+				}
+				break;
+
 			case "f_name":
 				if (value.length < 1) {
 					setErrors({
@@ -53,7 +67,7 @@ export const Register = (props: RegisterProps) => {
 					setRegisterInfo({ ...registerInfo, f_name: "" });
 				} else {
 					errors.f_name = "";
-					setErrors({ ...errors, username: "" });
+					setErrors({ ...errors, f_name: "" });
 					setRegisterInfo({ ...registerInfo, f_name: value });
 				}
 				break;
@@ -62,13 +76,13 @@ export const Register = (props: RegisterProps) => {
 				if (value.length < 1) {
 					setErrors({
 						...errors,
-						username: "Last Name cannot be blank!",
+						l_name: "Last Name cannot be blank!",
 					});
-					setRegisterInfo({ ...registerInfo, username: "" });
+					setRegisterInfo({ ...registerInfo, l_name: "" });
 				} else {
-					errors.username = "";
-					setErrors({ ...errors, username: "" });
-					setRegisterInfo({ ...registerInfo, username: value });
+					errors.l_name = "";
+					setErrors({ ...errors, l_name: "" });
+					setRegisterInfo({ ...registerInfo, l_name: value });
 				}
 				break;
 

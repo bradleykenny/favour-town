@@ -14,6 +14,7 @@ type ProfileProps = {
 export const Profile = (props: ProfileProps) => {
 	const { username } = props.user;
 	const [firstName, lastName] = ["John", "Test"];
+	// TODO: read in user profile picture dynamically
 	const profilePicture =
 		"https://i2-prod.manchestereveningnews.co.uk/incoming/article18777872.ece/ALTERNATES/s1200c/0_pepfrust.jpg";
 
@@ -35,7 +36,7 @@ export const Profile = (props: ProfileProps) => {
 				</h1>
 				<h2>@{username}</h2>
 			</Jumbotron>
-			<FeedList />
+			<FeedList filter={username} />
 		</div>
 	);
 };
