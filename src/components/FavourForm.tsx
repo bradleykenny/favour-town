@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
-import { Card, Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Modal } from "react-bootstrap";
 
 import { ProfileType } from "../types/Profile";
 import "../style/FavourForm.css";
@@ -80,109 +80,101 @@ export const FavourForm = (props: FavourFormProps) => {
 	if (props.user) {
 		if (showForm) {
 			return (
-				<Container>
-					<Row className="d-flex justify-content-center">
-						<Col sm={4} className="align-items-center">
-							<div id="favourForm">
-								<Card style={{ width: "32rem" }}>
-									<Card.Body>
-										<p
-											style={{ float: "right" }}
-											onClick={handleShowHide}
-										>
-											Hide Form
-										</p>
-										<Card.Title className="text-center">
-											<h1>New Favour</h1>
-										</Card.Title>
-										<Form onSubmit={handleSubmit}>
-											<Form.Group controlId="formUsername">
-												<Form.Label>Title</Form.Label>
-												<Form.Control
-													name="title"
-													type="text"
-													placeholder="Title"
-													onChange={handleChange}
-												/>
-											</Form.Group>
+				<div id="favourForm">
+					<Modal
+						style={{ margin: "auto auto" }}
+						show={true}
+						onHide={handleShowHide}
+					>
+						<Modal.Header closeButton>
+							<Modal.Title className="text-center">
+								<h1>New Favour</h1>
+							</Modal.Title>
+						</Modal.Header>
+						<Modal.Body>
+							<Form>
+								<Form.Group controlId="formUsername">
+									<Form.Label>Title</Form.Label>
+									<Form.Control
+										name="title"
+										type="text"
+										placeholder="Title"
+										onChange={handleChange}
+									/>
+								</Form.Group>
 
-											<Form.Group controlId="formUsername">
-												<Form.Label>
-													Description
-												</Form.Label>
-												<Form.Control
-													name="description"
-													type="text"
-													placeholder="Description"
-													onChange={handleChange}
-												/>
-											</Form.Group>
+								<Form.Group controlId="formUsername">
+									<Form.Label>Description</Form.Label>
+									<Form.Control
+										name="description"
+										type="text"
+										placeholder="Description"
+										onChange={handleChange}
+									/>
+								</Form.Group>
 
-											<Form.Group controlId="formUsername">
-												<Form.Label>
-													Location
-												</Form.Label>
-												<Form.Control
-													name="location"
-													type="text"
-													placeholder="Location"
-													onChange={handleChange}
-												/>
-											</Form.Group>
+								<Form.Group controlId="formUsername">
+									<Form.Label>Location</Form.Label>
+									<Form.Control
+										name="location"
+										type="text"
+										placeholder="Location"
+										onChange={handleChange}
+									/>
+								</Form.Group>
 
-											<Form.Group controlId="formUsername">
-												<Form.Label>Coins</Form.Label>
-												<Form.Control
-													name="coins"
-													type="number"
-													placeholder="Coins"
-													onChange={handleChange}
-												/>
-											</Form.Group>
+								<Form.Group controlId="formUsername">
+									<Form.Label>Coins</Form.Label>
+									<Form.Control
+										name="coins"
+										type="number"
+										placeholder="Coins"
+										onChange={handleChange}
+									/>
+								</Form.Group>
 
-											<Form.Group controlId="formUsername">
-												<Form.Label>Type</Form.Label>
-												<Form.Control
-													as="select"
-													name="type"
-													placeholder="Type"
-													onChange={handleChange}
-												>
-													<option value="request">
-														Request
-													</option>
-													<option value="offer">
-														Offer
-													</option>
-												</Form.Control>
-											</Form.Group>
+								<Form.Group controlId="formUsername">
+									<Form.Label>Type</Form.Label>
+									<Form.Control
+										as="select"
+										name="type"
+										placeholder="Type"
+										onChange={handleChange}
+									>
+										<option value="request">Request</option>
+										<option value="offer">Offer</option>
+									</Form.Control>
+								</Form.Group>
 
-											<Form.Group controlId="formUsername">
-												<Form.Label>
-													Date/Time
-												</Form.Label>
-												<Form.Control
-													name="datetime"
-													type="datetime-local"
-													placeholder="Date/Time"
-													onChange={handleChange}
-												/>
-											</Form.Group>
-
-											<Button
-												variant="primary"
-												type="submit"
-												className="btn-block"
-											>
-												Submit
-											</Button>
-										</Form>
-									</Card.Body>
-								</Card>
-							</div>
-						</Col>
-					</Row>
-				</Container>
+								<Form.Group controlId="formUsername">
+									<Form.Label>Date/Time</Form.Label>
+									<Form.Control
+										name="datetime"
+										type="datetime-local"
+										placeholder="Date/Time"
+										onChange={handleChange}
+									/>
+								</Form.Group>
+							</Form>
+						</Modal.Body>
+						<Modal.Footer>
+							<Button
+								variant="secondary"
+								type="submit"
+								onClick={handleShowHide}
+							>
+								Close
+							</Button>
+							<Button
+								variant="primary"
+								type="submit"
+								onClick={handleSubmit}
+							>
+								Submit
+							</Button>
+						</Modal.Footer>
+					</Modal>
+				</div>
 			);
 		} else {
 			return (

@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 
-import "bootstrap/dist/css/bootstrap.css";
+import "./style/index.scss";
 import {
 	NavBar,
 	FeedList,
@@ -45,7 +45,7 @@ const App = () => {
 						.get(
 							process.env.REACT_APP_API_HOST +
 								"/profile/" +
-								res.data
+								"bradknny"
 						)
 						.then((res2: AxiosResponse) => {
 							setUser(res2.data[0]);
