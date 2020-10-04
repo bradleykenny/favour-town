@@ -24,7 +24,7 @@ export const FavourForm = (props: FavourFormProps) => {
 		e.preventDefault();
 		axios
 			.post(
-				"http://localhost:5000/favours/",
+				process.env.REACT_APP_API_HOST + "/favours/",
 				{
 					title: title,
 					description: description,

@@ -142,7 +142,7 @@ export const Register = (props: RegisterProps) => {
 			console.info("Valid Form");
 			axios
 				.post(
-					"http://localhost:5000/register/",
+					process.env.REACT_APP_API_HOST + "/register/",
 					{
 						f_name: registerInfo.f_name,
 						l_name: registerInfo.l_name,

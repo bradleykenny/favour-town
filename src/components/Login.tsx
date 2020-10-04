@@ -71,7 +71,7 @@ export const Login = (props: LoginProps) => {
 			console.info("Valid Form");
 			axios
 				.post(
-					"http://localhost:5000/login/",
+					process.env.REACT_APP_API_HOST + "/login/",
 					{
 						username: loginInfo.username,
 						password: loginInfo.password,

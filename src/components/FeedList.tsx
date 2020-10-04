@@ -17,14 +17,18 @@ export const FeedList = (props: FeedListProps) => {
 	useEffect(() => {
 		if (props.filter) {
 			axios
-				.get("http://localhost:5000/listings/" + props.filter)
+				.get(
+					process.env.REACT_APP_API_HOST + "/listings/" + props.filter
+				)
 				.then((response) => {
 					setCards(response.data);
 				});
 		} else {
-			axios.get("http://localhost:5000/favours").then((response) => {
-				setCards(response.data);
-			});
+			axios
+				.get(process.env.REACT_APP_API_HOST + "/favours")
+				.then((response) => {
+					setCards(response.data);
+				});
 		}
 	}, [props.filter]);
 

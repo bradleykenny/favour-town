@@ -8,9 +8,7 @@ import { FeedList } from ".";
 import "../style/Profile.css";
 import { ProfileType } from "../types/Profile";
 
-type ProfileProps = {
-	user: ProfileType;
-};
+type ProfileProps = {};
 
 export const Profile = (props: ProfileProps) => {
 	const { username } = useParams<{ username: string }>();

@@ -5,7 +5,7 @@ import {
 	Route,
 	Redirect,
 } from "react-router-dom";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 import "bootstrap/dist/css/bootstrap.css";
 import {
@@ -32,9 +32,25 @@ const App = () => {
 	useEffect(() => {
 		// TODO: read in user dynamically
 		axios
-			.get("http://localhost:5000/profile/" + "bradknny")
-			.then((response) => {
-				setUser(response.data[0]);
+			.post(
+				process.env.REACT_APP_API_HOST + "/hassession",
+				{},
+				{
+					withCredentials: true,
+				}
+			)
+			.then((res: AxiosResponse) => {
+				if (res.data !== "NO") {
+					axios
+						.get(
+							process.env.REACT_APP_API_HOST +
+								"/profile/" +
+								res.data
+						)
+						.then((res2: AxiosResponse) => {
+							setUser(res2.data[0]);
+						});
+				}
 			});
 	}, []);
 
@@ -42,13 +58,13 @@ const App = () => {
 		<Router>
 			<Switch>
 				<Route path="/home">
-					<NavBar username={user.username} />
+					<NavBar username="placeholder" />
 					<FavourForm user={user} />
 					<FeedList />
 				</Route>
 				<Route path="/profile/:username">
 					<NavBar username="bradknny" />
-					<Profile user={user} />
+					<Profile />
 				</Route>
 				<Route path="/login">
 					<Login />
