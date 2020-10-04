@@ -1,8 +1,11 @@
 // change the theme
 $theme-colors: (
-	"primary": #0074d9,
+	"primary": #ff4136,
 	"danger": #ff4136,
 );
 
+$primary-color: #673ab7;
+$brand-primary: $primary-color;
+
 // Import Bootstrap and its default variables
-@import "~bootstrap/scss/bootstrap.scss";
+@import "~/bootstrap/dist/css/bootstrap.css";

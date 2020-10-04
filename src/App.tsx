@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 
-import "./style/index.scss";
 import {
 	NavBar,
 	FeedList,
