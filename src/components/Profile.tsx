@@ -1,5 +1,4 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.css";
 import { Jumbotron, Image } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
@@ -16,7 +15,7 @@ export const Profile = (props: ProfileProps) => {
 
 	// TODO: read in user profile picture dynamically
 	const profilePicture =
-		"https://i2-prod.manchestereveningnews.co.uk/incoming/article18777872.ece/ALTERNATES/s1200c/0_pepfrust.jpg";
+		"https://static.ffx.io/images/$zoom_0.138%2C$multiply_0.4431%2C$ratio_1.5%2C$width_756%2C$x_0%2C$y_0/t_crop_custom/q_86%2Cf_auto/8610f71c3fea808c5a2361ae80e7b7dacd555a39";
 
 	return (
 		<div>
@@ -30,6 +29,7 @@ export const Profile = (props: ProfileProps) => {
 						float: "left",
 						marginRight: "25px",
 					}}
+					className="profileImage"
 				/>
 				<h1>
 					{firstName} {lastName}

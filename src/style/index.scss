@@ -1,6 +1,6 @@
-// change the theme
+// Change the theme
 $theme-colors: (
-	"primary": #ff4136,
+	"primary": #007a4b,
 	"danger": #ff4136,
 );
 
@@ -8,4 +8,8 @@ $primary-color: #673ab7;
 $brand-primary: $primary-color;
 
 // Import Bootstrap and its default variables
-@import "~/bootstrap/dist/css/bootstrap.css";
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+.navbar {
+	padding: 20px;
+}

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.css";
 import { Container, Row, Col, Form, Button, Modal } from "react-bootstrap";
 
 import { ProfileType } from "../types/Profile";
