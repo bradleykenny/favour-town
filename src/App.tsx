@@ -27,7 +27,6 @@ const App = () => {
 		favour_counter: 0,
 	};
 	const [user, setUser] = useState(blankUser);
-	console.log(user);
 
 	useEffect(() => {
 		// TODO: read in user dynamically

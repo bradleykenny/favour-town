@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Jumbotron, Image } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import axios, { AxiosResponse } from "axios";
 
 import { FeedList } from ".";
 
@@ -11,7 +12,22 @@ type ProfileProps = {};
 
 export const Profile = (props: ProfileProps) => {
 	const { username } = useParams<{ username: string }>();
-	const [firstName, lastName] = ["John", "Test"];
+
+	const blankUser: ProfileType = {
+		username: "",
+		_id: "",
+		email_addr: "",
+		favour_counter: 0,
+	};
+	const [user, setUser] = useState(blankUser);
+
+	useEffect(() => {
+		axios
+			.get(process.env.REACT_APP_API_HOST + "/profile/" + username)
+			.then((res2: AxiosResponse) => {
+				setUser(res2.data[0]);
+			});
+	}, []);
 
 	// TODO: read in user profile picture dynamically
 	const profilePicture =
@@ -23,18 +39,10 @@ export const Profile = (props: ProfileProps) => {
 				<Image
 					src={profilePicture}
 					roundedCircle
-					style={{
-						height: "100px",
-						width: "100px",
-						float: "left",
-						marginRight: "25px",
-					}}
 					className="profileImage"
 				/>
-				<h1>
-					{firstName} {lastName}
-				</h1>
-				<h2>@{username}</h2>
+				<h1>@{user.username}</h1>
+				<h3>{user.email_addr}</h3>
 			</Jumbotron>
 			<FeedList filter={username} />
 		</div>
