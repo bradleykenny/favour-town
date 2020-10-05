@@ -4,12 +4,26 @@ $theme-colors: (
 	"danger": #ff4136,
 );
 
-$primary-color: #673ab7;
-$brand-primary: $primary-color;
+$primary-fade: rgba(map-get($theme-colors, primary), 0.1);
 
 // Import Bootstrap and its default variables
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
+body {
+	background-image: none;
+}
+
 .navbar {
 	padding: 20px;
+}
+
+.card-link {
+	margin: -10px;
+	padding: 5px 5px;
+	border-radius: 5px;
+}
+
+.card-link:hover {
+	color: map-get($theme-colors, primary);
+	background-color: $primary-fade;
 }

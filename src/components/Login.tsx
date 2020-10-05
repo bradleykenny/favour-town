@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../style/Login.css";
 import { Button, Form, Container, Row, Col, Card } from "react-bootstrap";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -99,21 +98,14 @@ export const Login = (props: LoginProps) => {
 	};
 
 	return (
-		<div
-			style={{
-				backgroundImage:
-					"url(https://www.xmple.com/wallpaper/blue-purple-linear-gradient-1920x1080-c2-ee82ee-40e0d0-a-15-f-14.svg)",
-				height: "100%",
-				width: "100%",
-			}}
-		>
+		<div id="loginBackground">
 			<Container>
 				<Row className="d-flex justify-content-center">
 					<Col sm={4} className="align-items-center">
 						<Card bg="light" className="loginCard">
 							<Card.Body>
 								<Card.Title className="text-center">
-									<h1>Login</h1>
+									<h2>Login</h2>
 								</Card.Title>
 								<Form onSubmit={handleSubmit}>
 									<Form.Group controlId="formUsername">
@@ -156,14 +148,14 @@ export const Login = (props: LoginProps) => {
 								</Form>
 							</Card.Body>
 							<Card.Footer>
-								<p className="font-small grey-text d-flex justify-content-end">
+								<p className="font-small grey-text d-flex justify-content-center">
 									Don't have an account?
-									<a
+									<Card.Link
 										href="/register"
-										className="blue-text ml-1"
+										id="loginRegLink"
 									>
 										Sign Up
-									</a>
+									</Card.Link>
 								</p>
 							</Card.Footer>
 						</Card>

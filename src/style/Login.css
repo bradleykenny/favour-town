@@ -1,3 +1,27 @@
 .loginCard {
-	margin-top: 8em;
+	margin-top: 6em;
+	margin-bottom: 6em;
+}
+
+.loginCard > .card-footer > p {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	text-align: left;
+}
+
+#loginRegLink {
+	margin: -2.5px 0px 0px 2.5px;
+	padding: 2.5px 5px;
+}
+
+#loginBackground {
+	position: relative;
+
+	top: 0;
+	left: 0;
+
+	width: 100vw;
+	height: 100vh;
+	background: url(https://htmlcolors.com/gradients-images/73-light-green-gradient.jpg);
+	background-attachment: fixed;
 }
