@@ -76,104 +76,98 @@ export const FavourForm = (props: FavourFormProps) => {
 		setShowForm(!showForm);
 	};
 
-	if (props.user) {
+	if (props.user.username !== "") {
 		if (showForm) {
 			return (
-				<div id="favourForm">
-					<Modal
-						style={{ margin: "auto auto" }}
-						show={true}
-						onHide={handleShowHide}
-					>
-						<Modal.Header closeButton>
-							<Modal.Title className="text-center">
-								<h1>New Favour</h1>
-							</Modal.Title>
-						</Modal.Header>
-						<Modal.Body>
-							<Form>
-								<Form.Group controlId="formUsername">
-									<Form.Label>Title</Form.Label>
-									<Form.Control
-										name="title"
-										type="text"
-										placeholder="Title"
-										onChange={handleChange}
-									/>
-								</Form.Group>
+				<Modal
+					style={{ margin: "auto auto" }}
+					show={true}
+					onHide={handleShowHide}
+				>
+					<Modal.Header closeButton>
+						<Modal.Title>New Favour</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
+						<Form>
+							<Form.Group controlId="formUsername">
+								<Form.Label>Title</Form.Label>
+								<Form.Control
+									name="title"
+									type="text"
+									placeholder="Enter a title..."
+									onChange={handleChange}
+								/>
+							</Form.Group>
 
-								<Form.Group controlId="formUsername">
-									<Form.Label>Description</Form.Label>
-									<Form.Control
-										name="description"
-										type="text"
-										placeholder="Description"
-										onChange={handleChange}
-									/>
-								</Form.Group>
+							<Form.Group controlId="formUsername">
+								<Form.Label>Description</Form.Label>
+								<Form.Control
+									name="description"
+									type="text"
+									placeholder="Enter a description..."
+									onChange={handleChange}
+								/>
+							</Form.Group>
 
-								<Form.Group controlId="formUsername">
-									<Form.Label>Location</Form.Label>
-									<Form.Control
-										name="location"
-										type="text"
-										placeholder="Location"
-										onChange={handleChange}
-									/>
-								</Form.Group>
+							<Form.Group controlId="formUsername">
+								<Form.Label>Location</Form.Label>
+								<Form.Control
+									name="location"
+									type="text"
+									placeholder="Enter the location..."
+									onChange={handleChange}
+								/>
+							</Form.Group>
 
-								<Form.Group controlId="formUsername">
-									<Form.Label>Coins</Form.Label>
-									<Form.Control
-										name="coins"
-										type="number"
-										placeholder="Coins"
-										onChange={handleChange}
-									/>
-								</Form.Group>
+							<Form.Group controlId="formUsername">
+								<Form.Label>Coins</Form.Label>
+								<Form.Control
+									name="coins"
+									type="number"
+									placeholder="Enter the number of coins earnt..."
+									onChange={handleChange}
+								/>
+							</Form.Group>
 
-								<Form.Group controlId="formUsername">
-									<Form.Label>Type</Form.Label>
-									<Form.Control
-										as="select"
-										name="type"
-										placeholder="Type"
-										onChange={handleChange}
-									>
-										<option value="request">Request</option>
-										<option value="offer">Offer</option>
-									</Form.Control>
-								</Form.Group>
+							<Form.Group controlId="formUsername">
+								<Form.Label>Type</Form.Label>
+								<Form.Control
+									as="select"
+									name="type"
+									onChange={handleChange}
+								>
+									<option value="request">Request</option>
+									<option value="offer">Offer</option>
+								</Form.Control>
+							</Form.Group>
 
-								<Form.Group controlId="formUsername">
-									<Form.Label>Date/Time</Form.Label>
-									<Form.Control
-										name="datetime"
-										type="datetime-local"
-										placeholder="Date/Time"
-										onChange={handleChange}
-									/>
-								</Form.Group>
-							</Form>
-						</Modal.Body>
-						<Modal.Footer>
-							<Button
-								variant="secondary"
-								type="submit"
-								onClick={handleShowHide}
-							>
-								Close
-							</Button>
-							<Button
-								variant="primary"
-								type="submit"
-								onClick={handleSubmit}
-							>
-								Submit
-							</Button>
-						</Modal.Footer>
-					</Modal>
-				</div>
+							<Form.Group controlId="formUsername">
+								<Form.Label>Date/Time</Form.Label>
+								<Form.Control
+									name="datetime"
+									type="datetime-local"
+									onChange={handleChange}
+								/>
+							</Form.Group>
+						</Form>
+					</Modal.Body>
+					<Modal.Footer>
+						<Button
+							variant="secondary"
+							type="submit"
+							onClick={handleShowHide}
+						>
+							Close
+						</Button>
+						<Button
+							variant="primary"
+							type="submit"
+							onClick={handleSubmit}
+						>
+							Submit
+						</Button>
+					</Modal.Footer>
+				</Modal>
 			);
 		} else {
 			return (
@@ -195,6 +189,22 @@ export const FavourForm = (props: FavourFormProps) => {
 			);
 		}
 	} else {
-		return <p>Not logged in</p>;
+		return (
+			<Container>
+				<Row className="d-flex justify-content-center">
+					<Col sm={4} className="align-items-center">
+						<Button
+							variant="primary"
+							type="submit"
+							className="btn-block"
+							href="/login"
+							style={{ marginTop: "25px" }}
+						>
+							Log In
+						</Button>
+					</Col>
+				</Row>
+			</Container>
+		);
 	}
 };
