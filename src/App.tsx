@@ -27,6 +27,7 @@ const App = () => {
 		favour_counter: 0,
 	};
 	const [user, setUser] = useState(blankUser);
+	const [username, setUsername] = useState("");
 
 	useEffect(() => {
 		// TODO: read in user dynamically
@@ -48,26 +49,28 @@ const App = () => {
 						)
 						.then((res2: AxiosResponse) => {
 							setUser(res2.data[0]);
+							setUsername(res2.data[0].username);
 						});
 				}
 			});
-	}, []);
+	}, [username]);
 
-	const validUsername: string = user ? user.username : "";
+	console.log(user);
+
 	return (
 		<Router>
 			<Switch>
 				<Route path="/home">
-					<NavBar username={validUsername} />
+					<NavBar username={user ? user.username : ""} />
 					<FavourForm user={user} />
 					<FeedList />
 				</Route>
 				<Route path="/profile/:username">
-					<NavBar username={validUsername} />
+					<NavBar username={user ? user.username : ""} />
 					<Profile />
 				</Route>
 				<Route path="/login">
-					<Login />
+					<Login setUsername={setUsername} />
 				</Route>
 				<Route path="/register">
 					<Register />

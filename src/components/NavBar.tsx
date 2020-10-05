@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
 	Nav,
 	Navbar,
@@ -15,7 +15,14 @@ type NavBarProps = {
 };
 
 export const NavBar = (props: NavBarProps) => {
-	const { username } = props;
+	const [username, setUsername] = useState(props.username);
+
+	// This will launch only if propName value has chaged.
+	useEffect(() => {
+		console.log(props.username);
+		setUsername(props.username);
+	}, [props.username]);
+
 	return (
 		<Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
 			<Navbar.Brand href="/home">

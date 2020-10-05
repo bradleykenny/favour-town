@@ -5,7 +5,9 @@ import { useHistory } from "react-router-dom";
 
 import "../style/Login.css";
 
-type LoginProps = {};
+type LoginProps = {
+	setUsername: Function;
+};
 
 const validateForm = (errors: any) => {
 	let valid = true;
@@ -81,7 +83,9 @@ export const Login = (props: LoginProps) => {
 						if (response.data !== "ERROR: Login failed") {
 							//TODO: Update session to be logged in with response.data
 							console.log(response.data);
-							history.push("/home");
+							window.alert(`Logged in as ${loginInfo.username}.`);
+							props.setUsername(loginInfo.username);
+							history.push("/");
 						}
 					},
 					(error) => {

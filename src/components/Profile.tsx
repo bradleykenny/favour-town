@@ -27,7 +27,7 @@ export const Profile = (props: ProfileProps) => {
 			.then((res2: AxiosResponse) => {
 				setUser(res2.data[0]);
 			});
-	}, []);
+	}, [username]);
 
 	// TODO: read in user profile picture dynamically
 	const profilePicture =
