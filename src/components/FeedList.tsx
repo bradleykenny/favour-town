@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { FeedCard } from "./FeedCard";
 import axios from "axios";
 
@@ -12,24 +12,37 @@ type FeedListProps = {
 
 export const FeedList = (props: FeedListProps) => {
 	const [cards, setCards] = useState([defaultFavour]);
+	const [countCards, setCountCards] = useState(20);
+	const [pageCards, setPageCards] = useState(1);
 
 	useEffect(() => {
 		if (props.filter) {
 			axios
 				.get(
-					process.env.REACT_APP_API_HOST + "/listings/" + props.filter
+					process.env.REACT_APP_API_HOST +
+						"/listings/" +
+						props.filter,
+					{}
 				)
 				.then((response) => {
 					setCards(response.data);
 				});
 		} else {
 			axios
-				.get(process.env.REACT_APP_API_HOST + "/favours")
+				.get(
+					process.env.REACT_APP_API_HOST +
+						"/favours?count=" +
+						countCards
+				)
 				.then((response) => {
 					setCards(response.data);
 				});
 		}
-	}, [props.filter]);
+	}, [props.filter, countCards]);
+
+	const handleLoadMore = (e: any) => {
+		setCountCards(countCards + 20);
+	};
 
 	return (
 		<Container>
@@ -45,6 +58,7 @@ export const FeedList = (props: FeedListProps) => {
 								username={favour.username}
 							/>
 						))}
+						<Button onClick={handleLoadMore}>Load More</Button>
 					</div>
 				</Col>
 			</Row>
