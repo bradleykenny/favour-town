@@ -7,4 +7,6 @@
 	float: left;
 	margin-left: 50px;
 	margin-right: 25px;
+	background-color: white;
+	border: 5px solid gray;
 }

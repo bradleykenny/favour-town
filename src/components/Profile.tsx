@@ -30,8 +30,7 @@ export const Profile = (props: ProfileProps) => {
 	}, [username]);
 
 	// TODO: read in user profile picture dynamically
-	const profilePicture =
-		"https://static.ffx.io/images/$zoom_0.138%2C$multiply_0.4431%2C$ratio_1.5%2C$width_756%2C$x_0%2C$y_0/t_crop_custom/q_86%2Cf_auto/8610f71c3fea808c5a2361ae80e7b7dacd555a39";
+	const profilePicture = "https://robohash.org/" + user._id;
 
 	return (
 		<div>
