@@ -173,13 +173,13 @@ export const FavourForm = (props: FavourFormProps) => {
 			return (
 				<Container>
 					<Row className="d-flex justify-content-center">
-						<Col sm={4} className="align-items-center">
+						<Col sm={6} className="align-items-center">
 							<Button
 								variant="primary"
 								type="submit"
 								className="btn-block"
 								onClick={handleShowHide}
-								style={{ marginTop: "25px" }}
+								block
 							>
 								Post a new favour
 							</Button>
@@ -192,13 +192,13 @@ export const FavourForm = (props: FavourFormProps) => {
 		return (
 			<Container>
 				<Row className="d-flex justify-content-center">
-					<Col sm={4} className="align-items-center">
+					<Col sm={6} className="align-items-center">
 						<Button
 							variant="primary"
 							type="submit"
 							className="btn-block"
 							href="/login"
-							style={{ marginTop: "25px" }}
+							block
 						>
 							Log In
 						</Button>

@@ -3,14 +3,12 @@ import { Card } from "react-bootstrap";
 
 import "../style/FeedCard.css";
 
-type FeedCardProps = {
+type UserCardProps = {
 	username: string;
-	title: string;
-	text: string;
 };
 
-export const FeedCard = (props: FeedCardProps) => {
-	const { title, username, text } = props;
+export const UserCard = (props: UserCardProps) => {
+	const { username } = props;
 
 	const profileLink = "/profile/" + username;
 
@@ -20,13 +18,8 @@ export const FeedCard = (props: FeedCardProps) => {
 				<Card.Link href={profileLink}>@{username}</Card.Link>
 			</Card.Header>
 			<Card.Body>
-				<Card.Title>{title}</Card.Title>
-				<Card.Text>{text}</Card.Text>
+				<Card.Text>Some more stuff coming here soon.</Card.Text>
 			</Card.Body>
-			<Card.Footer>
-				<Card.Link href="/">Like</Card.Link>
-				<Card.Link href="/">More</Card.Link>
-			</Card.Footer>
 		</Card>
 	);
 };

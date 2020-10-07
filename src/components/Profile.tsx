@@ -8,7 +8,9 @@ import { FeedList } from ".";
 import "../style/Profile.css";
 import { ProfileType } from "../types/Profile";
 
-type ProfileProps = {};
+type ProfileProps = {
+	user: ProfileType;
+};
 
 export const Profile = (props: ProfileProps) => {
 	const { username } = useParams<{ username: string }>();
@@ -43,7 +45,7 @@ export const Profile = (props: ProfileProps) => {
 				<h1>@{user.username}</h1>
 				<h3>{user.email_addr}</h3>
 			</Jumbotron>
-			<FeedList filter={username} />
+			<FeedList filter={username} user={props.user} />
 		</div>
 	);
 };

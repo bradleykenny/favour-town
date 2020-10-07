@@ -5,3 +5,4 @@ export { NavBar } from "./NavBar";
 export { Profile } from "./Profile";
 export { Register } from "./Register";
 export { FavourForm } from "./FavourForm";
+export { UserCard } from "./UserCard";

@@ -37,7 +37,6 @@ export const NavBar = (props: NavBarProps) => {
 					<Nav.Link href={"/profile/" + username}>
 						{username ? username : "Profile"}
 					</Nav.Link>
-					<Nav.Link href="#features">Friends</Nav.Link>
 					<Nav.Link href="#favours">Favours</Nav.Link>
 					<NavDropdown title="Dropdown" id="collasible-nav-dropdown">
 						<NavDropdown.Item href="#action/3.1">

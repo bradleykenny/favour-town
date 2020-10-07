@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { FeedCard } from "./FeedCard";
+import { FeedCard, UserCard, FavourForm } from "./";
 import axios from "axios";
 
 import "../style/FeedList.css";
 import { FavourType, defaultFavour } from "../types/Favour";
+import { ProfileType } from "../types/Profile";
 
 type FeedListProps = {
 	filter?: string;
+	user: ProfileType;
 };
 
 export const FeedList = (props: FeedListProps) => {
@@ -46,10 +48,19 @@ export const FeedList = (props: FeedListProps) => {
 
 	return (
 		<Container>
-			<Row className="d-flex justify-content-center">
-				<Col sm={4} className="align-items-center">
+			<Row
+				className="d-flex justify-content-center"
+				style={{ marginTop: "50px" }}
+			>
+				<Col sm={4}>
+					<UserCard username="bradknny" />
+				</Col>
+				<Col sm={6}>
 					<div id="feedList">
-						<h2>Favours</h2>
+						<FavourForm user={props.user} />
+						<h2 style={{ marginTop: "40px", marginLeft: "20px" }}>
+							Favours
+						</h2>
 						<br />
 						{cards.map((favour: FavourType) => (
 							<FeedCard
