@@ -1,6 +1,6 @@
 // Change the theme
 $theme-colors: (
-	"primary": rgb(0, 122, 45),
+	"primary": rgb(50, 120, 45),
 );
 
 $primary-fade: rgba(map-get($theme-colors, primary), 0.1);
