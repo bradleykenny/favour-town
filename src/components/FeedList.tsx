@@ -10,6 +10,7 @@ import { ProfileType } from "../types/Profile";
 type FeedListProps = {
 	filter?: string;
 	user: ProfileType;
+	userCardShow: boolean;
 };
 
 export const FeedList = (props: FeedListProps) => {
@@ -52,13 +53,21 @@ export const FeedList = (props: FeedListProps) => {
 				className="d-flex justify-content-center"
 				style={{ marginTop: "50px" }}
 			>
-				<Col sm={4}>
-					<UserCard username="bradknny" />
-				</Col>
+				{props.userCardShow && (
+					<Col sm={4}>
+						<UserCard username="bradknny" />
+					</Col>
+				)}
 				<Col sm={6}>
 					<div id="feedList">
-						<FavourForm user={props.user} />
-						<h2 style={{ marginTop: "40px", marginLeft: "20px" }}>
+						{props.userCardShow && <FavourForm user={props.user} />}
+						<h2
+							style={
+								props.userCardShow
+									? { marginTop: "40px", marginLeft: "20px" }
+									: { marginLeft: "20px" }
+							}
+						>
 							Favours
 						</h2>
 						<br />

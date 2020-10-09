@@ -45,7 +45,11 @@ export const Profile = (props: ProfileProps) => {
 				<h1>@{user.username}</h1>
 				<h3>{user.email_addr}</h3>
 			</Jumbotron>
-			<FeedList filter={username} user={props.user} />
+			<FeedList
+				filter={username}
+				user={props.user}
+				userCardShow={false}
+			/>
 		</div>
 	);
 };
