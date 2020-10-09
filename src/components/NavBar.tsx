@@ -34,9 +34,13 @@ export const NavBar = (props: NavBarProps) => {
 			<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 			<Navbar.Collapse id="responsive-navbar-nav">
 				<Nav className="mr-auto">
-					<Nav.Link href={"/profile/" + username}>
-						{username ? username : "Profile"}
-					</Nav.Link>
+					{username ? (
+						<Nav.Link href={"/profile/" + username}>
+							{username}
+						</Nav.Link>
+					) : (
+						<Nav.Link href={"/login"}>Log In</Nav.Link>
+					)}
 					<Nav.Link href="#favours">Favours</Nav.Link>
 					<NavDropdown title="Dropdown" id="collasible-nav-dropdown">
 						<NavDropdown.Item href="#action/3.1">
