@@ -62,7 +62,10 @@ const App = () => {
 			<Switch>
 				<Route path="/home">
 					<NavBar username={user ? user.username : ""} />
-					<FeedList user={user} userCardShow={true} />
+					<FeedList
+						user={user}
+						userCardShow={user.username ? true : false}
+					/>
 				</Route>
 				<Route path="/profile/:username">
 					<NavBar username={user ? user.username : ""} />

@@ -18,6 +18,7 @@ export const FeedList = (props: FeedListProps) => {
 	const [countCards, setCountCards] = useState(20);
 	const [pageCards, setPageCards] = useState(1);
 
+	// Do intial load of cards into the feed
 	useEffect(() => {
 		if (props.filter) {
 			axios
@@ -43,6 +44,7 @@ export const FeedList = (props: FeedListProps) => {
 		}
 	}, [props.filter, countCards]);
 
+	// Loads more cards into the feed
 	const handleLoadMore = (e: any) => {
 		setCountCards(countCards + 20);
 	};
