@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
 
 import { FavourType } from "../types/Favour";
@@ -17,6 +17,11 @@ export const FeedCard = (props: FeedCardProps) => {
 		favour_coins,
 		location,
 	} = props.favour;
+	const [claimed, setClaimed] = useState(false);
+
+	const handleClaimed = () => {
+		setClaimed(!claimed);
+	};
 
 	const profileLink = "/profile/" + username;
 
@@ -70,7 +75,9 @@ export const FeedCard = (props: FeedCardProps) => {
 				</ListGroup>
 			</Card.Body>
 			<Card.Footer>
-				<Card.Link href="/">Claim</Card.Link>
+				<Card.Link onClick={handleClaimed}>
+					{claimed ? "Unclaim" : "Claim"}
+				</Card.Link>
 				<Card.Link href="/">More</Card.Link>
 			</Card.Footer>
 		</Card>
