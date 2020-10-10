@@ -30,6 +30,7 @@ export const FavourForm = (props: FavourFormProps) => {
 					location: location,
 					favour_coins: coins,
 					type: type,
+					datetime: datetime,
 				},
 				{ withCredentials: true }
 			)

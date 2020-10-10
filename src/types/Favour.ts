@@ -8,6 +8,8 @@ export type FavourType = {
 	favour_type: number;
 	date: string;
 	username: string;
+	assigned_user_id: string | undefined;
+	favour_status: 0 | 1 | 2;
 };
 
 export const defaultFavour: FavourType = {
@@ -20,4 +22,6 @@ export const defaultFavour: FavourType = {
 	favour_type: 0,
 	date: "",
 	username: "",
+	assigned_user_id: undefined,
+	favour_status: 0,
 };

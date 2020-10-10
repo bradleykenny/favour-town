@@ -7,14 +7,7 @@ import {
 } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 
-import {
-	NavBar,
-	FeedList,
-	Profile,
-	Login,
-	Register,
-	FavourForm,
-} from "./components";
+import { NavBar, FeedList, Profile, Login, Register } from "./components";
 import { ProfileType } from "./types/Profile";
 
 import "./style/App.css";

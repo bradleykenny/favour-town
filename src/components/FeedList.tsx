@@ -16,7 +16,7 @@ type FeedListProps = {
 export const FeedList = (props: FeedListProps) => {
 	const [cards, setCards] = useState([defaultFavour]);
 	const [countCards, setCountCards] = useState(20);
-	const [pageCards, setPageCards] = useState(1);
+	// const [pageCards, setPageCards] = useState(1);
 
 	// Do intial load of cards into the feed
 	useEffect(() => {
@@ -30,6 +30,7 @@ export const FeedList = (props: FeedListProps) => {
 				)
 				.then((response) => {
 					setCards(response.data);
+					console.log(response.data);
 				});
 		} else {
 			axios
@@ -40,6 +41,9 @@ export const FeedList = (props: FeedListProps) => {
 				)
 				.then((response) => {
 					setCards(response.data);
+					for (const item of response.data) {
+						console.log(item);
+					}
 				});
 		}
 	}, [props.filter, countCards]);
@@ -74,11 +78,7 @@ export const FeedList = (props: FeedListProps) => {
 						</h2>
 						<br />
 						{cards.map((favour: FavourType) => (
-							<FeedCard
-								title={favour.title}
-								text={favour.description}
-								username={favour.username}
-							/>
+							<FeedCard favour={favour} />
 						))}
 						<Button onClick={handleLoadMore}>Load More</Button>
 					</div>
