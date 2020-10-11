@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
+import axios from "axios";
 
 import { FavourType } from "../types/Favour";
 
@@ -16,11 +17,24 @@ export const FeedCard = (props: FeedCardProps) => {
 		description,
 		favour_coins,
 		location,
+		_id,
+		favour_status,
 	} = props.favour;
+
 	const [claimed, setClaimed] = useState(false);
 
 	const handleClaimed = () => {
-		setClaimed(!claimed);
+		if (!claimed) {
+			axios
+				.post(
+					process.env.REACT_APP_API_HOST + "/favours/request/send",
+					{
+						favour_id: _id,
+					},
+					{ withCredentials: true }
+				)
+				.then(() => setClaimed(!claimed));
+		}
 	};
 
 	const profileLink = "/profile/" + username;
@@ -75,9 +89,13 @@ export const FeedCard = (props: FeedCardProps) => {
 				</ListGroup>
 			</Card.Body>
 			<Card.Footer>
-				<Card.Link onClick={handleClaimed}>
-					{claimed ? "Unclaim" : "Claim"}
-				</Card.Link>
+				{favour_status === 0 ? (
+					<Card.Link onClick={handleClaimed}>
+						{claimed ? "Unclaim" : "Claim"}
+					</Card.Link>
+				) : (
+					<></>
+				)}
 				<Card.Link href="/">More</Card.Link>
 			</Card.Footer>
 		</Card>

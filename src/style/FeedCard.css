@@ -10,3 +10,7 @@
 .list-group-flush {
 	margin: -10px -1.25rem -1.5rem -1.25rem;
 }
+
+a {
+	cursor: pointer;
+}
