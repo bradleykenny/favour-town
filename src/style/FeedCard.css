@@ -14,3 +14,12 @@
 a {
 	cursor: pointer;
 }
+
+.list-group > .list-group-item > p {
+	margin-bottom: 8px;
+}
+
+#feedList > .feedCard > .card-body,
+.singleCard > .card-body {
+	padding-bottom: 0 !important;
+}

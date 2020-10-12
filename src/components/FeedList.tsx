@@ -41,9 +41,6 @@ export const FeedList = (props: FeedListProps) => {
 				)
 				.then((response) => {
 					setCards(response.data);
-					for (const item of response.data) {
-						console.log(item);
-					}
 				});
 		}
 	}, [props.filter, countCards]);
@@ -78,7 +75,7 @@ export const FeedList = (props: FeedListProps) => {
 						</h2>
 						<br />
 						{cards.map((favour: FavourType) => (
-							<FeedCard favour={favour} />
+							<FeedCard favour={favour} user={props.user} />
 						))}
 						<Button onClick={handleLoadMore}>Load More</Button>
 					</div>

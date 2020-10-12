@@ -1,3 +1,4 @@
+export { FavourAdmin } from "./FavourAdmin";
 export { FeedCard } from "./FeedCard";
 export { FeedList } from "./FeedList";
 export { Login } from "./Login";

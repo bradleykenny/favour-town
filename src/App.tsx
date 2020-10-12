@@ -7,7 +7,14 @@ import {
 } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 
-import { NavBar, FeedList, Profile, Login, Register } from "./components";
+import {
+	NavBar,
+	FeedList,
+	Profile,
+	Login,
+	Register,
+	FavourAdmin,
+} from "./components";
 import { ProfileType } from "./types/Profile";
 
 import "./style/App.css";
@@ -23,7 +30,6 @@ const App = () => {
 	const [username, setUsername] = useState("");
 
 	useEffect(() => {
-		// TODO: read in user dynamically
 		axios
 			.post(
 				process.env.REACT_APP_API_HOST + "/hassession",
@@ -48,8 +54,6 @@ const App = () => {
 			});
 	}, [username]);
 
-	console.log(user);
-
 	return (
 		<Router>
 			<Switch>
@@ -63,6 +67,10 @@ const App = () => {
 				<Route path="/profile/:username">
 					<NavBar username={user ? user.username : ""} />
 					<Profile user={user} />
+				</Route>
+				<Route path="/favour/:id">
+					<NavBar username={user ? user.username : ""} />
+					<FavourAdmin user={user} />
 				</Route>
 				<Route path="/login">
 					<Login setUsername={setUsername} />

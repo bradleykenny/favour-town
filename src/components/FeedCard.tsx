@@ -3,11 +3,13 @@ import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
 import axios from "axios";
 
 import { FavourType } from "../types/Favour";
+import { ProfileType } from "../types/Profile";
 
 import "../style/FeedCard.css";
 
 type FeedCardProps = {
 	favour: FavourType;
+	user: ProfileType;
 };
 
 export const FeedCard = (props: FeedCardProps) => {
@@ -89,12 +91,14 @@ export const FeedCard = (props: FeedCardProps) => {
 				</ListGroup>
 			</Card.Body>
 			<Card.Footer>
-				{favour_status === 0 ? (
+				{username !== props.user.username && favour_status === 0 && (
 					<Card.Link onClick={handleClaimed}>
 						{claimed ? "Unclaim" : "Claim"}
 					</Card.Link>
-				) : (
-					<></>
+				)}
+				{favour_status === 1 && <Card.Link>Claimed</Card.Link>}
+				{username === props.user.username && (
+					<Card.Link href={"/favour/" + _id}>Admin</Card.Link>
 				)}
 				<Card.Link href="/">More</Card.Link>
 			</Card.Footer>
