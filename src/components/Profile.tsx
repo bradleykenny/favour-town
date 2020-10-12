@@ -36,7 +36,6 @@ export const Profile = (props: ProfileProps) => {
 			});
 	}, [username]);
 
-	// TODO: read in user profile picture dynamically
 	const profilePicture = "https://robohash.org/" + user._id;
 
 	const handleEdit = () => {
