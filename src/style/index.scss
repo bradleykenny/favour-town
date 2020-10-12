@@ -16,13 +16,19 @@ body {
 	padding: 20px;
 }
 
-.card-link {
+.card-link,
+.card-footer > button {
+	color: map-get($theme-colors, primary);
 	margin: -10px;
 	padding: 5px 5px;
 	border-radius: 5px;
+	background-color: rgba(0, 0, 0, 0);
+	border: none;
 }
 
-.card-link:hover {
+.card-link:hover,
+.card-footer > button:hover,
+.card-footer > button:focus {
 	color: map-get($theme-colors, primary);
 	background-color: $primary-fade;
 }

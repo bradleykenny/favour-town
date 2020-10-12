@@ -6,6 +6,7 @@ import {
 	Container,
 	Row,
 	Col,
+	Button,
 } from "react-bootstrap";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
@@ -47,6 +48,7 @@ export const FavourInfo = (props: FavourInfoProps) => {
 		axios
 			.get(process.env.REACT_APP_API_HOST + "/favours/" + id)
 			.then((response) => {
+				console.log(response.data);
 				setFavour(response.data[0]);
 			});
 
@@ -59,12 +61,26 @@ export const FavourInfo = (props: FavourInfoProps) => {
 				{ withCredentials: true }
 			)
 			.then((response) => {
-				console.log(response.data);
 				if (response.data !== "Not logged in!") {
 					setRequests(response.data);
 				}
 			});
 	}, [id]);
+
+	const handleAccept = (favour_id: string, requestor: string) => {
+		axios
+			.post(
+				process.env.REACT_APP_API_HOST + "/favours/request/accept",
+				{
+					favour_id: favour_id,
+					requestor: requestor,
+				},
+				{ withCredentials: true }
+			)
+			.then(() => {
+				history.push("/favour/" + favour_id);
+			});
+	};
 
 	const profileLink = "/profile/" + favour.username;
 
@@ -123,32 +139,42 @@ export const FavourInfo = (props: FavourInfoProps) => {
 									<b> Coins: </b>
 									{favour.favour_coins}
 								</ListGroupItem>
+								<ListGroupItem>
+									<i>Claimed by</i> {favour.assigned_user_id}
+								</ListGroupItem>
 
 								{props.user.username === favour.username && (
 									<ListGroupItem>
-										//Allow user to edit their own favours.
+										{/* Allow user to edit their own favours. */}
 										<b>Edit</b>
 									</ListGroupItem>
 								)}
 							</ListGroup>
 						</Card.Body>
 					</Card>
-					{requests.map((r: FRequest) => (
-						<Card className="feedCard requestCard">
-							<Card.Body>
-								<Card.Link href={"/profile/" + r.username}>
-									@{r.username}
-								</Card.Link>
-								<Card.Text>
-									[{r.f_name} {r.l_name}]
-								</Card.Text>
-							</Card.Body>
-							<Card.Footer>
-								<Card.Link>Accept</Card.Link>
-								<Card.Link>Reject</Card.Link>
-							</Card.Footer>
-						</Card>
-					))}
+					{favour.favour_status === 0 &&
+						requests.map((r: FRequest) => (
+							<Card className="feedCard requestCard">
+								<Card.Body>
+									<Card.Link href={"/profile/" + r.username}>
+										@{r.username}
+									</Card.Link>
+									<Card.Text>
+										[{r.f_name} {r.l_name}]
+									</Card.Text>
+								</Card.Body>
+								<Card.Footer>
+									<Button
+										onClick={() =>
+											handleAccept(r.favour_id, r.user_id)
+										}
+									>
+										<b>Accept</b>
+									</Button>
+									<Button>Reject</Button>
+								</Card.Footer>
+							</Card>
+						))}
 				</Col>
 			</Row>
 		</Container>
