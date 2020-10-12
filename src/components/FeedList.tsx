@@ -30,7 +30,6 @@ export const FeedList = (props: FeedListProps) => {
 				)
 				.then((response) => {
 					setCards(response.data);
-					console.log(response.data);
 				});
 		} else {
 			axios

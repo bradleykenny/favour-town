@@ -139,7 +139,6 @@ export const Register = (props: RegisterProps) => {
 			registerInfo.password.localeCompare(
 				registerInfo.confirmPassword
 			) === 0;
-		console.log(passwordsMatch);
 		if (validateForm(errors) && passwordsMatch) {
 			console.info("Valid Form");
 			axios
