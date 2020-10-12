@@ -145,7 +145,7 @@ export const FavourInfo = (props: FavourInfoProps) => {
 
 								{props.user.username === favour.username && (
 									<ListGroupItem>
-										//Allow user to edit their own favours.
+										{/* Allow user to edit their own favours. */}
 										<b>Edit</b>
 									</ListGroupItem>
 								)}
