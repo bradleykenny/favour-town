@@ -9,3 +9,5 @@ export { FavourForm } from "./FavourForm";
 export { UserCard } from "./UserCard";
 export { DirectMessage } from "./DirectMessage";
 export { EditProfile } from "./EditProfile";
+export { ChatMessage } from "./ChatMessage";
+export { Friend } from "./Friend";

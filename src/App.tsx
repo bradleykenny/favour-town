@@ -81,6 +81,7 @@ const App = () => {
 					<Register />
 				</Route>
 				<Route path="/message">
+					<NavBar username={user ? user.username : ""} />
 					<DirectMessage />
 				</Route>
 				<Route path="/editProfile">
