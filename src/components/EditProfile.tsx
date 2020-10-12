@@ -66,12 +66,12 @@ export const EditProfile = (props: EditProfileProps) => {
 								</Card.Title>
 
 								<Form onSubmit={handleSubmit}>
-									<Form.Group controlId="formUsername">
-										<Form.Label>Change username</Form.Label>
+									<Form.Group controlId="formLocation">
+										<Form.Label>Change location</Form.Label>
 										<Form.Control
-											name="username"
-											type="username"
-											placeholder="Enter new username"
+											name="location"
+											type="location"
+											placeholder="Enter new location"
 										/>
 									</Form.Group>
 									<Form.Group controlId="formPassword">
