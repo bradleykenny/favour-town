@@ -11,6 +11,7 @@ import {
 	ListGroupItem,
 	Badge,
 } from "react-bootstrap";
+import "../style/DirectMessage.css";
 
 type friendProps = {
 	friend: {
@@ -31,9 +32,10 @@ export const Friend = (props: friendProps) => (
 		style={{ backgroundColor: props.friend.active ? "#eeeeee" : "" }}
 	>
 		<img
-			className="avatar avatar-32 img-circle mr-2 z-depth-1"
+			className="img-circle mr-2 z-depth-1"
 			src={props.friend.avatar}
 			alt="avatar"
+			style={{ width: "3em", height: "3rem" }}
 		/>
 		<div style={{ fontSize: "0.95rem" }}>
 			<strong>{props.friend.name}</strong>

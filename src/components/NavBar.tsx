@@ -103,7 +103,9 @@ export const NavBar = (props: NavBarProps) => {
 					/>
 					<Button variant="outline-light">Search</Button>
 				</Form>
-				<Button variant="outline-light">Logout</Button>
+				<Button variant="outline-light" className="ml-4">
+					Logout
+				</Button>
 			</Navbar.Collapse>
 		</Navbar>
 	);

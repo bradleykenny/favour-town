@@ -11,6 +11,7 @@ import {
 	ListGroupItem,
 	Badge,
 } from "react-bootstrap";
+import "../style/DirectMessage.css";
 
 type messageProps = {
 	message: {
@@ -24,9 +25,10 @@ type messageProps = {
 export const ChatMessage = (props: messageProps) => (
 	<li className="chat-message d-flex justify-content-between mb-4">
 		<img
-			className="avatar avatar-32 img-circle mr-2 z-depth-1"
+			className="img-circle mr-2 z-depth-1"
 			src={props.message.avatar}
 			alt="avatar"
+			style={{ width: "3em", height: "3rem" }}
 		/>
 		<Card>
 			<Card.Body>
