@@ -8,3 +8,4 @@ export { Register } from "./Register";
 export { FavourForm } from "./FavourForm";
 export { UserCard } from "./UserCard";
 export { DirectMessage } from "./DirectMessage";
+export { EditProfile } from "./EditProfile";
