@@ -123,6 +123,13 @@ export const FavourInfo = (props: FavourInfoProps) => {
 									<b> Coins: </b>
 									{favour.favour_coins}
 								</ListGroupItem>
+
+								{props.user.username === favour.username && (
+									<ListGroupItem>
+										//Allow user to edit their own favours.
+										<b>Edit</b>
+									</ListGroupItem>
+								)}
 							</ListGroup>
 						</Card.Body>
 					</Card>
