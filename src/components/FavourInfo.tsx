@@ -59,6 +59,7 @@ export const FavourInfo = (props: FavourInfoProps) => {
 				{ withCredentials: true }
 			)
 			.then((response) => {
+				console.log(response.data);
 				if (response.data !== "Not logged in!") {
 					setRequests(response.data);
 				}

@@ -6,7 +6,7 @@ import axios, { AxiosResponse } from "axios";
 import { FeedList } from ".";
 
 import "../style/Profile.css";
-import { ProfileType } from "../types/Profile";
+import { ProfileType, ExtProfileType } from "../types/Profile";
 
 type ProfileProps = {
 	user: ProfileType;
@@ -16,11 +16,14 @@ export const Profile = (props: ProfileProps) => {
 	const { username } = useParams<{ username: string }>();
 	const history = useHistory();
 
-	const blankUser: ProfileType = {
+	const blankUser: ExtProfileType = {
 		username: "",
 		_id: "",
 		email_addr: "",
 		favour_counter: 0,
+		f_name: "",
+		l_name: "",
+		user_rating: -1,
 	};
 	const [user, setUser] = useState(blankUser);
 
@@ -28,6 +31,7 @@ export const Profile = (props: ProfileProps) => {
 		axios
 			.get(process.env.REACT_APP_API_HOST + "/profile/" + username)
 			.then((res2: AxiosResponse) => {
+				console.log(res2.data);
 				setUser(res2.data[0]);
 			});
 	}, [username]);
@@ -47,8 +51,10 @@ export const Profile = (props: ProfileProps) => {
 					roundedCircle
 					className="profileImage"
 				/>
-				<h1>@{user.username}</h1>
-				<h3>{user.email_addr}</h3>
+				<h1>
+					{user.f_name} {user.l_name}
+				</h1>
+				<h3>@{user.username}</h3>
 				<p>
 					<Button variant="primary" onClick={handleEdit}>
 						Edit
