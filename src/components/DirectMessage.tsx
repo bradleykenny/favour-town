@@ -40,15 +40,15 @@ export const DirectMessage = (props: messageProps) => {
 		seen: false,
 		active: true,
 	});
-	setFriends({
-		name: "Danny Smith",
-		message: "Lorem ipsum dolor sit",
-		avatar: "https://mdbootstrap.com/img/Photos/Avatars/avatar-1",
-		when: "5 min ago",
-		unread: 0,
-		seen: false,
-		active: false,
-	});
+	// setFriends({
+	// 	name: "Danny Smith",
+	// 	message: "Lorem ipsum dolor sit",
+	// 	avatar: "https://mdbootstrap.com/img/Photos/Avatars/avatar-1",
+	// 	when: "5 min ago",
+	// 	unread: 0,
+	// 	seen: false,
+	// 	active: false,
+	// });
 
 	setMessages({
 		author: "Brad Pitt",
@@ -58,13 +58,13 @@ export const DirectMessage = (props: messageProps) => {
 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
 	});
 
-	setMessages({
-		author: "Lara Croft",
-		avatar: "https://mdbootstrap.com/img/Photos/Avatars/avatar-5",
-		when: "13 mins ago",
-		message:
-			" Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
-	});
+	// setMessages({
+	// 	author: "Lara Croft",
+	// 	avatar: "https://mdbootstrap.com/img/Photos/Avatars/avatar-5",
+	// 	when: "13 mins ago",
+	// 	message:
+	// 		" Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+	// });
 
 	const handleFriends = () => {};
 

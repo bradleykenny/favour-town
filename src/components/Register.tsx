@@ -46,7 +46,7 @@ export const Register = (props: RegisterProps) => {
 
 		switch (name) {
 			case "username":
-				if (value.length < 1) {
+				if (value.length < 5) {
 					setErrors({
 						...errors,
 						username: "Username cannot be blank!",
