@@ -49,7 +49,8 @@ export const Register = (props: RegisterProps) => {
 				if (value.length < 5) {
 					setErrors({
 						...errors,
-						username: "Username cannot be blank!",
+						username:
+							"Please enter a username atleast 5 characters long",
 					});
 					setRegisterInfo({ ...registerInfo, username: "" });
 				} else {

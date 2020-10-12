@@ -104,7 +104,7 @@ export const FavourForm = (props: FavourFormProps) => {
 								<Form.Label>Description</Form.Label>
 								<Form.Control
 									name="description"
-									type="text"
+									as="textarea"
 									placeholder="Enter a description..."
 									onChange={handleChange}
 								/>
