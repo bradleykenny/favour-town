@@ -33,7 +33,7 @@ export const FavourInfo = (props: FavourInfoProps) => {
 	const { id } = useParams<{ id: string }>();
 
 	const [favour, setFavour] = useState(defaultFavour);
-	const [requests, setRequests] = useState([]);
+	const [requests, setRequests] = useState([defaultRequest]);
 
 	const history = useHistory();
 

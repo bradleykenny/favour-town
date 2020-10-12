@@ -31,3 +31,9 @@ a {
 .userCard > .card-header > img {
 	margin-bottom: 10px;
 }
+
+.singleCard,
+.feedCard,
+#feedList {
+	text-align: left;
+}
