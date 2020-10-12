@@ -39,7 +39,7 @@ export const EditProfile = (props: EditProfileProps) => {
 	}, [username]);
 
 	// TODO: read in user profile picture dynamically
-	const profilePicture = "https://robohash.org/" + user._id;
+	const profilePicture = "https://robohash.org/" + props.user._id;
 
 	const handleSubmit = () => {};
 
@@ -53,8 +53,8 @@ export const EditProfile = (props: EditProfileProps) => {
 					roundedCircle
 					className="profileImage"
 				/>
-				<h1>@{user.username}</h1>
-				<h3>{user.email_addr}</h3>
+				<h1>@{props.user.username}</h1>
+				<h3>{props.user.email_addr}</h3>
 			</Jumbotron>
 			<Container>
 				<Row className="d-flex justify-content-center">

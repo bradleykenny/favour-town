@@ -48,7 +48,6 @@ export const FavourInfo = (props: FavourInfoProps) => {
 			.get(process.env.REACT_APP_API_HOST + "/favours/" + id)
 			.then((response) => {
 				setFavour(response.data[0]);
-				console.log(response.data);
 			});
 
 		axios
@@ -64,7 +63,6 @@ export const FavourInfo = (props: FavourInfoProps) => {
 				if (response.data !== "Not logged in!") {
 					setRequests(response.data);
 				}
-				console.log(response.data);
 			});
 	}, [id]);
 
@@ -80,7 +78,7 @@ export const FavourInfo = (props: FavourInfoProps) => {
 					<Card className="feedCard singleCard">
 						<Card.Header>
 							<Card.Link href={profileLink}>
-								@{favour.user_id}
+								@{favour.username}
 							</Card.Link>
 						</Card.Header>
 						<Card.Body>
@@ -127,9 +125,6 @@ export const FavourInfo = (props: FavourInfoProps) => {
 								</ListGroupItem>
 							</ListGroup>
 						</Card.Body>
-						<Card.Footer>
-							<Card.Link href="/">More</Card.Link>
-						</Card.Footer>
 					</Card>
 					{requests.map((r: FRequest) => (
 						<Card className="feedCard requestCard">

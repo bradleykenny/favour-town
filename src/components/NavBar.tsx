@@ -19,7 +19,6 @@ export const NavBar = (props: NavBarProps) => {
 
 	// This will launch only if propName value has chaged.
 	useEffect(() => {
-		console.log(props.username);
 		setUsername(props.username);
 	}, [props.username]);
 
