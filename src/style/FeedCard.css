@@ -37,3 +37,12 @@ a {
 #feedList {
 	text-align: left;
 }
+
+.requestCard > .card-body > a,
+.requestCard > .card-body > p {
+	display: inline-block;
+}
+
+.requestCard > .card-body > a {
+	margin-right: 2.5px;
+}

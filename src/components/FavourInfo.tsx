@@ -22,11 +22,17 @@ type FavourInfoProps = {
 type FRequest = {
 	favour_id: string;
 	user_id: string;
+	f_name: string;
+	l_name: string;
+	username: string;
 };
 
 const defaultRequest: FRequest = {
 	favour_id: "",
 	user_id: "",
+	f_name: "",
+	l_name: "",
+	username: "",
 };
 
 export const FavourInfo = (props: FavourInfoProps) => {
@@ -54,6 +60,7 @@ export const FavourInfo = (props: FavourInfoProps) => {
 				{ withCredentials: true }
 			)
 			.then((response) => {
+				console.log(response.data);
 				if (response.data !== "Not logged in!") {
 					setRequests(response.data);
 				}
@@ -125,9 +132,14 @@ export const FavourInfo = (props: FavourInfoProps) => {
 						</Card.Footer>
 					</Card>
 					{requests.map((r: FRequest) => (
-						<Card>
+						<Card className="feedCard requestCard">
 							<Card.Body>
-								<Card.Text>{r.user_id}</Card.Text>
+								<Card.Link href={"/profile/" + r.username}>
+									@{r.username}
+								</Card.Link>
+								<Card.Text>
+									[{r.f_name} {r.l_name}]
+								</Card.Text>
 							</Card.Body>
 							<Card.Footer>
 								<Card.Link>Accept</Card.Link>
