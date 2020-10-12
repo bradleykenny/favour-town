@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Jumbotron, Image } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Jumbotron, Image, Button } from "react-bootstrap";
+import { useParams, useHistory } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 
 import { FeedList } from ".";
@@ -14,6 +14,7 @@ type ProfileProps = {
 
 export const Profile = (props: ProfileProps) => {
 	const { username } = useParams<{ username: string }>();
+	const history = useHistory();
 
 	const blankUser: ProfileType = {
 		username: "",
@@ -34,6 +35,10 @@ export const Profile = (props: ProfileProps) => {
 	// TODO: read in user profile picture dynamically
 	const profilePicture = "https://robohash.org/" + user._id;
 
+	const handleEdit = () => {
+		history.push("/editProfile");
+	};
+
 	return (
 		<div>
 			<Jumbotron>
@@ -44,6 +49,11 @@ export const Profile = (props: ProfileProps) => {
 				/>
 				<h1>@{user.username}</h1>
 				<h3>{user.email_addr}</h3>
+				<p>
+					<Button variant="primary" onClick={handleEdit}>
+						Edit
+					</Button>
+				</p>
 			</Jumbotron>
 			<FeedList
 				filter={username}

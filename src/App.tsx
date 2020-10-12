@@ -15,6 +15,7 @@ import {
 	Register,
 	FavourInfo,
 	DirectMessage,
+	EditProfile,
 } from "./components";
 import { ProfileType } from "./types/Profile";
 
@@ -81,6 +82,10 @@ const App = () => {
 				</Route>
 				<Route path="/message">
 					<DirectMessage />
+				</Route>
+				<Route path="/editProfile">
+					<NavBar username={user ? user.username : ""} />
+					<EditProfile user={user} />
 				</Route>
 
 				{/* ALWAYS LEAVE `/` LAST */}

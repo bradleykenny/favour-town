@@ -22,11 +22,17 @@ type FavourInfoProps = {
 type FRequest = {
 	favour_id: string;
 	user_id: string;
+	f_name: string;
+	l_name: string;
+	username: string;
 };
 
 const defaultRequest: FRequest = {
 	favour_id: "",
 	user_id: "",
+	f_name: "",
+	l_name: "",
+	username: "",
 };
 
 export const FavourInfo = (props: FavourInfoProps) => {
@@ -42,7 +48,6 @@ export const FavourInfo = (props: FavourInfoProps) => {
 			.get(process.env.REACT_APP_API_HOST + "/favours/" + id)
 			.then((response) => {
 				setFavour(response.data[0]);
-				console.log(response.data);
 			});
 
 		axios
@@ -57,7 +62,6 @@ export const FavourInfo = (props: FavourInfoProps) => {
 				if (response.data !== "Not logged in!") {
 					setRequests(response.data);
 				}
-				console.log(response.data);
 			});
 	}, [id]);
 
@@ -73,7 +77,7 @@ export const FavourInfo = (props: FavourInfoProps) => {
 					<Card className="feedCard singleCard">
 						<Card.Header>
 							<Card.Link href={profileLink}>
-								@{favour.user_id}
+								@{favour.username}
 							</Card.Link>
 						</Card.Header>
 						<Card.Body>
@@ -120,14 +124,16 @@ export const FavourInfo = (props: FavourInfoProps) => {
 								</ListGroupItem>
 							</ListGroup>
 						</Card.Body>
-						<Card.Footer>
-							<Card.Link href="/">More</Card.Link>
-						</Card.Footer>
 					</Card>
 					{requests.map((r: FRequest) => (
-						<Card>
+						<Card className="feedCard requestCard">
 							<Card.Body>
-								<Card.Text>{r.user_id}</Card.Text>
+								<Card.Link href={"/profile/" + r.username}>
+									@{r.username}
+								</Card.Link>
+								<Card.Text>
+									[{r.f_name} {r.l_name}]
+								</Card.Text>
 							</Card.Body>
 							<Card.Footer>
 								<Card.Link>Accept</Card.Link>

@@ -82,7 +82,6 @@ export const Login = (props: LoginProps) => {
 					(response) => {
 						if (response.data !== "ERROR: Login failed") {
 							//TODO: Update session to be logged in with response.data
-							console.log(response.data);
 							window.alert(`Logged in as ${loginInfo.username}.`);
 							props.setUsername(loginInfo.username);
 							history.push("/");
