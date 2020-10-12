@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import { Container, Row, Col, Form, Button, Modal } from "react-bootstrap";
 
 import { ProfileType } from "../types/Profile";
@@ -18,12 +19,13 @@ export const FavourForm = (props: FavourFormProps) => {
 	const [datetime, setDatetime] = useState("");
 
 	const [showForm, setShowForm] = useState(false);
-
+	const history = useHistory();
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
+		console.log(title, description, location, coins, type, datetime);
 		axios
 			.post(
-				process.env.REACT_APP_API_HOST + "/favours/",
+				process.env.REACT_APP_API_HOST + "/favours",
 				{
 					title: title,
 					description: description,
@@ -34,17 +36,19 @@ export const FavourForm = (props: FavourFormProps) => {
 				},
 				{ withCredentials: true }
 			)
-			.then((res) => {
-				alert("Favour posted!");
-				setTitle("");
-				setDescription("");
-				setLocation("");
-				setCoins(0);
-				setType("");
-				setDatetime("");
-			});
+			.then(
+				(response) => {
+					console.log(response);
+					if (response.data === "OK") {
+						alert("Favour Posted Succesfully");
+						history.push("/");
+					}
+				},
+				(error) => {
+					console.log(error);
+				}
+			);
 	};
-
 	const handleChange = (e: any) => {
 		e.preventDefault();
 		const { name, value } = e.target;
@@ -125,7 +129,7 @@ export const FavourForm = (props: FavourFormProps) => {
 								<Form.Control
 									name="coins"
 									type="number"
-									placeholder="Enter the number of coins earnt..."
+									placeholder="Enter the number of coins earned for completing this favour."
 									onChange={handleChange}
 								/>
 							</Form.Group>
