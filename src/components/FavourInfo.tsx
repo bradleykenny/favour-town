@@ -142,6 +142,13 @@ export const FavourInfo = (props: FavourInfoProps) => {
 								<ListGroupItem>
 									<i>Claimed by</i> {favour.assigned_user_id}
 								</ListGroupItem>
+
+								{props.user.username === favour.username && (
+									<ListGroupItem>
+										//Allow user to edit their own favours.
+										<b>Edit</b>
+									</ListGroupItem>
+								)}
 							</ListGroup>
 						</Card.Body>
 					</Card>
