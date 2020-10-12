@@ -23,3 +23,11 @@ a {
 .singleCard > .card-body {
 	padding-bottom: 0 !important;
 }
+
+.userCard > .card-body {
+	padding: 10px 20px 0px;
+}
+
+.userCard > .card-header > img {
+	margin-bottom: 10px;
+}

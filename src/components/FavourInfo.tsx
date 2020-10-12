@@ -15,7 +15,7 @@ import { ProfileType } from "../types/Profile";
 
 import "../style/FeedCard.css";
 
-type FavourAdminProps = {
+type FavourInfoProps = {
 	user: ProfileType;
 };
 
@@ -29,7 +29,7 @@ const defaultRequest: FRequest = {
 	user_id: "",
 };
 
-export const FavourAdmin = (props: FavourAdminProps) => {
+export const FavourInfo = (props: FavourInfoProps) => {
 	const { id } = useParams<{ id: string }>();
 
 	const [favour, setFavour] = useState(defaultFavour);
@@ -73,7 +73,7 @@ export const FavourAdmin = (props: FavourAdminProps) => {
 					<Card className="feedCard singleCard">
 						<Card.Header>
 							<Card.Link href={profileLink}>
-								@{favour.username}
+								@{favour.user_id}
 							</Card.Link>
 						</Card.Header>
 						<Card.Body>

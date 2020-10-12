@@ -13,7 +13,7 @@ import {
 	Profile,
 	Login,
 	Register,
-	FavourAdmin,
+	FavourInfo,
 } from "./components";
 import { ProfileType } from "./types/Profile";
 
@@ -70,7 +70,7 @@ const App = () => {
 				</Route>
 				<Route path="/favour/:id">
 					<NavBar username={user ? user.username : ""} />
-					<FavourAdmin user={user} />
+					<FavourInfo user={user} />
 				</Route>
 				<Route path="/login">
 					<Login setUsername={setUsername} />

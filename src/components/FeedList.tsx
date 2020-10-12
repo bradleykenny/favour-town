@@ -58,7 +58,7 @@ export const FeedList = (props: FeedListProps) => {
 			>
 				{props.userCardShow && (
 					<Col sm={4}>
-						<UserCard username="bradknny" />
+						<UserCard user={props.user} />
 					</Col>
 				)}
 				<Col sm={6}>
