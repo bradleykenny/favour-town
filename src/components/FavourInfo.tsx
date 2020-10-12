@@ -139,9 +139,12 @@ export const FavourInfo = (props: FavourInfoProps) => {
 									<b> Coins: </b>
 									{favour.favour_coins}
 								</ListGroupItem>
-								<ListGroupItem>
-									<i>Claimed by</i> {favour.assigned_user_id}
-								</ListGroupItem>
+								{favour.favour_status === 1 && (
+									<ListGroupItem>
+										<i>Claimed by</i>{" "}
+										{favour.assigned_user_id}
+									</ListGroupItem>
+								)}
 
 								{props.user.username === favour.username && (
 									<ListGroupItem>
