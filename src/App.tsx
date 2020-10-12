@@ -14,6 +14,7 @@ import {
 	Login,
 	Register,
 	FavourInfo,
+	DirectMessage,
 } from "./components";
 import { ProfileType } from "./types/Profile";
 
@@ -77,6 +78,9 @@ const App = () => {
 				</Route>
 				<Route path="/register">
 					<Register />
+				</Route>
+				<Route path="/message">
+					<DirectMessage />
 				</Route>
 
 				{/* ALWAYS LEAVE `/` LAST */}
