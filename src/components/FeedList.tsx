@@ -77,8 +77,10 @@ export const FeedList = (props: FeedListProps) => {
 						{cards.map((favour: FavourType) => (
 							<FeedCard favour={favour} user={props.user} />
 						))}
-						<Button onClick={handleLoadMore}>Load More</Button>
 					</div>
+					<Button onClick={handleLoadMore} className="loadMoreBtn">
+						Load More
+					</Button>
 				</Col>
 			</Row>
 		</Container>

@@ -96,7 +96,11 @@ export const FeedCard = (props: FeedCardProps) => {
 						{claimed ? "Unclaim" : "Claim"}
 					</Card.Link>
 				)}
-				{favour_status === 1 && <Card.Link>Claimed</Card.Link>}
+				{favour_status === 1 && (
+					<Card.Link>
+						<b>Claimed</b>
+					</Card.Link>
+				)}
 				{username === props.user.username && (
 					<Card.Link href={"/favour/" + _id}>
 						<b>Admin</b>
