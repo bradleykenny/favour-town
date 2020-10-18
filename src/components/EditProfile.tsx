@@ -21,6 +21,7 @@ type EditProfileProps = {
 
 export const EditProfile = (props: EditProfileProps) => {
 	const { username } = useParams<{ username: string }>();
+	const [profilePic, setProfilePic] = useState("")
 
 	const blankUser: ProfileType = {
 		username: "",
@@ -43,7 +44,10 @@ export const EditProfile = (props: EditProfileProps) => {
 
 	const handleSubmit = () => {};
 
-	const handleChange = () => {};
+	const handleChange = (e: any) => {
+		setProfilePic(e.target.files[0])
+		console.log(e.target.files[0])
+	};
 
 	return (
 		<div>
