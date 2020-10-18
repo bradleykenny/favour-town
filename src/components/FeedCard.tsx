@@ -41,8 +41,17 @@ export const FeedCard = (props: FeedCardProps) => {
 
 	const profileLink = "/profile/" + username;
 
+	let cardStateClass = "";
+	if (favour_status === 0) {
+		cardStateClass = "cardUnclaimed";
+	} else if (favour_status === 1) {
+		cardStateClass = "cardClaimed";
+	} else if (favour_status === 2) {
+		cardStateClass = "cardComplete";
+	}
+
 	return (
-		<Card className="feedCard">
+		<Card className={"feedCard " + cardStateClass}>
 			<Card.Header>
 				<Card.Link href={profileLink}>@{username}</Card.Link>
 			</Card.Header>
