@@ -12,7 +12,7 @@ import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 
 import { defaultFavour } from "../types/Favour";
-import { ProfileType } from "../types/Profile";
+import { ProfileType, emptyUser } from "../types/Profile";
 
 import "../style/FeedCard.css";
 
@@ -41,6 +41,7 @@ export const FavourInfo = (props: FavourInfoProps) => {
 
 	const [favour, setFavour] = useState(defaultFavour);
 	const [requests, setRequests] = useState([defaultRequest]);
+	const [assignedUser, setAssignedUser] = useState(emptyUser);
 
 	const history = useHistory();
 
@@ -48,8 +49,18 @@ export const FavourInfo = (props: FavourInfoProps) => {
 		axios
 			.get(process.env.REACT_APP_API_HOST + "/favours/" + id)
 			.then((response) => {
-				console.log(response.data);
 				setFavour(response.data[0]);
+				if (response.data[0].favour_status == 1) {
+					axios
+						.get(
+							process.env.REACT_APP_API_HOST +
+								"/profile/" +
+								response.data[0].assigned_user_id
+						)
+						.then((result) => {
+							setAssignedUser(result.data[0]);
+						});
+				}
 			});
 
 		axios
@@ -142,7 +153,9 @@ export const FavourInfo = (props: FavourInfoProps) => {
 								{favour.favour_status === 1 && (
 									<ListGroupItem>
 										<i>Claimed by</i>{" "}
-										{favour.assigned_user_id}
+										{assignedUser.f_name +
+											" " +
+											assignedUser.l_name}
 									</ListGroupItem>
 								)}
 

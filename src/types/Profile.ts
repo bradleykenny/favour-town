@@ -14,3 +14,13 @@ export type ExtProfileType = {
 	l_name: string;
 	user_rating: number;
 };
+
+export const emptyUser: ExtProfileType = {
+	username: "",
+	_id: "",
+	email_addr: "",
+	favour_counter: 0,
+	f_name: "",
+	l_name: "",
+	user_rating: 0,
+};
