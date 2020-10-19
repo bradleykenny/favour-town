@@ -13,7 +13,7 @@ import { useParams } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
 
 import "../style/Profile.css";
-import { ProfileType } from "../types/Profile";
+import { ProfileType, ExtProfileType } from "../types/Profile";
 
 type EditProfileProps = {
 	user: ProfileType;
@@ -22,13 +22,15 @@ type EditProfileProps = {
 export const EditProfile = (props: EditProfileProps) => {
 	const { username } = useParams<{ username: string }>();
 	const [profilePic, setProfilePic] = useState("");
-	const starRating = 3;
 
-	const blankUser: ProfileType = {
+	const blankUser: ExtProfileType = {
 		username: "",
 		_id: "",
 		email_addr: "",
 		favour_counter: 0,
+		f_name: "",
+		l_name: "",
+		user_rating: 4,
 	};
 	const [user, setUser] = useState(blankUser);
 
@@ -77,7 +79,7 @@ export const EditProfile = (props: EditProfileProps) => {
 									viewBox="0 0 16 16"
 									className="bi bi-star-fill"
 									fill={
-										ratingValue <= starRating
+										ratingValue <= user.user_rating
 											? "#ffc107"
 											: "#d4d5d9"
 									}
@@ -89,7 +91,7 @@ export const EditProfile = (props: EditProfileProps) => {
 						);
 					})}
 					<i className="text-muted ml-2">
-						Your rating is: {starRating}
+						Your rating is: {user.user_rating}
 					</i>
 				</div>
 			</Jumbotron>
