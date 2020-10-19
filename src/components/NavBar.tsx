@@ -11,7 +11,6 @@ import {
 
 import "../style/NavBar.css";
 import { useHistory } from "react-router-dom";
-import "Logout";
 import { Logout } from "./Logout";
 
 type NavBarProps = {
@@ -27,21 +26,6 @@ export const NavBar = (props: NavBarProps) => {
 		setUsername(props.username);
 	}, [props.username]);
 
-	const onSubmit = (e: any) => {
-		axios.post(process.env.REACT_APP_API_HOST + "/logout",{},{withCredentials:true}).then(
-			(response) => {
-				console.log(response)
-				if(response.data==="OK"){
-					window.location.reload(false);
-					window.alert("Logout Succesful. Please Login Again.")
-					history.push("/");
-				}
-			},
-			(error) => {
-				console.log(error);
-			}
-		)
-	};
 
 	return (
 		<Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
