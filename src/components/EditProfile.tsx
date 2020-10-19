@@ -21,7 +21,11 @@ type EditProfileProps = {
 
 export const EditProfile = (props: EditProfileProps) => {
 	const { username } = useParams<{ username: string }>();
-	const [profilePic, setProfilePic] = useState("");
+	const [profileInfo, setProfileInfo] = useState({
+		location: "",
+		password: "",
+		profilePicture: "",
+	});
 
 	const blankUser: ExtProfileType = {
 		username: "",
@@ -45,11 +49,39 @@ export const EditProfile = (props: EditProfileProps) => {
 	// TODO: read in user profile picture dynamically
 	const profilePicture = "https://robohash.org/" + props.user._id;
 
-	const handleSubmit = () => {};
+	const handleSubmit = (e: any) => {
+		e.preventDefault();
+		console.log(profileInfo);
+	};
 
 	const handleChange = (e: any) => {
-		setProfilePic(e.target.files[0]);
-		console.log(e.target.files[0]);
+		e.preventDefault();
+		const { name, value } = e.target;
+
+		switch (name) {
+			case "location":
+				if (value.length > 0) {
+					setProfileInfo({ ...profileInfo, location: value });
+				}
+
+				break;
+
+			case "password":
+				if (value.length > 0) {
+					setProfileInfo({ ...profileInfo, password: value });
+				}
+				break;
+
+			case "file":
+				setProfileInfo({
+					...profileInfo,
+					profilePicture: e.target.files[0],
+				});
+				break;
+
+			default:
+				break;
+		}
 	};
 
 	return (
@@ -111,6 +143,7 @@ export const EditProfile = (props: EditProfileProps) => {
 											name="location"
 											type="location"
 											placeholder="Enter new location"
+											onChange={handleChange}
 										/>
 									</Form.Group>
 									<Form.Group controlId="formPassword">
@@ -119,6 +152,7 @@ export const EditProfile = (props: EditProfileProps) => {
 											name="password"
 											type="password"
 											placeholder="Enter new password"
+											onChange={handleChange}
 										/>
 									</Form.Group>
 									<Form.Group controlId="formProfilePic">
