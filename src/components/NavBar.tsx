@@ -11,7 +11,8 @@ import {
 
 import "../style/NavBar.css";
 import { useHistory } from "react-router-dom";
-import cookie from "react-cookies";
+import "Logout";
+import { Logout } from "./Logout";
 
 type NavBarProps = {
 	username: string;
@@ -125,7 +126,8 @@ export const NavBar = (props: NavBarProps) => {
 				</Form>
 				{username ? (
 				<Button 
-				onClick={onSubmit}
+				/*Dont Know how to call Logout here properly*/
+				onClick={Logout}
 				variant="outline-light" className="ml-4">
 					Logout
 				</Button>

@@ -12,3 +12,4 @@ export { EditProfile } from "./EditProfile";
 export { ChatMessage } from "./ChatMessage";
 export { Friend } from "./Friend";
 export { Legend } from "./Legend";
+export { Logout } from "./Logout";
