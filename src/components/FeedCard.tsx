@@ -5,6 +5,8 @@ import axios from "axios";
 import { FavourType } from "../types/Favour";
 import { ProfileType } from "../types/Profile";
 
+import { BsArrowBarDown, BsArrowBarUp, BsList } from "react-icons/bs";
+
 import "../style/FeedCard.css";
 
 type FeedCardProps = {
@@ -36,6 +38,8 @@ export const FeedCard = (props: FeedCardProps) => {
 					{ withCredentials: true }
 				)
 				.then(() => setClaimed(!claimed));
+		} else {
+			setClaimed(!claimed);
 		}
 	};
 
@@ -102,6 +106,7 @@ export const FeedCard = (props: FeedCardProps) => {
 			<Card.Footer>
 				{username !== props.user.username && favour_status === 0 && (
 					<Card.Link onClick={handleClaimed}>
+						{claimed ? <BsArrowBarDown /> : <BsArrowBarUp />}
 						{claimed ? "Unclaim" : "Claim"}
 					</Card.Link>
 				)}
@@ -115,7 +120,10 @@ export const FeedCard = (props: FeedCardProps) => {
 						<b>Admin</b>
 					</Card.Link>
 				)}
-				<Card.Link href={"/favour/" + _id}>More</Card.Link>
+				<Card.Link href={"/favour/" + _id}>
+					<BsList />
+					More
+				</Card.Link>
 			</Card.Footer>
 		</Card>
 	);

@@ -31,7 +31,6 @@ export const Profile = (props: ProfileProps) => {
 		axios
 			.get(process.env.REACT_APP_API_HOST + "/profile/" + username)
 			.then((res2: AxiosResponse) => {
-				console.log(res2.data);
 				setUser(res2.data[0]);
 			});
 	}, [username]);

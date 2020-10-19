@@ -63,3 +63,10 @@ a {
 .cardClaimed {
 	border-left: 4px solid rgba(207, 191, 46, 0.7) !important;
 }
+
+.card-link > svg {
+	margin-top: -1.5px;
+	margin-right: 5px;
+	height: 1.2em;
+	width: 1.2em;
+}
