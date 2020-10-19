@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import { FeedCard, UserCard, FavourForm } from "./";
+import { Container, Row, Col, Button, Card } from "react-bootstrap";
+import { FeedCard, UserCard, FavourForm, Legend } from "./";
 import axios from "axios";
 
 import "../style/FeedList.css";
@@ -58,6 +58,7 @@ export const FeedList = (props: FeedListProps) => {
 				{props.userCardShow && (
 					<Col sm={4}>
 						<UserCard user={props.user} />
+						<Legend />
 					</Col>
 				)}
 				<Col sm={6}>

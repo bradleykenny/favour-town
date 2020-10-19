@@ -70,3 +70,43 @@ a {
 	height: 1.2em;
 	width: 1.2em;
 }
+
+/* LEGEND.TSX RELATED */
+
+#cardLegend {
+	margin-top: 20px;
+	padding: 40px auto !important;
+}
+
+#cardLegend > p {
+	margin-left: 20px;
+}
+
+#cardLegend > p:first-child {
+	margin-top: 20px;
+}
+
+#cardLegend > p:last-child {
+	margin-bottom: 20px;
+}
+
+.legendCircle {
+	height: 12px;
+	width: 12px;
+	margin-right: 10px;
+	background-color: black;
+	display: inline-block;
+	border-radius: 50%;
+}
+
+.green {
+	background-color: rgba(58, 160, 55, 0.7);
+}
+
+.yellow {
+	background-color: rgba(207, 191, 46, 0.7);
+}
+
+.blue {
+	background-color: rgba(30, 114, 211, 0.7);
+}
