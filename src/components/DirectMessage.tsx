@@ -1,16 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import {
-	Button,
-	Form,
-	Container,
-	Row,
-	Col,
-	Card,
-	ListGroup,
-	ListGroupItem,
-	Badge,
-} from "react-bootstrap";
+import { Button, Container, Row, Col, Card, ListGroup } from "react-bootstrap";
 import { ChatMessage, Friend } from "../components";
 import "../style/DirectMessage.css";
 type messageProps = {};
@@ -108,54 +98,47 @@ export const DirectMessage = (props: messageProps) => {
 	});
 
 	return (
-		<div>
-			<Container>
-				<Card bg="light" className="directMessageCard">
-					<Row className="d-flex justify-content-center mt-2">
-						<Col sm={3} className="align-items-center">
-							<h3 className="font-weight-bold mb-2 ml-3">
-								Member
-							</h3>
-							<div className="white z-depth-1 p-3">
-								<ListGroup className="friend-list">
-									{state.friends.map((friend: any) => (
-										<Friend
-											key={friend.name}
-											friend={friend}
-										/>
-									))}
-								</ListGroup>
-							</div>
-						</Col>
-						<Col>
-							<Row>
-								<ListGroup>
-									{state.messages.map((message: any) => (
-										<ChatMessage
-											key={message.author + message.when}
-											message={message}
-										/>
-									))}
+		<Container>
+			<Card bg="light" className="directMessageCard">
+				<Row className="d-flex justify-content-center mt-2">
+					<Col sm={3} className="align-items-center">
+						<h3 className="font-weight-bold mb-2 ml-3">Member</h3>
+						<div className="white z-depth-1 p-3">
+							<ListGroup className="friend-list">
+								{state.friends.map((friend: any) => (
+									<Friend key={friend.name} friend={friend} />
+								))}
+							</ListGroup>
+						</div>
+					</Col>
+					<Col>
+						<Row>
+							<ListGroup>
+								{state.messages.map((message: any) => (
+									<ChatMessage
+										key={message.author + message.when}
+										message={message}
+									/>
+								))}
 
-									<div>
-										<textarea
-											className="form-control pl-2 my-0"
-											placeholder="Type your message here..."
-										/>
-										<Button
-											color="info"
-											size="sm"
-											className="float-right mt-4"
-										>
-											Send
-										</Button>
-									</div>
-								</ListGroup>
-							</Row>
-						</Col>
-					</Row>
-				</Card>
-			</Container>
-		</div>
+								<div>
+									<textarea
+										className="form-control pl-2 my-0"
+										placeholder="Type your message here..."
+									/>
+									<Button
+										color="info"
+										size="sm"
+										className="float-right mt-4"
+									>
+										Send
+									</Button>
+								</div>
+							</ListGroup>
+						</Row>
+					</Col>
+				</Row>
+			</Card>
+		</Container>
 	);
 };
