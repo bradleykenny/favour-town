@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import { Button, Container, Row, Col, Card, ListGroup } from "react-bootstrap";
+import {
+	Button,
+	Container,
+	Row,
+	Col,
+	Card,
+	ListGroup,
+	Form,
+	InputGroup,
+	FormControl,
+} from "react-bootstrap";
 import { ChatMessage, Friend } from "../components";
 import "../style/DirectMessage.css";
 type messageProps = {};
 
 export const DirectMessage = (props: messageProps) => {
+	const [newMessage, setNewMessage] = useState("");
 	const [state, setState] = useState({
 		friends: [
 			{
@@ -97,6 +108,27 @@ export const DirectMessage = (props: messageProps) => {
 		],
 	});
 
+	const handleSubmit = (e: any) => {
+		e.preventDefault();
+		console.log(newMessage);
+		// setState({
+		// 	messages: [
+		// 		{
+		// 			author: "Lara Croft",
+		// 			avatar: "https://robohash.org/Lara",
+		// 			when: "13 mins ago",
+		// 			message: newMessage,
+		// 		},
+		// 	],
+		// });
+	};
+
+	const handleChange = (e: any) => {
+		e.preventDefault();
+		const { name, value } = e.target;
+		setNewMessage(value);
+	};
+
 	return (
 		<Container>
 			<Card bg="light" className="directMessageCard">
@@ -122,17 +154,25 @@ export const DirectMessage = (props: messageProps) => {
 								))}
 
 								<div>
-									<textarea
-										className="form-control pl-2 my-0"
-										placeholder="Type your message here..."
-									/>
-									<Button
-										color="info"
-										size="sm"
-										className="float-right mt-4"
-									>
-										Send
-									</Button>
+									<Form onSubmit={handleSubmit}>
+										<Form.Group>
+											<Form.Control
+												as="textarea"
+												name="messageBox"
+												className="form-control pl-2 my-0"
+												placeholder="Type your message here..."
+												onChange={handleChange}
+											/>
+										</Form.Group>
+										<Button
+											color="info"
+											size="sm"
+											type="submit"
+											className="float-right mt-2"
+										>
+											Send
+										</Button>
+									</Form>
 								</div>
 							</ListGroup>
 						</Row>
