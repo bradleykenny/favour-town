@@ -127,6 +127,7 @@ export const EditProfile = (props: EditProfileProps) => {
 											required
 											name="file"
 											label="Upload new profile picture"
+											accept=".png, .jpg, .jpeg"
 											onChange={handleChange}
 											feedbackTooltip
 										/>
