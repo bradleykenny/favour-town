@@ -72,6 +72,7 @@ export const Friend = (props: friendProps) => (
 						height="1em"
 						viewBox="0 0 16 16"
 						className="bi bi-reply-fill"
+						id="replyIcon"
 						fill="currentColor"
 						xmlns="http://www.w3.org/2000/svg"
 					>

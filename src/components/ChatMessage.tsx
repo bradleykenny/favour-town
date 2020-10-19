@@ -28,7 +28,7 @@ export const ChatMessage = (props: messageProps) => (
 			className="img-circle mr-2 z-depth-1"
 			src={props.message.avatar}
 			alt="avatar"
-			style={{ width: "3em", height: "3rem" }}
+			style={{ width: "3rem", height: "3rem" }}
 		/>
 		<Card>
 			<Card.Body>
