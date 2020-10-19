@@ -155,7 +155,10 @@ export const FavourInfo = (props: FavourInfoProps) => {
 										<i>Claimed by</i>{" "}
 										{assignedUser.f_name +
 											" " +
-											assignedUser.l_name}
+											assignedUser.l_name +
+											"[@" +
+											assignedUser.username +
+											"]"}
 									</ListGroupItem>
 								)}
 
@@ -169,6 +172,7 @@ export const FavourInfo = (props: FavourInfoProps) => {
 						</Card.Body>
 					</Card>
 					{favour.favour_status === 0 &&
+						favour.user_id === props.user._id &&
 						requests.map((r: FRequest) => (
 							<Card className="feedCard requestCard">
 								<Card.Body>
