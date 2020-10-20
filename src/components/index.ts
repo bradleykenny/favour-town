@@ -12,3 +12,5 @@ export { EditProfile } from "./EditProfile";
 export { ChatMessage } from "./ChatMessage";
 export { Friend } from "./Friend";
 export { Legend } from "./Legend";
+export { uploadFile } from "./FileUpload";
+export { Logout } from "./Logout";

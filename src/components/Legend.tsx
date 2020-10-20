@@ -15,7 +15,7 @@ export const Legend = (props: {}) => {
 				Claimed
 			</Card.Text>
 			<Card.Text>
-				<span className="legendCircle blue"></span>
+				<span className="legendCircle grey"></span>
 				Unclaimed
 			</Card.Text>
 		</Card>

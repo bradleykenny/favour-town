@@ -14,6 +14,7 @@ import axios, { AxiosResponse } from "axios";
 
 import "../style/Profile.css";
 import { ProfileType, ExtProfileType } from "../types/Profile";
+import { uploadFile } from "./FileUpload";
 
 type EditProfileProps = {
 	user: ProfileType;
@@ -52,6 +53,7 @@ export const EditProfile = (props: EditProfileProps) => {
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
 		console.log(profileInfo);
+		uploadFile(profileInfo.profilePicture);
 	};
 
 	const handleChange = (e: any) => {
