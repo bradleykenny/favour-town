@@ -50,7 +50,7 @@ export const Register = (props: RegisterProps) => {
 					setErrors({
 						...errors,
 						username:
-							"Please enter a username atleast 5 characters long",
+							"Please enter a username at least 5 characters long",
 					});
 					setRegisterInfo({ ...registerInfo, username: "" });
 				} else {
@@ -199,7 +199,7 @@ export const Register = (props: RegisterProps) => {
 											onChange={handleChange}
 										/>
 										{errors.f_name.length > 0 && (
-											<Form.Text className="error">
+											<Form.Text className="error text-danger">
 												{errors.f_name}
 											</Form.Text>
 										)}
@@ -213,7 +213,7 @@ export const Register = (props: RegisterProps) => {
 											onChange={handleChange}
 										/>
 										{errors.l_name.length > 0 && (
-											<Form.Text className="error">
+											<Form.Text className="error text-danger">
 												{errors.l_name}
 											</Form.Text>
 										)}
@@ -228,7 +228,7 @@ export const Register = (props: RegisterProps) => {
 											onChange={handleChange}
 										/>
 										{errors.username.length > 0 && (
-											<Form.Text className="error">
+											<Form.Text className="error text-danger">
 												{errors.username}
 											</Form.Text>
 										)}
@@ -243,7 +243,7 @@ export const Register = (props: RegisterProps) => {
 											onChange={handleChange}
 										/>
 										{errors.email.length > 0 && (
-											<Form.Text className="error">
+											<Form.Text className="error text-danger">
 												{errors.email}
 											</Form.Text>
 										)}
@@ -258,7 +258,7 @@ export const Register = (props: RegisterProps) => {
 											onChange={handleChange}
 										/>
 										{errors.password.length > 0 && (
-											<Form.Text className="error">
+											<Form.Text className="error text-danger">
 												{errors.password}
 											</Form.Text>
 										)}
@@ -275,7 +275,7 @@ export const Register = (props: RegisterProps) => {
 											onChange={handleChange}
 										/>
 										{errors.confirmPassword.length > 0 && (
-											<Form.Text className="error">
+											<Form.Text className="error text-danger">
 												{errors.confirmPassword}
 											</Form.Text>
 										)}

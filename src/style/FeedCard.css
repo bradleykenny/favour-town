@@ -53,7 +53,7 @@ a {
 }
 
 .cardUnclaimed {
-	border-left: 4px solid rgba(30, 114, 211, 0.7) !important;
+	border-left: 4px solid rgba(200, 200, 200, 0.7) !important;
 }
 
 .cardComplete {
@@ -107,6 +107,10 @@ a {
 	background-color: rgba(207, 191, 46, 0.7);
 }
 
-.blue {
-	background-color: rgba(30, 114, 211, 0.7);
+.grey {
+	background-color: rgba(200, 200, 200, 0.7);
+}
+
+.list-group-item > i {
+	margin-right: 5px;
 }

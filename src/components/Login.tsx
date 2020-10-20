@@ -86,6 +86,13 @@ export const Login = (props: LoginProps) => {
 							props.setUsername(loginInfo.username);
 							history.push("/");
 						}
+						if (response.data === "ERROR: Login failed") {
+							setErrors({
+								...errors,
+								password:
+									"Username or password invalid, please try again!",
+							});
+						}
 					},
 					(error) => {
 						console.log(error);
@@ -120,7 +127,7 @@ export const Login = (props: LoginProps) => {
 											onChange={handleChange}
 										/>
 										{errors.username.length > 0 && (
-											<Form.Text className="error">
+											<Form.Text className="error text-danger">
 												{errors.username}
 											</Form.Text>
 										)}
@@ -135,7 +142,7 @@ export const Login = (props: LoginProps) => {
 											onChange={handleChange}
 										/>
 										{errors.password.length > 0 && (
-											<Form.Text className="error">
+											<Form.Text className="error text-danger">
 												{errors.password}
 											</Form.Text>
 										)}
