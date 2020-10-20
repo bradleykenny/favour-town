@@ -50,7 +50,10 @@ export const FavourInfo = (props: FavourInfoProps) => {
 			.get(process.env.REACT_APP_API_HOST + "/favours/" + id)
 			.then((response) => {
 				setFavour(response.data[0]);
-				if (response.data[0].favour_status == 1) {
+				if (
+					response.data[0].favour_status == 1 ||
+					response.data[0].favour_status == 2
+				) {
 					axios
 						.get(
 							process.env.REACT_APP_API_HOST +
@@ -153,12 +156,37 @@ export const FavourInfo = (props: FavourInfoProps) => {
 								{favour.favour_status === 1 && (
 									<ListGroupItem>
 										<i>Claimed by</i>{" "}
-										{assignedUser.f_name +
-											" " +
-											assignedUser.l_name +
-											"[@" +
-											assignedUser.username +
-											"]"}
+										<Card.Link
+											href={
+												"/profile/" +
+												assignedUser.username
+											}
+										>
+											{assignedUser.f_name +
+												" " +
+												assignedUser.l_name +
+												"[@" +
+												assignedUser.username +
+												"]"}
+										</Card.Link>
+									</ListGroupItem>
+								)}
+								{favour.favour_status === 2 && (
+									<ListGroupItem>
+										<i>Completed by</i>{" "}
+										<Card.Link
+											href={
+												"/profile/" +
+												assignedUser.username
+											}
+										>
+											{assignedUser.f_name +
+												" " +
+												assignedUser.l_name +
+												" [@" +
+												assignedUser.username +
+												"]"}
+										</Card.Link>
 									</ListGroupItem>
 								)}
 

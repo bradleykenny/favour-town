@@ -110,3 +110,7 @@ a {
 .grey {
 	background-color: rgba(200, 200, 200, 0.7);
 }
+
+.list-group-item > i {
+	margin-right: 5px;
+}
