@@ -6,11 +6,8 @@
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.5.0",
 		"@testing-library/user-event": "^7.2.1",
-<<<<<<< HEAD
 		"@types/aws-sdk": "^2.7.0",
-=======
 		"@types/react-cookies": "^0.1.0",
->>>>>>> 63793dbd0a2b12bdc17987a01b97106e7c585e22
 		"@types/react-router-dom": "^5.1.5",
 		"axios": "^0.20.0",
 		"bootstrap": "^4.5.2",
