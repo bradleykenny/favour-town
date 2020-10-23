@@ -53,7 +53,6 @@ export const EditProfile = (props: EditProfileProps) => {
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
-		console.log(profileInfo.profilePicture.name);
 		uploadFile(profileInfo.profilePicture);
 	};
 
@@ -76,7 +75,6 @@ export const EditProfile = (props: EditProfileProps) => {
 				break;
 
 			case "file":
-				// e.target.files[0].
 				setProfileInfo({
 					...profileInfo,
 					profilePicture: e.target.files[0],

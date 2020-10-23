@@ -23,7 +23,6 @@ export const uploadFile = (fileName: File) => {
 	// Setting up S3 upload parameters
 	const params = {
 		Bucket: BUCKET_NAME,
-		//Key: fileName+".jpg", // File name you want to save as in S3
 		Key: fileName.name, // File name you want to save as in S3
 		Body: fileName,
 	};
