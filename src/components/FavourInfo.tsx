@@ -52,8 +52,8 @@ export const FavourInfo = (props: FavourInfoProps) => {
 			.then((response) => {
 				setFavour(response.data[0]);
 				if (
-					response.data[0].favour_status == 1 ||
-					response.data[0].favour_status == 2
+					response.data[0].favour_status === 1 ||
+					response.data[0].favour_status === 2
 				) {
 					axios
 						.get(
@@ -86,6 +86,21 @@ export const FavourInfo = (props: FavourInfoProps) => {
 		axios
 			.post(
 				process.env.REACT_APP_API_HOST + "/favours/request/accept",
+				{
+					favour_id: favour_id,
+					requestor: requestor,
+				},
+				{ withCredentials: true }
+			)
+			.then(() => {
+				window.location.assign("/favour/" + favour_id);
+			});
+	};
+
+	const handleReject = (favour_id: string, requestor: string) => {
+		axios
+			.post(
+				process.env.REACT_APP_API_HOST + "/favours/request/reject",
 				{
 					favour_id: favour_id,
 					requestor: requestor,
@@ -224,7 +239,11 @@ export const FavourInfo = (props: FavourInfoProps) => {
 										<BsPlusCircle />
 										<b>Accept</b>
 									</Card.Link>
-									<Card.Link>
+									<Card.Link
+										onClick={() =>
+											handleReject(r.favour_id, r.user_id)
+										}
+									>
 										<BsDashCircle />
 										Reject
 									</Card.Link>
