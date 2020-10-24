@@ -14,4 +14,3 @@ export { Friend } from "./Friend";
 export { Legend } from "./Legend";
 export { uploadFile } from "./FileUpload";
 export { Logout } from "./Logout";
-export { MyFavours } from "./MyFavours";
