@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
 import axios from "axios";
 
@@ -26,6 +26,25 @@ export const FeedCard = (props: FeedCardProps) => {
 	} = props.favour;
 
 	const [claimed, setClaimed] = useState(false);
+
+	useEffect(() => {
+		axios
+			.post(
+				process.env.REACT_APP_API_HOST + "/favours/request/list",
+				{
+					favour_id: props.favour._id,
+				},
+				{ withCredentials: true }
+			)
+			.then((response) => {
+				if (Array.isArray(response.data)) {
+					const userIDs = response.data.map((i: any) => i.user_id);
+					if (userIDs.includes(props.user._id)) {
+						setClaimed(true);
+					}
+				}
+			});
+	}, [props.user._id]);
 
 	const handleClaimed = () => {
 		if (!claimed) {

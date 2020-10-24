@@ -43,8 +43,16 @@ a {
 	display: inline-block;
 }
 
-.requestCard > .card-body > a {
-	margin-right: 2.5px;
+.requestCard > .card-body > .card-text {
+	margin-right: 10px !important;
+	margin-bottom: 0px;
+}
+
+.requestCard > .card-footer > a > svg {
+	height: 1.1em;
+	width: 1.1em;
+	margin-top: -3px;
+	margin-right: 5px;
 }
 
 .card-footer > button {

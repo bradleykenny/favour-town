@@ -25,7 +25,8 @@ export const EditProfile = (props: EditProfileProps) => {
 	const [profileInfo, setProfileInfo] = useState({
 		location: "",
 		password: "",
-		profilePicture: "",
+		profilePicture: new File([""], "filename"),
+		// ----------------------------------> new File(),
 	});
 
 	const blankUser: ExtProfileType = {
@@ -52,7 +53,6 @@ export const EditProfile = (props: EditProfileProps) => {
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
-		console.log(profileInfo);
 		uploadFile(profileInfo.profilePicture);
 	};
 

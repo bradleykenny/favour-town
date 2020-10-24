@@ -28,7 +28,9 @@ body {
 
 .card-link:hover,
 .card-footer > button:hover,
-.card-footer > button:focus {
+.card-footer > button:focus,
+.card-footer > button:visited,
+.card-footer > button:active {
 	color: map-get($theme-colors, primary);
 	background-color: $primary-fade;
 }
