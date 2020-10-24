@@ -13,6 +13,7 @@ import axios from "axios";
 
 import { defaultFavour } from "../types/Favour";
 import { ProfileType, emptyUser } from "../types/Profile";
+import { BsChat, BsPlusCircle, BsDashCircle, BsPencil } from "react-icons/bs";
 
 import "../style/FeedCard.css";
 
@@ -92,7 +93,7 @@ export const FavourInfo = (props: FavourInfoProps) => {
 				{ withCredentials: true }
 			)
 			.then(() => {
-				history.push("/favour/" + favour_id);
+				window.location.assign("/favour/" + favour_id);
 			});
 	};
 
@@ -193,7 +194,10 @@ export const FavourInfo = (props: FavourInfoProps) => {
 								{props.user.username === favour.username && (
 									<ListGroupItem>
 										{/* Allow user to edit their own favours. */}
-										<b>Edit</b>
+										<Card.Link>
+											<BsPencil />
+											<b>Edit</b>
+										</Card.Link>
 									</ListGroupItem>
 								)}
 							</ListGroup>
@@ -204,22 +208,30 @@ export const FavourInfo = (props: FavourInfoProps) => {
 						requests.map((r: FRequest) => (
 							<Card className="feedCard requestCard">
 								<Card.Body>
+									<Card.Text>
+										{r.f_name} {r.l_name}
+									</Card.Text>
 									<Card.Link href={"/profile/" + r.username}>
 										@{r.username}
 									</Card.Link>
-									<Card.Text>
-										[{r.f_name} {r.l_name}]
-									</Card.Text>
 								</Card.Body>
 								<Card.Footer>
-									<Button
+									<Card.Link
 										onClick={() =>
 											handleAccept(r.favour_id, r.user_id)
 										}
 									>
+										<BsPlusCircle />
 										<b>Accept</b>
-									</Button>
-									<Button>Reject</Button>
+									</Card.Link>
+									<Card.Link>
+										<BsDashCircle />
+										Reject
+									</Card.Link>
+									<Card.Link>
+										<BsChat />
+										Message
+									</Card.Link>
 								</Card.Footer>
 							</Card>
 						))}
