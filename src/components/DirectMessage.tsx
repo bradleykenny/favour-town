@@ -39,6 +39,7 @@ export const DirectMessage = (props: messageProps) => {
 	const [newMessage, setNewMessage] = useState("");
 	const [friends, setFriends] = useState([
 		{
+			friendId: 6,
 			name: "John Doe",
 			avatar: "https://robohash.org/John",
 			message: "Hello, Are you there?",
@@ -48,6 +49,7 @@ export const DirectMessage = (props: messageProps) => {
 			active: true,
 		},
 		{
+			friendId: 5,
 			name: "Danny Smith",
 			message: "Lorem ipsum dolor sit",
 			avatar: "https://robohash.org/Danny",
@@ -57,6 +59,7 @@ export const DirectMessage = (props: messageProps) => {
 			active: false,
 		},
 		{
+			friendId: 4,
 			name: "Alex Steward",
 			message: "Lorem ipsum dolor sit",
 			avatar: "https://robohash.org/Alex",
@@ -66,6 +69,7 @@ export const DirectMessage = (props: messageProps) => {
 			active: false,
 		},
 		{
+			friendId: 3,
 			name: "Ashley Olsen",
 			message: "Lorem ipsum dolor sit",
 			avatar: "https://robohash.org/Ashley",
@@ -75,6 +79,7 @@ export const DirectMessage = (props: messageProps) => {
 			active: false,
 		},
 		{
+			friendId: 2,
 			name: "Kate Moss",
 			message: "Lorem ipsum dolor sit",
 			avatar: "https://robohash.org/Kate",
@@ -84,6 +89,7 @@ export const DirectMessage = (props: messageProps) => {
 			active: false,
 		},
 		{
+			friendId: 1,
 			name: "Lara Croft",
 			message: "Lorem ipsum dolor sit",
 			avatar: "https://robohash.org/Lara",
@@ -93,6 +99,7 @@ export const DirectMessage = (props: messageProps) => {
 			active: false,
 		},
 		{
+			friendId: 0,
 			name: "Brad Pitt",
 			message: "Lorem ipsum dolor sit",
 			avatar: "https://robohash.org/Brad",
@@ -104,6 +111,7 @@ export const DirectMessage = (props: messageProps) => {
 	]);
 	const [messages, setMessages] = useState([
 		{
+			authorId: 0,
 			author: "Brad Pitt",
 			avatar: "https://robohash.org/Brad",
 			when: "12 mins ago",
@@ -111,6 +119,7 @@ export const DirectMessage = (props: messageProps) => {
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolo",
 		},
 		{
+			authorId: 1,
 			author: "Lara Croft",
 			avatar: "https://robohash.org/Lara",
 			when: "13 mins ago",
@@ -118,6 +127,7 @@ export const DirectMessage = (props: messageProps) => {
 				" Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
 		},
 		{
+			authorId: 0,
 			author: "Brad Pitt",
 			avatar: "https://robohash.org/Brad",
 			when: "14 mins ago",
@@ -128,11 +138,11 @@ export const DirectMessage = (props: messageProps) => {
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
-		console.log(newMessage);
 		const message = {
+			authorId: 1,
 			author: "Lara Croft",
 			avatar: "https://robohash.org/Lara",
-			when: "13 mins ago",
+			when: "now",
 			message: newMessage,
 		};
 		setMessages([...messages, message]);
