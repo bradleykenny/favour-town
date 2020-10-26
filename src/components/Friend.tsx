@@ -12,6 +12,7 @@ import {
 	Badge,
 } from "react-bootstrap";
 import "../style/DirectMessage.css";
+import { DirectMessage } from "../components";
 
 type friendProps = {
 	friend: {
@@ -29,6 +30,7 @@ export const Friend = (props: friendProps) => {
 	const handleClick = (e: any) => {
 		e.preventDefault();
 		alert(props.friend.name);
+		// <DirectMessage id={props.friend.friendId} />;
 	};
 	return (
 		<ListGroupItem

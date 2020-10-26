@@ -36,6 +36,7 @@ socket.on("friendslist", (friends: object[]) => {
 });
 
 export const DirectMessage = (props: messageProps) => {
+	const [userID, setUserID] = useState(1);
 	const [newMessage, setNewMessage] = useState("");
 	const [friends, setFriends] = useState([
 		{
@@ -111,7 +112,7 @@ export const DirectMessage = (props: messageProps) => {
 	]);
 	const [messages, setMessages] = useState([
 		{
-			authorId: 0,
+			authorId: 1,
 			author: "Brad Pitt",
 			avatar: "https://robohash.org/Brad",
 			when: "12 mins ago",
@@ -119,7 +120,7 @@ export const DirectMessage = (props: messageProps) => {
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolo",
 		},
 		{
-			authorId: 1,
+			authorId: 0,
 			author: "Lara Croft",
 			avatar: "https://robohash.org/Lara",
 			when: "13 mins ago",
@@ -127,7 +128,7 @@ export const DirectMessage = (props: messageProps) => {
 				" Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
 		},
 		{
-			authorId: 0,
+			authorId: 1,
 			author: "Brad Pitt",
 			avatar: "https://robohash.org/Brad",
 			when: "14 mins ago",
@@ -139,7 +140,7 @@ export const DirectMessage = (props: messageProps) => {
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
 		const message = {
-			authorId: 1,
+			authorId: 0,
 			author: "Lara Croft",
 			avatar: "https://robohash.org/Lara",
 			when: "now",
@@ -171,12 +172,24 @@ export const DirectMessage = (props: messageProps) => {
 					<Col>
 						<Row>
 							<ListGroup>
-								{messages.map((message: any) => (
+								{/* {messages.map((message: any) => (
 									<ChatMessage
 										key={message.author + message.when}
 										message={message}
 									/>
-								))}
+								))} */}
+								{messages
+									.filter(
+										(message: any) =>
+											message.authorId === userID ||
+											message.authorId === 0
+									)
+									.map((message: any) => (
+										<ChatMessage
+											key={message.author + message.when}
+											message={message}
+										/>
+									))}
 
 								<div>
 									<Form onSubmit={handleSubmit}>
