@@ -15,28 +15,37 @@ import {
 } from "react-bootstrap";
 import { ChatMessage, Friend } from "../components";
 import "../style/DirectMessage.css";
-type messageProps = {};
-const socket = socketIOClient("http://localhost:5000"); //public is the room name
-socket.on("NotLoggedIn", (msg: string) => {
-	console.log(msg);
-	//Redirect to login page
-});
+type messageProps = {
+//	user_id:string;
+};
 
-socket.on("ACK", (msg: string) => {
-	console.log(msg);
-});
-
-socket.on("incoming", (msgList: object[]) => {
-	//Update message list state with list of messages
-});
-
-socket.on("friendslist", (friends: object[]) => {
-	console.log(friends);
-	//Update list of friends (i.e. people you have recieved messages from or sent messages to). Each object will contain the user_id, username and the last message recieved from them
-});
 
 export const DirectMessage = (props: messageProps) => {
-	const [userID, setUserID] = useState(1);
+	const socket = socketIOClient("http://localhost:5000"); //public is the room name
+
+	socket.on("NotLoggedIn", (msg: string) => {
+		console.log(msg);
+		//Redirect to login page
+	});
+
+	socket.on("ACK", (msg: string) => {
+		console.log(msg);
+	});
+
+	socket.on("incoming", (msgList: object[]) => {
+		//Update message list state with list of messages
+	});
+
+	socket.on("yourUser_id", (your_id: string) => {
+		//Set own user id in state
+
+		
+	});
+	socket.on("friendslist", (friends: object[]) => {
+		console.log(friends);
+		//Update list of friends (i.e. people you have recieved messages from or sent messages to). Each object will contain the user_id, username and the last message recieved from them
+	});
+	const [userID,usar_id] = useState("");
 	const [newMessage, setNewMessage] = useState("");
 	const [friends, setFriends] = useState([
 		{
