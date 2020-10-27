@@ -90,10 +90,9 @@ export const DirectMessage = (props: messageProps) => {
 		setYourId(your_id);
 	});
 	socket.on("friendslist", (friendsList: object[]) => {
-		var friendInfo: object;
 		//Update list of friends (i.e. people you have recieved messages from or sent messages to). Each object will contain the user_id, username and the last message recieved from them
+		
 		setFriends(friends.concat(
-		// uncomment to load friendlist
 			friendsList.map((friend: any) =>{
 					return {
 						friendId: friend.receiver_id,
