@@ -14,7 +14,7 @@ import {
 import { ChatMessage, Friend } from "../components";
 import "../style/DirectMessage.css";
 type messageProps = {
-//	user_id:string;
+	//	user_id:string;
 };
 const socket = socketIOClient("http://localhost:5000"); //public is the room name
 
@@ -83,6 +83,7 @@ export const DirectMessage = (props: messageProps) => {
 
 	socket.on("incoming", (msgList: object[]) => {
 		//Update message list state with list of messages
+		console.log("message list ", msgList);
 	});
 
 	socket.on("yourUser_id", (your_id: string) => {
@@ -91,9 +92,10 @@ export const DirectMessage = (props: messageProps) => {
 	});
 	socket.on("friendslist", (friendsList: object[]) => {
 		//Update list of friends (i.e. people you have recieved messages from or sent messages to). Each object will contain the user_id, username and the last message recieved from them
-		
-		setFriends(friends.concat(
-			friendsList.map((friend: any) =>{
+
+		setFriends(
+			friends.concat(
+				friendsList.map((friend: any) => {
 					return {
 						friendId: friend.receiver_id,
 						name: friend.username,
@@ -103,10 +105,10 @@ export const DirectMessage = (props: messageProps) => {
 						toRespond: 0,
 						seen: true,
 						active: false,
-					}
-
-			})
-		))
+					};
+				})
+			)
+		);
 	});
 
 	const handleSubmit = (e: any) => {
@@ -115,15 +117,13 @@ export const DirectMessage = (props: messageProps) => {
 			authorId: 0,
 			author: "Lara Croft",
 			avatar: "https://robohash.org/Lara",
-			reciever: receiverID,  //Get from state: 
-			when: "now", 
+			reciever: receiverID, //Get from state:
+			when: "now",
 			message: newMessage,
 		};
-		console.log(message)
-		socket.emit("send",message)
+		console.log(message);
+		socket.emit("send", message);
 		setMessages([...messages, message]);
-		
-		
 	};
 
 	const handleChange = (e: any) => {
