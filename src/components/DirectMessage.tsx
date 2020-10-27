@@ -13,89 +13,15 @@ import {
 } from "react-bootstrap";
 import { ChatMessage, Friend } from "../components";
 import "../style/DirectMessage.css";
-type messageProps = {
-	//	user_id:string;
-};
+type messageProps = {};
 
 export const DirectMessage = (props: messageProps) => {
-	const [yourUserId, setYourUserId] = useState("");
-	const [userID, setUserID] = useState(0);
+	// logged in user's id
+	const [yourId, setYourId] = useState("");
+	// user you are messaging's id
+	const [receiverID, setReceiverID] = useState(0);
 	const [newMessage, setNewMessage] = useState("");
-	const socket = socketIOClient("http://localhost:5000"); //public is the room name
-
-	socket.on("NotLoggedIn", (msg: string) => {
-		console.log(msg);
-		//Redirect to login page
-	});
-
-	socket.on("ACK", (msg: string) => {
-		console.log(msg);
-	});
-
-	socket.on("incoming", (msgList: object[]) => {
-		//Update message list state with list of messages
-	});
-
-	socket.on("yourUser_id", (your_id: string) => {
-		//Set own user id in state
-		console.log("ID ", your_id);
-		setYourUserId(your_id);
-	});
-	socket.on("friendslist", (friends: object[]) => {
-		console.log(friends);
-		//Update list of friends (i.e. people you have recieved messages from or sent messages to). Each object will contain the user_id, username and the last message recieved from them
-	});
 	const [friends, setFriends] = useState([
-		{
-			friendId: 6,
-			name: "John Doe",
-			avatar: "https://robohash.org/John",
-			message: "Hello, Are you there?",
-			when: "Just now",
-			toRespond: 1,
-			seen: false,
-			active: true,
-		},
-		{
-			friendId: 5,
-			name: "Danny Smith",
-			message: "Lorem ipsum dolor sit",
-			avatar: "https://robohash.org/Danny",
-			when: "5 min ago",
-			toRespond: 0,
-			seen: false,
-			active: false,
-		},
-		{
-			friendId: 4,
-			name: "Alex Steward",
-			message: "Lorem ipsum dolor sit",
-			avatar: "https://robohash.org/Alex",
-			when: "Yesterday",
-			toRespond: 0,
-			seen: false,
-			active: false,
-		},
-		{
-			friendId: 3,
-			name: "Ashley Olsen",
-			message: "Lorem ipsum dolor sit",
-			avatar: "https://robohash.org/Ashley",
-			when: "Yesterday",
-			toRespond: 0,
-			seen: false,
-			active: false,
-		},
-		{
-			friendId: 2,
-			name: "Kate Moss",
-			message: "Lorem ipsum dolor sit",
-			avatar: "https://robohash.org/Kate",
-			when: "Yesterday",
-			toRespond: 0,
-			seen: false,
-			active: false,
-		},
 		{
 			friendId: 0,
 			name: "Lara Croft",
@@ -143,6 +69,47 @@ export const DirectMessage = (props: messageProps) => {
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dol",
 		},
 	]);
+	const socket = socketIOClient("http://localhost:5000"); //public is the room name
+
+	socket.on("NotLoggedIn", (msg: string) => {
+		console.log(msg);
+		//Redirect to login page
+	});
+
+	socket.on("ACK", (msg: string) => {
+		console.log(msg);
+	});
+
+	socket.on("incoming", (msgList: object[]) => {
+		//Update message list state with list of messages
+	});
+
+	socket.on("yourUser_id", (your_id: string) => {
+		//Set own user id in state
+		setYourId(your_id);
+	});
+	socket.on("friendslist", (friendsList: object[]) => {
+		var friendInfo: object;
+		console.log(friendsList);
+		//Update list of friends (i.e. people you have recieved messages from or sent messages to). Each object will contain the user_id, username and the last message recieved from them
+
+		// uncomment to load friendlist
+		// friendsList.map((friend: any) =>
+		// 	setFriends([
+		// 		...friends,
+		// 		(friendInfo = {
+		// 			friendId: friend.receiver_id,
+		// 			name: friend.username,
+		// 			message: friend.content,
+		// 			avatar: "https://robohash.org/" + friend.username,
+		// 			when: "5 min ago",
+		// 			toRespond: 0,
+		// 			seen: true,
+		// 			active: false,
+		// 		}),
+		// 	])
+		// );
+	});
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
@@ -154,7 +121,7 @@ export const DirectMessage = (props: messageProps) => {
 			message: newMessage,
 		};
 		setMessages([...messages, message]);
-		console.log("user ID = ", userID);
+		console.log("user ID = ", receiverID);
 	};
 
 	const handleChange = (e: any) => {
@@ -162,8 +129,6 @@ export const DirectMessage = (props: messageProps) => {
 		const { name, value } = e.target;
 		setNewMessage(value);
 	};
-
-	console.log("userId = ", userID);
 
 	return (
 		<Container>
@@ -177,7 +142,7 @@ export const DirectMessage = (props: messageProps) => {
 									<Friend
 										key={friend.name}
 										friend={friend}
-										setId={setUserID}
+										setId={setReceiverID}
 									/>
 								))}
 							</ListGroup>
@@ -189,8 +154,8 @@ export const DirectMessage = (props: messageProps) => {
 								{messages
 									.filter(
 										(message: any) =>
-											message.authorId === yourUserId ||
-											message.authorId === userID ||
+											message.authorId === yourId ||
+											message.authorId === receiverID ||
 											message.authorID === 0
 									)
 									.map((message: any) => (
