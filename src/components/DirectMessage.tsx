@@ -13,14 +13,18 @@ import {
 } from "react-bootstrap";
 import { ChatMessage, Friend } from "../components";
 import "../style/DirectMessage.css";
-type messageProps = {};
+type messageProps = {
+//	user_id:string;
+};
+const socket = socketIOClient("http://localhost:5000"); //public is the room name
 
 export const DirectMessage = (props: messageProps) => {
-	// logged in user's id
-	const [yourId, setYourId] = useState("");
-	// user you are messaging's id
-	const [receiverID, setReceiverID] = useState(0);
+	const [userID,user_id] = useState("");
+	const [recieverID,reciever_id] = useState("");
 	const [newMessage, setNewMessage] = useState("");
+	
+	
+
 	const [friends, setFriends] = useState([
 		{
 			friendId: 0,
@@ -69,7 +73,12 @@ export const DirectMessage = (props: messageProps) => {
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dol",
 		},
 	]);
-	const socket = socketIOClient("http://localhost:5000"); //public is the room name
+
+
+
+
+
+
 
 	socket.on("NotLoggedIn", (msg: string) => {
 		console.log(msg);
@@ -117,11 +126,15 @@ export const DirectMessage = (props: messageProps) => {
 			authorId: 0,
 			author: "Lara Croft",
 			avatar: "https://robohash.org/Lara",
-			when: "now",
+			reciever: recieverID,  //Get from state: 
+			when: "now", 
 			message: newMessage,
 		};
+		console.log(message)
+		socket.emit("send",message)
 		setMessages([...messages, message]);
-		console.log("user ID = ", receiverID);
+		
+		
 	};
 
 	const handleChange = (e: any) => {
