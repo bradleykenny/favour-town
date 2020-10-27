@@ -1,13 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import {
-	Nav,
-	Navbar,
-	NavDropdown,
-	Form,
-	FormControl,
-	Button,
-} from "react-bootstrap";
+import { Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
 
 import "../style/NavBar.css";
 import { useHistory } from "react-router-dom";
@@ -25,7 +18,6 @@ export const NavBar = (props: NavBarProps) => {
 	useEffect(() => {
 		setUsername(props.username);
 	}, [props.username]);
-
 
 	return (
 		<Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
@@ -99,6 +91,7 @@ export const NavBar = (props: NavBarProps) => {
 						</svg>
 						Favours
 					</Nav.Link>
+					<Nav.Link href="/message">Messages</Nav.Link>
 				</Nav>
 				<Form inline>
 					<FormControl
@@ -109,13 +102,15 @@ export const NavBar = (props: NavBarProps) => {
 					<Button variant="outline-light">Search</Button>
 				</Form>
 				{username ? (
-				<Button 
-				/*Dont Know how to call Logout here properly*/
-				onClick={Logout}
-				variant="outline-light" className="ml-4">
-					Logout
-				</Button>
-				) : (null)}
+					<Button
+						/*Dont Know how to call Logout here properly*/
+						onClick={Logout}
+						variant="outline-light"
+						className="ml-4"
+					>
+						Logout
+					</Button>
+				) : null}
 			</Navbar.Collapse>
 		</Navbar>
 	);

@@ -10,17 +10,17 @@ import {
 	Card,
 	ListGroup,
 	Form,
-	InputGroup,
-	FormControl,
 } from "react-bootstrap";
 import { ChatMessage, Friend } from "../components";
 import "../style/DirectMessage.css";
 type messageProps = {
-//	user_id:string;
+	//	user_id:string;
 };
 
-
 export const DirectMessage = (props: messageProps) => {
+	const [yourUserId, setYourUserId] = useState("");
+	const [userID, setUserID] = useState(0);
+	const [newMessage, setNewMessage] = useState("");
 	const socket = socketIOClient("http://localhost:5000"); //public is the room name
 
 	socket.on("NotLoggedIn", (msg: string) => {
@@ -38,15 +38,13 @@ export const DirectMessage = (props: messageProps) => {
 
 	socket.on("yourUser_id", (your_id: string) => {
 		//Set own user id in state
-
-		
+		console.log("ID ", your_id);
+		setYourUserId(your_id);
 	});
 	socket.on("friendslist", (friends: object[]) => {
 		console.log(friends);
 		//Update list of friends (i.e. people you have recieved messages from or sent messages to). Each object will contain the user_id, username and the last message recieved from them
 	});
-	const [userID,usar_id] = useState("");
-	const [newMessage, setNewMessage] = useState("");
 	const [friends, setFriends] = useState([
 		{
 			friendId: 6,
@@ -99,7 +97,7 @@ export const DirectMessage = (props: messageProps) => {
 			active: false,
 		},
 		{
-			friendId: 1,
+			friendId: 0,
 			name: "Lara Croft",
 			message: "Lorem ipsum dolor sit",
 			avatar: "https://robohash.org/Lara",
@@ -109,7 +107,7 @@ export const DirectMessage = (props: messageProps) => {
 			active: false,
 		},
 		{
-			friendId: 0,
+			friendId: 1,
 			name: "Brad Pitt",
 			message: "Lorem ipsum dolor sit",
 			avatar: "https://robohash.org/Brad",
@@ -156,6 +154,7 @@ export const DirectMessage = (props: messageProps) => {
 			message: newMessage,
 		};
 		setMessages([...messages, message]);
+		console.log("user ID = ", userID);
 	};
 
 	const handleChange = (e: any) => {
@@ -163,6 +162,8 @@ export const DirectMessage = (props: messageProps) => {
 		const { name, value } = e.target;
 		setNewMessage(value);
 	};
+
+	console.log("userId = ", userID);
 
 	return (
 		<Container>
@@ -173,7 +174,11 @@ export const DirectMessage = (props: messageProps) => {
 						<div className="white z-depth-1 p-3">
 							<ListGroup className="friend-list">
 								{friends.map((friend: any) => (
-									<Friend key={friend.name} friend={friend} />
+									<Friend
+										key={friend.name}
+										friend={friend}
+										setId={setUserID}
+									/>
 								))}
 							</ListGroup>
 						</div>
@@ -181,17 +186,12 @@ export const DirectMessage = (props: messageProps) => {
 					<Col>
 						<Row>
 							<ListGroup>
-								{/* {messages.map((message: any) => (
-									<ChatMessage
-										key={message.author + message.when}
-										message={message}
-									/>
-								))} */}
 								{messages
 									.filter(
 										(message: any) =>
+											message.authorId === yourUserId ||
 											message.authorId === userID ||
-											message.authorId === 0
+											message.authorID === 0
 									)
 									.map((message: any) => (
 										<ChatMessage

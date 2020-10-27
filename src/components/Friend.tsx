@@ -1,36 +1,26 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import {
-	Button,
-	Form,
-	Container,
-	Row,
-	Col,
-	Card,
-	ListGroup,
-	ListGroupItem,
-	Badge,
-} from "react-bootstrap";
+import { ListGroupItem, Badge } from "react-bootstrap";
 import "../style/DirectMessage.css";
-import { DirectMessage } from "../components";
 
 type friendProps = {
 	friend: {
-		friendId: 0;
+		friendId: number;
 		name: string;
 		avatar: string;
 		message: string;
 		when: string;
-		toRespond: 0;
+		toRespond: number;
 		seen: boolean;
 		active: boolean;
 	};
+	setId: Function;
 };
 export const Friend = (props: friendProps) => {
 	const handleClick = (e: any) => {
 		e.preventDefault();
 		alert(props.friend.name);
-		// <DirectMessage id={props.friend.friendId} />;
+		props.setId(props.friend.friendId);
 	};
 	return (
 		<ListGroupItem

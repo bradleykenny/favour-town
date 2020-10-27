@@ -1,21 +1,11 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import {
-	Button,
-	Form,
-	Container,
-	Row,
-	Col,
-	Card,
-	ListGroup,
-	ListGroupItem,
-	Badge,
-} from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import "../style/DirectMessage.css";
 
 type messageProps = {
 	message: {
-		authorId: 0;
+		authorId: number;
 		author: string;
 		avatar: string;
 		when: string;
