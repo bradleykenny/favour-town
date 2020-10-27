@@ -26,7 +26,6 @@ export const EditProfile = (props: EditProfileProps) => {
 		location: "",
 		password: "",
 		profilePicture: new File([""], "filename"),
-		// ----------------------------------> new File(),
 	});
 
 	const blankUser: ExtProfileType = {
@@ -53,7 +52,13 @@ export const EditProfile = (props: EditProfileProps) => {
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
-		uploadFile(profileInfo.profilePicture);
+		uploadFile(props.user._id, profileInfo.profilePicture);
+
+		const fileTypeArray = profileInfo.profilePicture.name.split(".")
+		const fileType = fileTypeArray[fileTypeArray.length-1]
+		const fullLink = props.user._id+"."+fileType;
+
+		axios.post(process.env.REACT_APP_API_HOST + "/profileImage", {image_link:fullLink, user_id:props.user._id}, {withCredentials: true})
 	};
 
 	const handleChange = (e: any) => {

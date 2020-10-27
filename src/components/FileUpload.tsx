@@ -17,13 +17,14 @@ const s3 = new AWS.S3({
 });
 
 // uploading functionalities
-export const uploadFile = (fileName: File) => {
-	// Read content from the file
-
+export const uploadFile = (user_id: string, fileName: File) => {
 	// Setting up S3 upload parameters
+	const fileTypeArray = fileName.name.split(".")
+	const fileType = fileTypeArray[fileTypeArray.length-1]
+	
 	const params = {
 		Bucket: BUCKET_NAME,
-		Key: fileName.name, // File name you want to save as in S3
+		Key: user_id + "." + fileType, // File name you want to save as in S3
 		Body: fileName,
 	};
 
