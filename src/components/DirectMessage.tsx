@@ -19,12 +19,10 @@ type messageProps = {
 const socket = socketIOClient("http://localhost:5000"); //public is the room name
 
 export const DirectMessage = (props: messageProps) => {
-	const [userID,user_id] = useState("");
-	const [recieverID,reciever_id] = useState("");
+	const [yourId, setYourId] = useState("");
+	// user you are messaging's id
+	const [receiverID, setReceiverID] = useState(0);
 	const [newMessage, setNewMessage] = useState("");
-	
-	
-
 	const [friends, setFriends] = useState([
 		{
 			friendId: 0,
@@ -74,12 +72,6 @@ export const DirectMessage = (props: messageProps) => {
 		},
 	]);
 
-
-
-
-
-
-
 	socket.on("NotLoggedIn", (msg: string) => {
 		console.log(msg);
 		//Redirect to login page
@@ -99,25 +91,23 @@ export const DirectMessage = (props: messageProps) => {
 	});
 	socket.on("friendslist", (friendsList: object[]) => {
 		var friendInfo: object;
-		console.log(friendsList);
 		//Update list of friends (i.e. people you have recieved messages from or sent messages to). Each object will contain the user_id, username and the last message recieved from them
-
+		setFriends(friends.concat(
 		// uncomment to load friendlist
-		// friendsList.map((friend: any) =>
-		// 	setFriends([
-		// 		...friends,
-		// 		(friendInfo = {
-		// 			friendId: friend.receiver_id,
-		// 			name: friend.username,
-		// 			message: friend.content,
-		// 			avatar: "https://robohash.org/" + friend.username,
-		// 			when: "5 min ago",
-		// 			toRespond: 0,
-		// 			seen: true,
-		// 			active: false,
-		// 		}),
-		// 	])
-		// );
+			friendsList.map((friend: any) =>{
+					return {
+						friendId: friend.receiver_id,
+						name: friend.username,
+						message: friend.content,
+						avatar: "https://robohash.org/" + friend.username,
+						when: "5 min ago",
+						toRespond: 0,
+						seen: true,
+						active: false,
+					}
+
+			})
+		))
 	});
 
 	const handleSubmit = (e: any) => {
@@ -126,7 +116,7 @@ export const DirectMessage = (props: messageProps) => {
 			authorId: 0,
 			author: "Lara Croft",
 			avatar: "https://robohash.org/Lara",
-			reciever: recieverID,  //Get from state: 
+			reciever: receiverID,  //Get from state: 
 			when: "now", 
 			message: newMessage,
 		};
