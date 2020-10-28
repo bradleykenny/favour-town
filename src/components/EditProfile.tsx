@@ -15,6 +15,11 @@ import axios, { AxiosResponse } from "axios";
 import "../style/Profile.css";
 import { ProfileType, ExtProfileType } from "../types/Profile";
 import { uploadFile } from "./FileUpload";
+import {Map, Marker, GoogleApiWrapper } from "google-maps-react";
+import { GoogleMapsAPI } from "./GoogleMaps";
+import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+
+
 
 type EditProfileProps = {
 	user: ProfileType;
@@ -27,7 +32,6 @@ export const EditProfile = (props: EditProfileProps) => {
 		password: "",
 		profilePicture: new File([""], "filename"),
 	});
-
 	const blankUser: ExtProfileType = {
 		username: "",
 		_id: "",
@@ -38,6 +42,12 @@ export const EditProfile = (props: EditProfileProps) => {
 		user_rating: 4,
 	};
 	const [user, setUser] = useState(blankUser);
+	const [scriptLoaded, setScriptLoaded] = useState(false);
+	const input = document.getElementById('location') as HTMLInputElement;
+	const options={
+		types: ['locality'],
+		componentRestrictions: {country: 'au'},
+	}
 
 	useEffect(() => {
 		axios
@@ -46,14 +56,13 @@ export const EditProfile = (props: EditProfileProps) => {
 				setUser(res2.data[0]);
 			});
 	}, [username]);
-
+	
 	// TODO: read in user profile picture dynamically
 	const profilePicture = "https://robohash.org/" + props.user._id;
-
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
 		uploadFile(props.user._id, profileInfo.profilePicture);
-
+		
 		const fileTypeArray = profileInfo.profilePicture.name.split(".")
 		const fileType = fileTypeArray[fileTypeArray.length-1]
 		const fullLink = props.user._id+"."+fileType;
@@ -91,6 +100,7 @@ export const EditProfile = (props: EditProfileProps) => {
 		}
 	};
 
+	
 	return (
 		<div>
 			<Jumbotron>
@@ -146,16 +156,25 @@ export const EditProfile = (props: EditProfileProps) => {
 								<Form onSubmit={handleSubmit}>
 									<Form.Group controlId="formLocation">
 										<Form.Label>Change location</Form.Label>
-										<Form.Control
-											name="location"
-											type="location"
-											placeholder="Enter new location"
-											onChange={handleChange}
-										/>
+										<GooglePlacesAutocomplete apiKey="AIzaSyBT2ahmrpwBI5acSuxtIa-js55Ah33YVkM" 
+										autocompletionRequest={{
+											types: ['(cities)'],
+											componentRestrictions: {
+												country: ['au'],
+											}
+										}}>
+											<Form.Control
+												id="location"
+												name="location"
+												type="location"
+												placeholder="Enter new location"
+												onChange={handleChange}
+											/>
+										</GooglePlacesAutocomplete>
 									</Form.Group>
 									<Form.Group controlId="formPassword">
 										<Form.Label>Change password</Form.Label>
-										<Form.Control
+										<Form.Control 
 											name="password"
 											type="password"
 											placeholder="Enter new password"
