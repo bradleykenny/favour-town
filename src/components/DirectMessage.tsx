@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import socketIOClient from "socket.io-client";
+import axios, { AxiosResponse } from "axios";
 import {
 	Button,
 	Container,
@@ -12,11 +13,11 @@ import {
 } from "react-bootstrap";
 import { ChatMessage, Friend } from "../components";
 import "../style/DirectMessage.css";
-type messageProps = {};
 const socket = socketIOClient("http://localhost:5000"); //public is the room name
 
 export class DirectMessage extends React.Component {
-	state = {  
+	state = { 
+		yourUsername:"", 
 		yourId:"",
 		receiverID:"",
 		newMessage:"",
@@ -35,33 +36,38 @@ export class DirectMessage extends React.Component {
 	
 		socket.on("incoming", (msgList: object[]) => {
 			//Update message list state with list of messages
-			
 			this.setState({messages:[...this.state.messages,
 					...msgList.map((message: any) => {
 						return {
 							authorId: message.sender_id,
-							author: "Brad Pitt",
-							avatar: "https://robohash.org/",
+							author: message.username,
+							avatar: message.image_link,
 							when: message.date,
 							message: message.content,
 						};
 					})]
 				
 			});
-			console.log(this.state.messages)
 		});
 	
 		socket.on("yourUser_id", (your_id: string) => {
 			//Set own user id in state
-			this.setState({yourId:your_id})
+			axios
+			.get(process.env.REACT_APP_API_HOST + "/profile/" + your_id)
+			.then((res2: AxiosResponse) => {
+				this.setState({yourId:your_id,yourUsername:res2.data[0].username})
+			})
 		});
+
+
 		socket.on("friendslist", (friendsList: object[]) => {
 			//Update list of friends (i.e. people you have recieved messages from or sent messages to). Each object will contain the user_id, username and the last message recieved from them
 
 			this.setState({friends:[...this.state.friends,
 				...friendsList.map((friend: any) => {
+					console.log(friend)
 					return {
-						friendId: friend.receiver_id,
+						friendId: friend.receiver_id==this.state.yourId ? friend.sender_id:friend.receiver_id,
 						name: friend.username,
 						message: friend.content,
 						avatar: "https://robohash.org/" + friend.username,
@@ -82,7 +88,7 @@ export class DirectMessage extends React.Component {
 		e.preventDefault();
 		const message = {
 			authorId: this.state.yourId,
-			author: "Lara Croft",
+			author: this.state.yourUsername,
 			avatar: "https://robohash.org/Lara",
 			reciever: this.state.receiverID, //Get from state:
 			when: "now",
@@ -91,7 +97,7 @@ export class DirectMessage extends React.Component {
 		console.log(message);
 		socket.emit("send", message);
 		this.setState({messages:[...this.state.messages,message]})
-		console.log(this.state.messages)
+
 	};
 
 	handleChange = (e: any) => {
