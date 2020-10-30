@@ -93,8 +93,8 @@ export const NavBar = (props: NavBarProps) => {
 					</Nav.Link>
 					<Nav.Link href="/message">
 						<svg
-							width="1em"
-							height="1em"
+							width="1.4em"
+							height="1.4em"
 							viewBox="0 0 16 16"
 							className="navIcon bi bi-chat-left-dots-fill"
 							fill="currentColor"
