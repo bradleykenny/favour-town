@@ -81,19 +81,19 @@ export const DirectMessage = (props: messageProps) => {
 	socket.on("incoming", (msgList: object[]) => {
 		//Update message list state with list of messages
 		console.log(msgList);
-		// setMessages(
-		// 	messages.concat(
-		// 		msgList.map((message: any) => {
-		// 			return {
-		// 				authorId: message.senderId,
-		// 				author: "Brad Pitt",
-		// 				avatar: "https://robohash.org/",
-		// 				when: message.date,
-		// 				message: message.content,
-		// 			};
-		// 		})
-		// 	)
-		// );
+		setMessages(
+			messages.concat(
+				msgList.map((message: any) => {
+					return {
+						authorId: message.sender_id,
+						author: "Brad Pitt",
+						avatar: "https://robohash.org/",
+						when: message.date,
+						message: message.content,
+					};
+				})
+			)
+		);
 	});
 
 	socket.on("yourUser_id", (your_id: string) => {
@@ -133,7 +133,7 @@ export const DirectMessage = (props: messageProps) => {
 		};
 		console.log(message);
 		socket.emit("send", message);
-		setMessages([...messages, message]);
+		// setMessages([...messages, message]);
 	};
 
 	const handleChange = (e: any) => {
