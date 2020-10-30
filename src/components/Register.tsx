@@ -181,10 +181,17 @@ export const Register = (props: RegisterProps) => {
 
 	return (
 		<div id="loginBackground">
+			<img className="backgroundImage" src="/green-abstract.jpg" />
 			<Container className="align-items-center">
 				<Row className="d-flex justify-content-center">
 					<Col sm={4} className="align-items-center">
 						<Card bg="light" className="loginCard">
+							<Card.Header className="loginCard-header">
+								<span className="logo">
+									<span className="logo_f">favour</span>
+									<span className="logo_t">town</span>
+								</span>
+							</Card.Header>
 							<Card.Body>
 								<Card.Title className="text-center">
 									<h2>Create Account</h2>

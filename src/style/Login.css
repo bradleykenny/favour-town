@@ -14,15 +14,29 @@
 	padding: 2.5px 5px;
 }
 
-#loginBackground {
-	position: relative;
+.backgroundImage {
+	position: fixed;
 
 	top: 0;
 	left: 0;
 
 	width: 100vw;
 	height: 100vh;
-	background: url(https://images.hdqwalls.com/wallpapers/4k-green-abstract-zm.jpg);
+	background: url("/green-abstract.jpg");
 	background-size: cover;
 	background-attachment: fixed;
+}
+
+.loginCard-header {
+	text-align: center;
+	font-size: 20px;
+}
+
+.card-header > .logo > .logo_f {
+	color: rgba(0, 0, 0, 0.7) !important;
+	margin-right: 3px;
+}
+
+.card-header > .logo > .logo_t {
+	color: rgba(0, 0, 0, 1) !important;
 }
