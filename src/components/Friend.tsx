@@ -15,12 +15,13 @@ type friendProps = {
 		active: boolean;
 	};
 	setId: Function;
+	socket: SocketIOClient.Socket;
 };
 export const Friend = (props: friendProps) => {
 	const handleClick = (e: any) => {
 		e.preventDefault();
-		alert(props.friend.name);
 		props.setId(props.friend.friendId);
+		props.socket.emit("receive", { sender: props.friend.friendId });
 	};
 	return (
 		<ListGroupItem

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import socketIOClient from "socket.io-client";
-import { Redirect } from "react-router-dom";
 import {
 	Button,
 	Container,
@@ -13,15 +12,13 @@ import {
 } from "react-bootstrap";
 import { ChatMessage, Friend } from "../components";
 import "../style/DirectMessage.css";
-type messageProps = {
-	//	user_id:string;
-};
+type messageProps = {};
 const socket = socketIOClient("http://localhost:5000"); //public is the room name
 
 export const DirectMessage = (props: messageProps) => {
 	const [yourId, setYourId] = useState("");
 	// user you are messaging's id
-	const [receiverID, setReceiverID] = useState(0);
+	const [receiverID, setReceiverID] = useState("");
 	const [newMessage, setNewMessage] = useState("");
 	const [friends, setFriends] = useState([
 		{
@@ -83,7 +80,20 @@ export const DirectMessage = (props: messageProps) => {
 
 	socket.on("incoming", (msgList: object[]) => {
 		//Update message list state with list of messages
-		console.log("message list ", msgList);
+		console.log(msgList);
+		// setMessages(
+		// 	messages.concat(
+		// 		msgList.map((message: any) => {
+		// 			return {
+		// 				authorId: message.senderId,
+		// 				author: "Brad Pitt",
+		// 				avatar: "https://robohash.org/",
+		// 				when: message.date,
+		// 				message: message.content,
+		// 			};
+		// 		})
+		// 	)
+		// );
 	});
 
 	socket.on("yourUser_id", (your_id: string) => {
@@ -92,7 +102,7 @@ export const DirectMessage = (props: messageProps) => {
 	});
 	socket.on("friendslist", (friendsList: object[]) => {
 		//Update list of friends (i.e. people you have recieved messages from or sent messages to). Each object will contain the user_id, username and the last message recieved from them
-
+		console.log(friendsList);
 		setFriends(
 			friends.concat(
 				friendsList.map((friend: any) => {
@@ -145,6 +155,7 @@ export const DirectMessage = (props: messageProps) => {
 										key={friend.name}
 										friend={friend}
 										setId={setReceiverID}
+										socket={socket}
 									/>
 								))}
 							</ListGroup>
