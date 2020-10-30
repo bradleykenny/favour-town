@@ -5,7 +5,7 @@ import "../style/DirectMessage.css";
 
 type friendProps = {
 	friend: {
-		friendId: number;
+		friendId: string;
 		name: string;
 		avatar: string;
 		message: string;
@@ -24,7 +24,6 @@ export const Friend = (props: friendProps) => {
 	};
 	return (
 		<ListGroupItem
-			href="#!"
 			className="d-flex justify-content-between p-2
         border-light"
 			style={{ backgroundColor: props.friend.active ? "#eeeeee" : "" }}

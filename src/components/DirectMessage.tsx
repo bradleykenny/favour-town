@@ -25,7 +25,7 @@ export const DirectMessage = (props: messageProps) => {
 	const [newMessage, setNewMessage] = useState("");
 	const [friends, setFriends] = useState([
 		{
-			friendId: 0,
+			friendId: "0",
 			name: "Lara Croft",
 			message: "Lorem ipsum dolor sit",
 			avatar: "https://robohash.org/Lara",
@@ -35,7 +35,7 @@ export const DirectMessage = (props: messageProps) => {
 			active: false,
 		},
 		{
-			friendId: 1,
+			friendId: "1",
 			name: "Brad Pitt",
 			message: "Lorem ipsum dolor sit",
 			avatar: "https://robohash.org/Brad",
@@ -47,7 +47,7 @@ export const DirectMessage = (props: messageProps) => {
 	]);
 	const [messages, setMessages] = useState([
 		{
-			authorId: 1,
+			authorId: "1",
 			author: "Brad Pitt",
 			avatar: "https://robohash.org/Brad",
 			when: "12 mins ago",
@@ -55,7 +55,7 @@ export const DirectMessage = (props: messageProps) => {
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolo",
 		},
 		{
-			authorId: 0,
+			authorId: "0",
 			author: "Lara Croft",
 			avatar: "https://robohash.org/Lara",
 			when: "13 mins ago",
@@ -63,7 +63,7 @@ export const DirectMessage = (props: messageProps) => {
 				" Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
 		},
 		{
-			authorId: 1,
+			authorId: "1",
 			author: "Brad Pitt",
 			avatar: "https://robohash.org/Brad",
 			when: "14 mins ago",
@@ -114,7 +114,7 @@ export const DirectMessage = (props: messageProps) => {
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
 		const message = {
-			authorId: 0,
+			authorId: yourId,
 			author: "Lara Croft",
 			avatar: "https://robohash.org/Lara",
 			reciever: receiverID, //Get from state:
@@ -158,7 +158,7 @@ export const DirectMessage = (props: messageProps) => {
 										(message: any) =>
 											message.authorId === yourId ||
 											message.authorId === receiverID ||
-											message.authorID === 0
+											message.authorId === "0"
 									)
 									.map((message: any) => (
 										<ChatMessage

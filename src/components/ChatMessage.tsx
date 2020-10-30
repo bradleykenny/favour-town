@@ -5,7 +5,7 @@ import "../style/DirectMessage.css";
 
 type messageProps = {
 	message: {
-		authorId: number;
+		authorId: string;
 		author: string;
 		avatar: string;
 		when: string;
