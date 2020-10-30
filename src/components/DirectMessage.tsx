@@ -15,6 +15,13 @@ import "../style/DirectMessage.css";
 type messageProps = {};
 const socket = socketIOClient("http://localhost:5000"); //public is the room name
 
+export class DirectMessage extends React.Component {
+	render(){
+		return( <h1>hi</h1>)
+	}
+
+}
+/*
 export const DirectMessage = (props: messageProps) => {
 	const [yourId, setYourId] = useState("");
 	// user you are messaging's id
@@ -207,3 +214,4 @@ export const DirectMessage = (props: messageProps) => {
 		</Container>
 	);
 };
+*/
