@@ -15,9 +15,9 @@ import axios, { AxiosResponse } from "axios";
 import "../style/Profile.css";
 import { ProfileType, ExtProfileType } from "../types/Profile";
 import { uploadFile } from "./FileUpload";
-import {Map, Marker, GoogleApiWrapper } from "google-maps-react";
-import { GoogleMapsAPI } from "./GoogleMaps";
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+// import {Map, Marker, GoogleApiWrapper } from "google-maps-react";
+//import { GoogleMapsAPI } from "./GoogleMaps";
+// import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 
 
@@ -156,13 +156,13 @@ export const EditProfile = (props: EditProfileProps) => {
 								<Form onSubmit={handleSubmit}>
 									<Form.Group controlId="formLocation">
 										<Form.Label>Change location</Form.Label>
-										<GooglePlacesAutocomplete apiKey="AIzaSyBT2ahmrpwBI5acSuxtIa-js55Ah33YVkM" 
+										{/* <GooglePlacesAutocomplete apiKey="AIzaSyBT2ahmrpwBI5acSuxtIa-js55Ah33YVkM" 
 										autocompletionRequest={{
 											types: ['(cities)'],
 											componentRestrictions: {
 												country: ['au'],
 											}
-										}}>
+										}}> */}
 											<Form.Control
 												id="location"
 												name="location"
@@ -170,7 +170,7 @@ export const EditProfile = (props: EditProfileProps) => {
 												placeholder="Enter new location"
 												onChange={handleChange}
 											/>
-										</GooglePlacesAutocomplete>
+										{/* </GooglePlacesAutocomplete> */}
 									</Form.Group>
 									<Form.Group controlId="formPassword">
 										<Form.Label>Change password</Form.Label>
