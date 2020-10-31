@@ -11,6 +11,8 @@ type messageProps = {
 		when: string;
 		message: string;
 	};
+	senderId: string;
+	receiverId: string;
 };
 
 export const ChatMessage = (props: messageProps) => {
@@ -22,7 +24,7 @@ export const ChatMessage = (props: messageProps) => {
 				alt="avatar"
 				style={{ width: "3rem", height: "3rem" }}
 			/>
-			<Card>
+			<Card className="chatMessageCard">
 				<Card.Body>
 					<div>
 						<strong className="primary-font">

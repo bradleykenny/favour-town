@@ -30,26 +30,30 @@ export class DirectMessage extends React.Component {
 			console.log(msg);
 			//Redirect to login page
 		});
-	
+
 		socket.on("ACK", (msg: string) => {
 			console.log(msg);
 		});
-	
+
 		socket.on("incoming", (msgList: object[]) => {
 			//Update message list state with list of messages
+
 			console.log(msgList);
-			this.setState({messages:[...this.state.messages,
+			this.setState({
+				messages: [
+					...this.state.messages,
 					...msgList.map((message: any) => {
 						return {
 							authorId: message.sender_id,
 							author: message.username,
-							avatar: message.image_link,
+							avatar: "https://robohash.org/" + message.username,
 							when: message.date,
 							message: message.content,
 						};
-					})]
-				
+					}),
+				],
 			});
+			console.log(this.state.messages);
 		});
 	
 		socket.on("yourUser_id", (credentials: any) => {
@@ -62,54 +66,51 @@ export class DirectMessage extends React.Component {
 			
 		});
 
-
 		socket.on("friendslist", (friendsList: object[]) => {
 			//Update list of friends (i.e. people you have recieved messages from or sent messages to). Each object will contain the user_id, username and the last message recieved from them
-			console.log(this.state.yourId)
-			if(this.state.ready){
-				this.setState({friends:[...this.state.friends,
+
+			this.setState({
+				friends: [
+					...this.state.friends,
 					...friendsList.map((friend: any) => {
+						console.log(friend);
 						return {
-							friendId: friend.receiver_id==this.state.yourId ? friend.sender_id:friend.receiver_id,
+							friendId:
+								friend.receiver_id === this.state.yourId
+									? friend.sender_id
+									: friend.receiver_id,
 							name: friend.username,
 							message: friend.content,
 							avatar: "https://robohash.org/" + friend.username,
-							when: "5 min ago",
+							when: "",
 							toRespond: 0,
 							seen: true,
 							active: false,
-						}
-						
-					})]
-				
-				});
-			}
-			console.log(this.state.friends)
-
+						};
+					}),
+				],
+			});
 		});
 	}
-	
+
 	handleSubmit = (e: any) => {
-		console.log(e.target)
 		e.preventDefault();
 		const message = {
 			authorId: this.state.yourId,
 			author: this.state.yourUsername,
-			avatar: "https://robohash.org/"+this.state.yourUsername,
-			reciever: this.state.receiverID, //Get from state:
+			avatar: "https://robohash.org/" + this.state.yourUsername,
+			reciever: this.state.receiverID,
 			when: "now",
 			message: this.state.newMessage,
 		};
-		console.log(message);
 		socket.emit("send", message);
-		this.setState({messages:[...this.state.messages,message]})
-
+		this.setState({ messages: [...this.state.messages, message] });
 	};
 
 	handleChange = (e: any) => {
 		e.preventDefault();
 		const { name, value } = e.target;
-		this.setState({newMessage:value})
+		this.setState({ newMessage: value });
 	};
 
 
@@ -118,19 +119,22 @@ export class DirectMessage extends React.Component {
 		return (
 			<Container>
 				<Card bg="light" className="directMessageCard">
-					<Row className="d-flex justify-content-center mt-2">
-						<Col sm={3} className="align-items-center">
-							<h3 className="font-weight-bold mb-2 ml-3">Member</h3>
+					<Row>
+						<Col>
+							<h3 className="font-weight-bold mb-2 ml-3 mt-1">
+								Chats
+							</h3>
 							<div className="white z-depth-1 p-3">
-								<ListGroup className="friend-list">
+								<ListGroup className="friend-list" id="friends">
 									{this.state.friends.map((friend: any) => (
 										<Friend
 											key={friend.name}
 											friend={friend}
-											setId={(id:string)=>{
-												this.setState({messages:[],receiverID:id})
-												console.log(this.state.receiverID);
-
+											setId={(id: string) => {
+												this.setState({
+													messages: [],
+													receiverID: id,
+												});
 											}}
 											socket={socket}
 										/>
@@ -140,43 +144,67 @@ export class DirectMessage extends React.Component {
 						</Col>
 						<Col>
 							<Row>
-								<ListGroup>
+								<ListGroup id="messages">
 									{this.state.messages
 										.filter(
 											(message: any) =>
-												message.authorId === this.state.yourId ||
-												message.authorId === this.state.receiverID ||
-												message.authorId === "0"
+												message.authorId ===
+													this.state.yourId ||
+												message.authorId ===
+													this.state.receiverID
 										)
 										.map((message: any) => (
 											<ChatMessage
-												key={message.author + message.when}
+												key={
+													message.author +
+													message.when
+												}
 												message={message}
+												senderId={this.state.yourId}
+												receiverId={
+													this.state.receiverID
+												}
 											/>
 										))}
-	
-									<div>
-										<Form onSubmit={this.handleSubmit}>
-											<Form.Group>
-												<Form.Control
-													as="textarea"
-													name="messageBox"
-													className="form-control pl-2 my-0"
-													placeholder="Type your message here..."
-													onChange={this.handleChange}
-												/>
-											</Form.Group>
-											<Button
-												color="info"
-												size="sm"
-												type="submit"
-												className="float-right mt-2"
-											>
-												Send
-											</Button>
-										</Form>
-									</div>
 								</ListGroup>
+								<div>
+									<Form
+										onSubmit={this.handleSubmit}
+										id="submitForm"
+									>
+										<Form.Group>
+											<Form.Control
+												as="textarea"
+												name="messageBox"
+												id="textarea"
+												className="form-control pl-2 my-0"
+												placeholder="Type your message here..."
+												onChange={this.handleChange}
+											/>
+										</Form.Group>
+										<Button
+											color="info"
+											size="sm"
+											type="submit"
+											id="submitBtn"
+										>
+											Send
+											<svg
+												width="1em"
+												height="1em"
+												viewBox="0 0 16 16"
+												className="bi bi-cursor-fill ml-1 mb-1"
+												fill="currentColor"
+												xmlns="http://www.w3.org/2000/svg"
+											>
+												<path
+													fillRule="evenodd"
+													d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"
+												/>
+											</svg>
+										</Button>
+									</Form>
+								</div>
 							</Row>
 						</Col>
 					</Row>
@@ -188,5 +216,4 @@ export class DirectMessage extends React.Component {
 			return (<h1>loading...</h1>);
 		}
 	}
-
 }
