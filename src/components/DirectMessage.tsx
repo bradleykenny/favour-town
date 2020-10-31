@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import socketIOClient from "socket.io-client";
-import axios, { AxiosResponse } from "axios";
 import {
 	Button,
 	Container,
@@ -13,7 +12,7 @@ import {
 } from "react-bootstrap";
 import { ChatMessage, Friend } from "../components";
 import "../style/DirectMessage.css";
-const socket = socketIOClient("http://localhost:5000"); //public is the room name
+const socket = socketIOClient("http://localhost:5000");
 
 export class DirectMessage extends React.Component {
 	state = { 
