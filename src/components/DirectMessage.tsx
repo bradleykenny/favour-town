@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import socketIOClient from "socket.io-client";
+import axios, { AxiosResponse } from "axios";
 import {
 	Button,
 	Container,
@@ -12,102 +13,61 @@ import {
 } from "react-bootstrap";
 import { ChatMessage, Friend } from "../components";
 import "../style/DirectMessage.css";
-type messageProps = {};
 const socket = socketIOClient("http://localhost:5000"); //public is the room name
 
-export const DirectMessage = (props: messageProps) => {
-	const [yourId, setYourId] = useState("");
-	// user you are messaging's id
-	const [receiverID, setReceiverID] = useState("");
-	const [newMessage, setNewMessage] = useState("");
-	const [friends, setFriends] = useState([
-		{
-			friendId: "0",
-			name: "Lara Croft",
-			message: "Lorem ipsum dolor sit",
-			avatar: "https://robohash.org/Lara",
-			when: "Yesterday",
-			toRespond: 0,
-			seen: false,
-			active: false,
-		},
-		{
-			friendId: "1",
-			name: "Brad Pitt",
-			message: "Lorem ipsum dolor sit",
-			avatar: "https://robohash.org/Brad",
-			when: "5 min ago",
-			toRespond: 0,
-			seen: true,
-			active: false,
-		},
-	]);
-	const [messages, setMessages] = useState([
-		{
-			authorId: "1",
-			author: "Brad Pitt",
-			avatar: "https://robohash.org/Brad",
-			when: "12 mins ago",
-			message:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolo",
-		},
-		{
-			authorId: "0",
-			author: "Lara Croft",
-			avatar: "https://robohash.org/Lara",
-			when: "13 mins ago",
-			message:
-				" Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
-		},
-		{
-			authorId: "1",
-			author: "Brad Pitt",
-			avatar: "https://robohash.org/Brad",
-			when: "14 mins ago",
-			message:
-				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dol",
-		},
-	]);
+export class DirectMessage extends React.Component {
+	state = { 
+		yourUsername:"", 
+		yourId:"",
+		receiverID:"",
+		newMessage:"",
+		friends:[],
+		messages:[]
+	}
+	componentDidMount(){
+		socket.on("NotLoggedIn", (msg: string) => {
+			console.log(msg);
+			//Redirect to login page
+		});
+	
+		socket.on("ACK", (msg: string) => {
+			console.log(msg);
+		});
+	
+		socket.on("incoming", (msgList: object[]) => {
+			//Update message list state with list of messages
+			this.setState({messages:[...this.state.messages,
+					...msgList.map((message: any) => {
+						return {
+							authorId: message.sender_id,
+							author: message.username,
+							avatar: message.image_link,
+							when: message.date,
+							message: message.content,
+						};
+					})]
+				
+			});
+		});
+	
+		socket.on("yourUser_id", (your_id: string) => {
+			//Set own user id in state
+			axios
+			.get(process.env.REACT_APP_API_HOST + "/profile/" + your_id)
+			.then((res2: AxiosResponse) => {
+				this.setState({yourId:your_id,yourUsername:res2.data[0].username})
+			})
+		});
 
-	socket.on("NotLoggedIn", (msg: string) => {
-		console.log(msg);
-		//Redirect to login page
-	});
 
-	socket.on("ACK", (msg: string) => {
-		console.log(msg);
-	});
+		socket.on("friendslist", (friendsList: object[]) => {
+			//Update list of friends (i.e. people you have recieved messages from or sent messages to). Each object will contain the user_id, username and the last message recieved from them
 
-	socket.on("incoming", (msgList: object[]) => {
-		//Update message list state with list of messages
-		console.log(msgList);
-		setMessages(
-			messages.concat(
-				msgList.map((message: any) => {
+			this.setState({friends:[...this.state.friends,
+				...friendsList.map((friend: any) => {
+					console.log(friend)
 					return {
-						authorId: message.sender_id,
-						author: "Brad Pitt",
-						avatar: "https://robohash.org/",
-						when: message.date,
-						message: message.content,
-					};
-				})
-			)
-		);
-	});
-
-	socket.on("yourUser_id", (your_id: string) => {
-		//Set own user id in state
-		setYourId(your_id);
-	});
-	socket.on("friendslist", (friendsList: object[]) => {
-		//Update list of friends (i.e. people you have recieved messages from or sent messages to). Each object will contain the user_id, username and the last message recieved from them
-		console.log(friendsList);
-		setFriends(
-			friends.concat(
-				friendsList.map((friend: any) => {
-					return {
-						friendId: friend.receiver_id,
+						friendId: friend.receiver_id==this.state.yourId ? friend.sender_id:friend.receiver_id,
 						name: friend.username,
 						message: friend.content,
 						avatar: "https://robohash.org/" + friend.username,
@@ -116,94 +76,105 @@ export const DirectMessage = (props: messageProps) => {
 						seen: true,
 						active: false,
 					};
-				})
-			)
-		);
-	});
+				})]
+			
+			});
 
-	const handleSubmit = (e: any) => {
+		});
+	}
+	
+	handleSubmit = (e: any) => {
+		console.log(e.target)
 		e.preventDefault();
 		const message = {
-			authorId: yourId,
-			author: "Lara Croft",
+			authorId: this.state.yourId,
+			author: this.state.yourUsername,
 			avatar: "https://robohash.org/Lara",
-			reciever: receiverID, //Get from state:
+			reciever: this.state.receiverID, //Get from state:
 			when: "now",
-			message: newMessage,
+			message: this.state.newMessage,
 		};
 		console.log(message);
 		socket.emit("send", message);
-		// setMessages([...messages, message]);
+		this.setState({messages:[...this.state.messages,message]})
+
 	};
 
-	const handleChange = (e: any) => {
+	handleChange = (e: any) => {
 		e.preventDefault();
 		const { name, value } = e.target;
-		setNewMessage(value);
+		this.setState({newMessage:value})
 	};
 
-	return (
-		<Container>
-			<Card bg="light" className="directMessageCard">
-				<Row className="d-flex justify-content-center mt-2">
-					<Col sm={3} className="align-items-center">
-						<h3 className="font-weight-bold mb-2 ml-3">Member</h3>
-						<div className="white z-depth-1 p-3">
-							<ListGroup className="friend-list">
-								{friends.map((friend: any) => (
-									<Friend
-										key={friend.name}
-										friend={friend}
-										setId={setReceiverID}
-										socket={socket}
-									/>
-								))}
-							</ListGroup>
-						</div>
-					</Col>
-					<Col>
-						<Row>
-							<ListGroup>
-								{messages
-									.filter(
-										(message: any) =>
-											message.authorId === yourId ||
-											message.authorId === receiverID ||
-											message.authorId === "0"
-									)
-									.map((message: any) => (
-										<ChatMessage
-											key={message.author + message.when}
-											message={message}
+
+	render(){
+		return (
+			<Container>
+				<Card bg="light" className="directMessageCard">
+					<Row className="d-flex justify-content-center mt-2">
+						<Col sm={3} className="align-items-center">
+							<h3 className="font-weight-bold mb-2 ml-3">Member</h3>
+							<div className="white z-depth-1 p-3">
+								<ListGroup className="friend-list">
+									{this.state.friends.map((friend: any) => (
+										<Friend
+											key={friend.name}
+											friend={friend}
+											setId={(id:string)=>{
+												
+												this.setState({messages:[],receiverID:id})
+											}}
+											socket={socket}
 										/>
 									))}
-
-								<div>
-									<Form onSubmit={handleSubmit}>
-										<Form.Group>
-											<Form.Control
-												as="textarea"
-												name="messageBox"
-												className="form-control pl-2 my-0"
-												placeholder="Type your message here..."
-												onChange={handleChange}
+								</ListGroup>
+							</div>
+						</Col>
+						<Col>
+							<Row>
+								<ListGroup>
+									{this.state.messages
+										.filter(
+											(message: any) =>
+												message.authorId === this.state.yourId ||
+												message.authorId === this.state.receiverID ||
+												message.authorId === "0"
+										)
+										.map((message: any) => (
+											<ChatMessage
+												key={message.author + message.when}
+												message={message}
 											/>
-										</Form.Group>
-										<Button
-											color="info"
-											size="sm"
-											type="submit"
-											className="float-right mt-2"
-										>
-											Send
-										</Button>
-									</Form>
-								</div>
-							</ListGroup>
-						</Row>
-					</Col>
-				</Row>
-			</Card>
-		</Container>
-	);
-};
+										))}
+	
+									<div>
+										<Form onSubmit={this.handleSubmit}>
+											<Form.Group>
+												<Form.Control
+													as="textarea"
+													name="messageBox"
+													className="form-control pl-2 my-0"
+													placeholder="Type your message here..."
+													onChange={this.handleChange}
+												/>
+											</Form.Group>
+											<Button
+												color="info"
+												size="sm"
+												type="submit"
+												className="float-right mt-2"
+											>
+												Send
+											</Button>
+										</Form>
+									</div>
+								</ListGroup>
+							</Row>
+						</Col>
+					</Row>
+				</Card>
+			</Container>
+		);
+	}
+
+}
