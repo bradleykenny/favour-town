@@ -22,7 +22,8 @@ export class DirectMessage extends React.Component {
 		receiverID:"",
 		newMessage:"",
 		friends:[],
-		messages:[]
+		messages:[],
+		ready:false
 	}
 	componentDidMount(){
 		socket.on("NotLoggedIn", (msg: string) => {
@@ -36,6 +37,7 @@ export class DirectMessage extends React.Component {
 	
 		socket.on("incoming", (msgList: object[]) => {
 			//Update message list state with list of messages
+			console.log(msgList);
 			this.setState({messages:[...this.state.messages,
 					...msgList.map((message: any) => {
 						return {
@@ -50,35 +52,39 @@ export class DirectMessage extends React.Component {
 			});
 		});
 	
-		socket.on("yourUser_id", (your_id: string) => {
+		socket.on("yourUser_id", (credentials: any) => {
 			//Set own user id in state
-			axios
-			.get(process.env.REACT_APP_API_HOST + "/profile/" + your_id)
-			.then((res2: AxiosResponse) => {
-				this.setState({yourId:your_id,yourUsername:res2.data[0].username})
-			})
+			console.log(credentials)
+		
+			this.setState({yourId:credentials._id,yourUsername:credentials.username,ready:true})
+			
+			
+			
 		});
 
 
 		socket.on("friendslist", (friendsList: object[]) => {
 			//Update list of friends (i.e. people you have recieved messages from or sent messages to). Each object will contain the user_id, username and the last message recieved from them
-
-			this.setState({friends:[...this.state.friends,
-				...friendsList.map((friend: any) => {
-					console.log(friend)
-					return {
-						friendId: friend.receiver_id==this.state.yourId ? friend.sender_id:friend.receiver_id,
-						name: friend.username,
-						message: friend.content,
-						avatar: "https://robohash.org/" + friend.username,
-						when: "5 min ago",
-						toRespond: 0,
-						seen: true,
-						active: false,
-					};
-				})]
-			
-			});
+			console.log(this.state.yourId)
+			if(this.state.ready){
+				this.setState({friends:[...this.state.friends,
+					...friendsList.map((friend: any) => {
+						return {
+							friendId: friend.receiver_id==this.state.yourId ? friend.sender_id:friend.receiver_id,
+							name: friend.username,
+							message: friend.content,
+							avatar: "https://robohash.org/" + friend.username,
+							when: "5 min ago",
+							toRespond: 0,
+							seen: true,
+							active: false,
+						}
+						
+					})]
+				
+				});
+			}
+			console.log(this.state.friends)
 
 		});
 	}
@@ -89,7 +95,7 @@ export class DirectMessage extends React.Component {
 		const message = {
 			authorId: this.state.yourId,
 			author: this.state.yourUsername,
-			avatar: "https://robohash.org/Lara",
+			avatar: "https://robohash.org/"+this.state.yourUsername,
 			reciever: this.state.receiverID, //Get from state:
 			when: "now",
 			message: this.state.newMessage,
@@ -108,6 +114,7 @@ export class DirectMessage extends React.Component {
 
 
 	render(){
+		if(this.state.ready){
 		return (
 			<Container>
 				<Card bg="light" className="directMessageCard">
@@ -121,8 +128,9 @@ export class DirectMessage extends React.Component {
 											key={friend.name}
 											friend={friend}
 											setId={(id:string)=>{
-												
 												this.setState({messages:[],receiverID:id})
+												console.log(this.state.receiverID);
+
 											}}
 											socket={socket}
 										/>
@@ -175,6 +183,10 @@ export class DirectMessage extends React.Component {
 				</Card>
 			</Container>
 		);
+		}
+		else{
+			return (<h1>loading...</h1>);
+		}
 	}
 
 }
