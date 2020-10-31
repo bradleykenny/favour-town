@@ -1,9 +1,8 @@
 .directMessageCard {
-	margin: 0 auto;
-	float: none;
-	margin-bottom: 10px;
+	position: absolute;
+	left: -5rem;
 	margin-top: 1rem;
-	width: 85rem;
+	height: 36rem;
 }
 
 #replyIcon {
@@ -13,4 +12,37 @@
 	transform: scaleX(-1);
 	filter: FlipH;
 	-ms-filter: "FlipH";
+}
+
+#friends {
+	width: 20rem;
+	overflow: auto;
+}
+
+#messages {
+	position: absolute;
+	left: -10rem;
+	width: 44rem;
+	height: 30rem;
+	overflow: auto;
+}
+
+#submitForm {
+	position: absolute;
+	top: 30rem;
+	left: -10rem;
+	width: 44rem;
+	margin-top: 1rem;
+}
+
+#textarea {
+	width: 40rem;
+}
+
+#submitBtn {
+	position: absolute;
+	left: 40rem;
+	top: 0;
+	margin-top: 1rem;
+	margin-left: 1rem;
 }
