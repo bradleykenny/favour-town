@@ -26,7 +26,8 @@ export const Friend = (props: friendProps) => {
 	return (
 		<ListGroupItem
 			className="d-flex justify-content-between p-2
-        border-light"
+		border-light"
+			id="friend"
 			style={{ backgroundColor: props.friend.active ? "#eeeeee" : "" }}
 			onClick={handleClick}
 		>

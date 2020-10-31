@@ -46,3 +46,11 @@
 	margin-top: 1rem;
 	margin-left: 1rem;
 }
+
+#friend {
+	transition-duration: 0.4s;
+}
+
+#friend:hover {
+	background-color: #eeeeee;
+}
