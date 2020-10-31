@@ -121,7 +121,7 @@ export class DirectMessage extends React.Component {
 					<Row>
 						<Col>
 							<h3 className="font-weight-bold mb-2 ml-3 mt-1">
-								Member
+								Chats
 							</h3>
 							<div className="white z-depth-1 p-3">
 								<ListGroup className="friend-list" id="friends">
@@ -188,6 +188,19 @@ export class DirectMessage extends React.Component {
 											id="submitBtn"
 										>
 											Send
+											<svg
+												width="1em"
+												height="1em"
+												viewBox="0 0 16 16"
+												className="bi bi-cursor-fill ml-1 mb-1"
+												fill="currentColor"
+												xmlns="http://www.w3.org/2000/svg"
+											>
+												<path
+													fillRule="evenodd"
+													d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103z"
+												/>
+											</svg>
 										</Button>
 									</Form>
 								</div>
