@@ -16,7 +16,6 @@ export const Profile = (props: ProfileProps) => {
 	const { username } = useParams<{ username: string }>();
 	const history = useHistory();
 
-
 	const blankUser: ExtProfileType = {
 		username: "",
 		_id: "",
@@ -39,7 +38,7 @@ export const Profile = (props: ProfileProps) => {
 	const profilePicture = "https://robohash.org/" + user._id;
 
 	const handleEdit = () => {
-		history.push("/editProfile");
+		history.push("/edit/profile");
 	};
 
 	return (
@@ -87,49 +86,45 @@ export const Profile = (props: ProfileProps) => {
 					</i>
 				</div>
 				<p>
-					{
-					props.user._id==user._id&&
-					(<Button variant="primary" onClick={handleEdit}>
-						Edit
-					</Button>)
-					}
-					{
-					props.user._id!=user._id&&(
-					<Form
-						onSubmit={(e:any)=>{
-							e.preventDefault();
-
-							const socket = socketIOClient("http://localhost:5000");
-							socket.emit("send",{
-								reciever:user._id,
-								author:props.user.username,
-								message:e.target["messageBox"].value,
-								image_link:"https://robohash.org/" +props.user.username
-							})
-							socket.on("ACK",()=>{
-								history.push("/message")
-								window.location.reload()
-									
-							})
-							
-							
-						}}
-						id="msgFirst"
-					>
-						<Form.Control
-							as="input"
-							name="messageBox"
-							id="text"
-							className="form-control pl-2 my-0"
-						/>
-						<Button variant="primary" 
-							type="submit">
-							Message
+					{props.user._id == user._id && (
+						<Button variant="primary" onClick={handleEdit}>
+							Edit
 						</Button>
-					</Form>)
-					}
+					)}
+					{props.user._id != user._id && (
+						<Form
+							onSubmit={(e: any) => {
+								e.preventDefault();
 
-					
+								const socket = socketIOClient(
+									"http://localhost:5000"
+								);
+								socket.emit("send", {
+									reciever: user._id,
+									author: props.user.username,
+									message: e.target["messageBox"].value,
+									image_link:
+										"https://robohash.org/" +
+										props.user.username,
+								});
+								socket.on("ACK", () => {
+									history.push("/message");
+									window.location.reload();
+								});
+							}}
+							id="msgFirst"
+						>
+							<Form.Control
+								as="input"
+								name="messageBox"
+								id="text"
+								className="form-control pl-2 my-0"
+							/>
+							<Button variant="primary" type="submit">
+								Message
+							</Button>
+						</Form>
+					)}
 				</p>
 			</Jumbotron>
 			<FeedList

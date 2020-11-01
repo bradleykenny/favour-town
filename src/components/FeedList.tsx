@@ -9,6 +9,7 @@ import { ProfileType } from "../types/Profile";
 
 type FeedListProps = {
 	filter?: string;
+	filterType?: number;
 	user: ProfileType;
 	userCardShow: boolean;
 };
@@ -16,6 +17,7 @@ type FeedListProps = {
 export const FeedList = (props: FeedListProps) => {
 	const [cards, setCards] = useState([defaultFavour]);
 	const [countCards, setCountCards] = useState(20);
+	const [filterType, setFilterType] = useState(props.filterType);
 	// const [pageCards, setPageCards] = useState(1);
 
 	// Do intial load of cards into the feed
@@ -39,7 +41,18 @@ export const FeedList = (props: FeedListProps) => {
 						countCards
 				)
 				.then((response) => {
-					setCards(response.data);
+					if (props.filterType) {
+						const respCards = response.data;
+						console.log(filterType);
+						setCards(
+							respCards.filter(
+								(resp: FavourType) =>
+									resp.favour_status === filterType
+							)
+						);
+					} else {
+						setCards(response.data);
+					}
 				});
 		}
 	}, [props.filter, countCards]);

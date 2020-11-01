@@ -19,8 +19,6 @@ import { uploadFile } from "./FileUpload";
 //import { GoogleMapsAPI } from "./GoogleMaps";
 // import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
-
-
 type EditProfileProps = {
 	user: ProfileType;
 };
@@ -43,31 +41,35 @@ export const EditProfile = (props: EditProfileProps) => {
 	};
 	const [user, setUser] = useState(blankUser);
 	const [scriptLoaded, setScriptLoaded] = useState(false);
-	const input = document.getElementById('location') as HTMLInputElement;
-	const options={
-		types: ['locality'],
-		componentRestrictions: {country: 'au'},
-	}
+	const input = document.getElementById("location") as HTMLInputElement;
+	const options = {
+		types: ["locality"],
+		componentRestrictions: { country: "au" },
+	};
 
 	useEffect(() => {
 		axios
-			.get(process.env.REACT_APP_API_HOST + "/editProfile/" + username)
+			.get(process.env.REACT_APP_API_HOST + "/edit/profile/" + username)
 			.then((res2: AxiosResponse) => {
 				setUser(res2.data[0]);
 			});
 	}, [username]);
-	
+
 	// TODO: read in user profile picture dynamically
 	const profilePicture = "https://robohash.org/" + props.user._id;
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
 		uploadFile(props.user._id, profileInfo.profilePicture);
-		
-		const fileTypeArray = profileInfo.profilePicture.name.split(".")
-		const fileType = fileTypeArray[fileTypeArray.length-1]
-		const fullLink = props.user._id+"."+fileType;
 
-		axios.post(process.env.REACT_APP_API_HOST + "/profileImage", {image_link:fullLink, user_id:props.user._id}, {withCredentials: true})
+		const fileTypeArray = profileInfo.profilePicture.name.split(".");
+		const fileType = fileTypeArray[fileTypeArray.length - 1];
+		const fullLink = props.user._id + "." + fileType;
+
+		axios.post(
+			process.env.REACT_APP_API_HOST + "/profileImage",
+			{ image_link: fullLink, user_id: props.user._id },
+			{ withCredentials: true }
+		);
 	};
 
 	const handleChange = (e: any) => {
@@ -100,7 +102,6 @@ export const EditProfile = (props: EditProfileProps) => {
 		}
 	};
 
-	
 	return (
 		<div>
 			<Jumbotron>
@@ -163,18 +164,18 @@ export const EditProfile = (props: EditProfileProps) => {
 												country: ['au'],
 											}
 										}}> */}
-											<Form.Control
-												id="location"
-												name="location"
-												type="location"
-												placeholder="Enter new location"
-												onChange={handleChange}
-											/>
+										<Form.Control
+											id="location"
+											name="location"
+											type="location"
+											placeholder="Enter new location"
+											onChange={handleChange}
+										/>
 										{/* </GooglePlacesAutocomplete> */}
 									</Form.Group>
 									<Form.Group controlId="formPassword">
 										<Form.Label>Change password</Form.Label>
-										<Form.Control 
+										<Form.Control
 											name="password"
 											type="password"
 											placeholder="Enter new password"
