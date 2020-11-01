@@ -5,7 +5,14 @@ import axios from "axios";
 import { FavourType } from "../types/Favour";
 import { ProfileType } from "../types/Profile";
 
-import { BsArrowBarDown, BsArrowBarUp, BsList } from "react-icons/bs";
+import {
+	BsBookmarkDash,
+	BsBookmarkPlus,
+	BsList,
+	BsBookmarks,
+	BsBookmarkCheck,
+	BsGear,
+} from "react-icons/bs";
 
 import "../style/FeedCard.css";
 
@@ -46,20 +53,28 @@ export const FeedCard = (props: FeedCardProps) => {
 			});
 	}, [props.user._id]);
 
-	const handleClaimed = () => {
-		if (!claimed) {
-			axios
-				.post(
-					process.env.REACT_APP_API_HOST + "/favours/request/send",
-					{
-						favour_id: _id,
-					},
-					{ withCredentials: true }
-				)
-				.then(() => setClaimed(!claimed));
-		} else {
-			setClaimed(!claimed);
-		}
+	const handleClaim = () => {
+		axios
+			.post(
+				process.env.REACT_APP_API_HOST + "/favours/request/send",
+				{
+					favour_id: _id,
+				},
+				{ withCredentials: true }
+			)
+			.then(() => setClaimed(true));
+	};
+
+	const handleUnclaim = () => {
+		axios
+			.post(
+				process.env.REACT_APP_API_HOST + "/favours/request/retract",
+				{
+					favour_id: _id,
+				},
+				{ withCredentials: true }
+			)
+			.then(() => setClaimed(false));
 	};
 
 	const profileLink = "/profile/" + username;
@@ -124,18 +139,26 @@ export const FeedCard = (props: FeedCardProps) => {
 			</Card.Body>
 			<Card.Footer>
 				{username !== props.user.username && favour_status === 0 && (
-					<Card.Link onClick={handleClaimed}>
-						{claimed ? <BsArrowBarDown /> : <BsArrowBarUp />}
+					<Card.Link onClick={claimed ? handleUnclaim : handleClaim}>
+						{claimed ? <BsBookmarkDash /> : <BsBookmarkPlus />}
 						{claimed ? "Unclaim" : "Claim"}
 					</Card.Link>
 				)}
 				{favour_status === 1 && (
 					<Card.Link>
+						<BsBookmarks />
 						<b>Claimed</b>
+					</Card.Link>
+				)}
+				{favour_status === 2 && (
+					<Card.Link>
+						<BsBookmarkCheck />
+						<b>Complete</b>
 					</Card.Link>
 				)}
 				{username === props.user.username && (
 					<Card.Link href={"/favour/" + _id}>
+						<BsGear />
 						<b>Admin</b>
 					</Card.Link>
 				)}

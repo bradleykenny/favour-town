@@ -86,12 +86,12 @@ export const Profile = (props: ProfileProps) => {
 					</i>
 				</div>
 				<p>
-					{props.user._id == user._id && (
+					{props.user._id === user._id && (
 						<Button variant="primary" onClick={handleEdit}>
 							Edit
 						</Button>
 					)}
-					{props.user._id != user._id && (
+					{props.user._id !== user._id && (
 						<Form
 							onSubmit={(e: any) => {
 								e.preventDefault();
