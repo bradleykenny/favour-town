@@ -24,6 +24,7 @@ export const Profile = (props: ProfileProps) => {
 		f_name: "",
 		l_name: "",
 		user_rating: -1,
+		image_link: "",
 	};
 	const [user, setUser] = useState(blankUser);
 
@@ -35,7 +36,8 @@ export const Profile = (props: ProfileProps) => {
 			});
 	}, [username]);
 
-	const profilePicture = "https://robohash.org/" + user._id;
+	const profilePicture =
+		user.image_link || "https://robohash.org/" + user._id;
 
 	const handleEdit = () => {
 		history.push("/edit/profile");

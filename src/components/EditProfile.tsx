@@ -38,6 +38,7 @@ export const EditProfile = (props: EditProfileProps) => {
 		f_name: "",
 		l_name: "",
 		user_rating: 4,
+		image_link: "",
 	};
 	const [user, setUser] = useState(blankUser);
 	const [scriptLoaded, setScriptLoaded] = useState(false);
