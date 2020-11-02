@@ -71,12 +71,36 @@ const App = () => {
 					<NavBar username={user ? user.username : ""} />
 					<Profile user={user} />
 				</Route>
+				<Route path="/favours/incomplete">
+					<NavBar username={user ? user.username : ""} />
+					<FeedList
+						user={user}
+						userCardShow={user.username ? true : false}
+						filterType={[0, 1]}
+					/>
+				</Route>
+				<Route path="/favours/unclaimed">
+					<NavBar username={user ? user.username : ""} />
+					<FeedList
+						user={user}
+						userCardShow={user.username ? true : false}
+						filterType={[0]}
+					/>
+				</Route>
 				<Route path="/favours/claimed">
 					<NavBar username={user ? user.username : ""} />
 					<FeedList
 						user={user}
 						userCardShow={user.username ? true : false}
-						filterType={1}
+						filterType={[1]}
+					/>
+				</Route>
+				<Route path="/favours/complete">
+					<NavBar username={user ? user.username : ""} />
+					<FeedList
+						user={user}
+						userCardShow={user.username ? true : false}
+						filterType={[2]}
 					/>
 				</Route>
 				<Route path="/favour/:id">

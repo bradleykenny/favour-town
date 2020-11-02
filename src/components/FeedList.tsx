@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Button, Card } from "react-bootstrap";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { FeedCard, UserCard, FavourForm, Legend } from "./";
 import axios from "axios";
 
@@ -9,7 +9,7 @@ import { ProfileType } from "../types/Profile";
 
 type FeedListProps = {
 	filter?: string;
-	filterType?: number;
+	filterType?: number[];
 	user: ProfileType;
 	userCardShow: boolean;
 };
@@ -31,8 +31,16 @@ export const FeedList = (props: FeedListProps) => {
 					{}
 				)
 				.then((response) => {
-					setCards(response.data);
-					console.log("favours data" + response.data);
+					if (props.filterType) {
+						const respCards = response.data;
+						setCards(
+							respCards.filter((resp: FavourType) =>
+								filterType?.includes(resp.favour_status)
+							)
+						);
+					} else {
+						setCards(response.data);
+					}
 				});
 		} else {
 			axios
@@ -44,11 +52,9 @@ export const FeedList = (props: FeedListProps) => {
 				.then((response) => {
 					if (props.filterType) {
 						const respCards = response.data;
-						console.log(filterType);
 						setCards(
-							respCards.filter(
-								(resp: FavourType) =>
-									resp.favour_status === filterType
+							respCards.filter((resp: FavourType) =>
+								filterType?.includes(resp.favour_status)
 							)
 						);
 					} else {
@@ -61,6 +67,26 @@ export const FeedList = (props: FeedListProps) => {
 	// Loads more cards into the feed
 	const handleLoadMore = (e: any) => {
 		setCountCards(countCards + 20);
+	};
+
+	const handleFilter = (e: any) => {
+		console.log(e.target.value);
+		switch (e.target.value) {
+			case "Incomplete":
+				window.location.assign("/favours/incomplete");
+				break;
+			case "Unclaimed":
+				window.location.assign("/favours/unclaimed");
+				break;
+			case "Claimed":
+				window.location.assign("/favours/claimed");
+				break;
+			case "Complete":
+				window.location.assign("/favours/complete");
+				break;
+			default:
+				break;
+		}
 	};
 
 	return (
@@ -87,6 +113,17 @@ export const FeedList = (props: FeedListProps) => {
 						>
 							Favours
 						</h2>
+						<Form.Control
+							as="select"
+							onChange={handleFilter}
+							id="feedFilterSelect"
+						>
+							<option>Choose a filter...</option>
+							<option>Incomplete</option>
+							<option>Unclaimed</option>
+							<option>Claimed</option>
+							<option>Complete</option>
+						</Form.Control>
 						<br />
 						{cards.map((favour: FavourType) => (
 							<FeedCard favour={favour} user={props.user} />
