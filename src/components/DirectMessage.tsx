@@ -1,5 +1,4 @@
 import React from "react";
-import moment from "moment";
 import "bootstrap/dist/css/bootstrap.css";
 import socketIOClient from "socket.io-client";
 import {
@@ -14,6 +13,7 @@ import {
 import { ChatMessage, Friend } from "../components";
 import "../style/DirectMessage.css";
 const socket = socketIOClient("http://localhost:5000");
+var moment = require("moment-timezone");
 
 export class DirectMessage extends React.Component {
 	state = {
@@ -47,9 +47,9 @@ export class DirectMessage extends React.Component {
 							authorId: message.sender_id,
 							author: message.username,
 							avatar: "https://robohash.org/" + message.username,
-							when: moment(message.date).format(
-								"MMMM Do, h:mm a"
-							),
+							when: moment(message.date)
+								.tz("Australia/Sydney")
+								.format("MMMM Do, h:mm a"),
 							message: message.content,
 						};
 					}),
@@ -103,7 +103,7 @@ export class DirectMessage extends React.Component {
 			author: this.state.yourUsername,
 			avatar: "https://robohash.org/" + this.state.yourUsername,
 			reciever: this.state.receiverID,
-			when: moment().format("MMMM Do, h:mm a"),
+			when: "now",
 			message: this.state.newMessage,
 		};
 		socket.emit("send", message);
