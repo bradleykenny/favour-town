@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { Container, Row, Col, Form, Button, Modal } from "react-bootstrap";
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import { ProfileType } from "../types/Profile";
 import "../style/FavourForm.css";
 
@@ -77,6 +77,10 @@ export const FavourForm = (props: FavourFormProps) => {
 		}
 	};
 
+	const handleLocation = (e: any) => {
+		setLocation(e.value.description);
+	};
+
 	const handleShowHide = () => {
 		setShowForm(!showForm);
 	};
@@ -116,20 +120,20 @@ export const FavourForm = (props: FavourFormProps) => {
 
 							<Form.Group controlId="formUsername">
 								<Form.Label>Location</Form.Label>
-								<GooglePlacesAutocomplete apiKey="AIzaSyBT2ahmrpwBI5acSuxtIa-js55Ah33YVkM" 
-										autocompletionRequest={{
-											types: ['(cities)'],
-											componentRestrictions: {
-												country: ['au'],
-											}
-										}}>
-								<Form.Control
-									name="location"
-									type="text"
-									placeholder="Enter the location..."
-									onChange={handleChange}
+								<GooglePlacesAutocomplete
+									apiKey="AIzaSyBT2ahmrpwBI5acSuxtIa-js55Ah33YVkM"
+									autocompletionRequest={{
+										types: ["(cities)"],
+										componentRestrictions: {
+											country: ["au"],
+										},
+									}}
+									selectProps={{
+										name: "location",
+										onChange: handleLocation,
+										placeholder: "Enter the location...",
+									}}
 								/>
-								</GooglePlacesAutocomplete>
 							</Form.Group>
 
 							<Form.Group controlId="formUsername">
