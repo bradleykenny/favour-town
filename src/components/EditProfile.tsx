@@ -19,11 +19,13 @@ import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 
 
+
 type EditProfileProps = {
 	user: ProfileType;
 };
 
 export const EditProfile = (props: EditProfileProps) => {
+	
 	const { username } = useParams<{ username: string }>();
 	const [profileInfo, setProfileInfo] = useState({
 		location: "",
@@ -39,20 +41,15 @@ export const EditProfile = (props: EditProfileProps) => {
 		l_name: "",
 		user_rating: 4,
 	};
+
 	const [user, setUser] = useState(blankUser);
-	const [scriptLoaded, setScriptLoaded] = useState(false);
-	const input = document.getElementById('location') as HTMLInputElement;
-	const options={
-		types: ['locality'],
-		componentRestrictions: {country: 'au'},
-	}
 
 	useEffect(() => {
-		axios
-			.get(process.env.REACT_APP_API_HOST + "/editProfile/" + username)
-			.then((res2: AxiosResponse) => {
-				setUser(res2.data[0]);
-			});
+			axios
+				.get(process.env.REACT_APP_API_HOST + "/editProfile/" + username)
+				.then((res2: AxiosResponse) => {
+					setUser(res2.data[0]);
+				})			
 	}, [username]);
 	
 	// TODO: read in user profile picture dynamically
@@ -65,7 +62,8 @@ export const EditProfile = (props: EditProfileProps) => {
 		const fileType = fileTypeArray[fileTypeArray.length-1]
 		const fullLink = props.user._id+"."+fileType;
 
-		axios.post(process.env.REACT_APP_API_HOST + "/profileImage", {image_link:fullLink, user_id:props.user._id}, {withCredentials: true})
+		axios.post(process.env.REACT_APP_API_HOST + "/profileImage", {location: profileInfo.location, password: profileInfo.password, image_link:fullLink, user_id:props.user._id}, {withCredentials: true})
+		window.location.assign("/editProfile");
 	};
 
 	const handleChange = (e: any) => {

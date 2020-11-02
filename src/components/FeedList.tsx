@@ -30,6 +30,7 @@ export const FeedList = (props: FeedListProps) => {
 				)
 				.then((response) => {
 					setCards(response.data);
+					console.log("favours data" + response.data);
 				});
 		} else {
 			axios
@@ -40,6 +41,7 @@ export const FeedList = (props: FeedListProps) => {
 				)
 				.then((response) => {
 					setCards(response.data);
+					console.log("favours data" + response.data[0].location);
 				});
 		}
 	}, [props.filter, countCards]);
