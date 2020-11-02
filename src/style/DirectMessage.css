@@ -54,3 +54,11 @@
 #friend:hover {
 	background-color: #eeeeee;
 }
+
+.chatMessageCardLeft {
+	float: left;
+}
+
+.chatMessageCardRight {
+	float: right;
+}
