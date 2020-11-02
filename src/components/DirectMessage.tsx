@@ -108,6 +108,8 @@ export class DirectMessage extends React.Component {
 		};
 		socket.emit("send", message);
 		this.setState({ messages: [...this.state.messages, message] });
+		// reset form after submit
+		this.setState({ newMessage: "" });
 	};
 
 	handleChange = (e: any) => {
@@ -184,6 +186,9 @@ export class DirectMessage extends React.Component {
 													as="textarea"
 													name="messageBox"
 													id="textarea"
+													value={
+														this.state.newMessage
+													}
 													className="form-control pl-2 my-0"
 													placeholder="Type your message here..."
 													onChange={this.handleChange}
