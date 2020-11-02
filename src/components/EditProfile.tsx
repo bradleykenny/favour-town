@@ -54,6 +54,8 @@ export const EditProfile = (props: EditProfileProps) => {
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
 
+		console.log(profileInfo.profilePicture);
+
 		uploadFile(props.user._id, profileInfo.profilePicture);
 		const fileTypeArray = profileInfo.profilePicture.name.split(".");
 		const fileType = fileTypeArray[fileTypeArray.length - 1];
@@ -69,7 +71,6 @@ export const EditProfile = (props: EditProfileProps) => {
 			},
 			{ withCredentials: true }
 		);
-		window.location.assign("/edit/profile");
 	};
 
 	const handleChange = (e: any) => {
