@@ -27,7 +27,6 @@ export const Profile = (props: ProfileProps) => {
 		image_link: "",
 	};
 	const [user, setUser] = useState(blankUser);
-	console.log(user);
 
 	useEffect(() => {
 		axios
