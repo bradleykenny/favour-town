@@ -27,6 +27,7 @@ const App = () => {
 		_id: "",
 		email_addr: "",
 		favour_counter: 0,
+		image_link: "",
 	};
 	const [user, setUser] = useState(blankUser);
 	const [username, setUsername] = useState("");

@@ -12,7 +12,8 @@ export const UserCard = (props: UserCardProps) => {
 	const { user } = props;
 
 	const profileLink = "/profile/" + user.username;
-	const profilePicture = "https://robohash.org/" + user._id;
+	const profilePicture =
+		user.image_link || "https://robohash.org/" + user._id;
 
 	return (
 		<Card className="userCard">

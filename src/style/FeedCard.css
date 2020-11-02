@@ -32,6 +32,13 @@ a {
 	margin-bottom: 10px;
 }
 
+.profilePicture {
+	margin-top: 5px;
+	height: 308px;
+	width: 308px;
+	border-radius: 3px;
+}
+
 .singleCard,
 .feedCard,
 #feedList {

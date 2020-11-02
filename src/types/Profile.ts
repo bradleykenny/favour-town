@@ -3,6 +3,7 @@ export type ProfileType = {
 	_id: string;
 	email_addr: string;
 	favour_counter: number;
+	image_link: string;
 };
 
 export type ExtProfileType = {
