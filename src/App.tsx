@@ -27,6 +27,7 @@ const App = () => {
 		_id: "",
 		email_addr: "",
 		favour_counter: 0,
+		image_link: "",
 	};
 	const [user, setUser] = useState(blankUser);
 	const [username, setUsername] = useState("");
@@ -70,6 +71,14 @@ const App = () => {
 					<NavBar username={user ? user.username : ""} />
 					<Profile user={user} />
 				</Route>
+				<Route path="/favours/claimed">
+					<NavBar username={user ? user.username : ""} />
+					<FeedList
+						user={user}
+						userCardShow={user.username ? true : false}
+						filterType={1}
+					/>
+				</Route>
 				<Route path="/favour/:id">
 					<NavBar username={user ? user.username : ""} />
 					<FavourInfo user={user} />
@@ -84,7 +93,7 @@ const App = () => {
 					<NavBar username={user ? user.username : ""} />
 					<DirectMessage />
 				</Route>
-				<Route path="/editProfile">
+				<Route path="/edit/profile">
 					<NavBar username={user ? user.username : ""} />
 					<EditProfile user={user} />
 				</Route>

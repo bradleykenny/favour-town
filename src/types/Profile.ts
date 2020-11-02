@@ -3,6 +3,7 @@ export type ProfileType = {
 	_id: string;
 	email_addr: string;
 	favour_counter: number;
+	image_link: string;
 };
 
 export type ExtProfileType = {
@@ -13,6 +14,7 @@ export type ExtProfileType = {
 	f_name: string;
 	l_name: string;
 	user_rating: number;
+	image_link: "";
 };
 
 export const emptyUser: ExtProfileType = {
@@ -23,4 +25,5 @@ export const emptyUser: ExtProfileType = {
 	f_name: "",
 	l_name: "",
 	user_rating: 0,
+	image_link: "",
 };

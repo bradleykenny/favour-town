@@ -18,8 +18,6 @@ import { uploadFile } from "./FileUpload";
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 
 
-
-
 type EditProfileProps = {
 	user: ProfileType;
 };
@@ -40,30 +38,32 @@ export const EditProfile = (props: EditProfileProps) => {
 		f_name: "",
 		l_name: "",
 		user_rating: 4,
+		image_link: "",
 	};
 
 	const [user, setUser] = useState(blankUser);
 
 	useEffect(() => {
-			axios
-				.get(process.env.REACT_APP_API_HOST + "/editProfile/" + username)
-				.then((res2: AxiosResponse) => {
-					setUser(res2.data[0]);
-				})			
+		axios
+			.get(process.env.REACT_APP_API_HOST + "/edit/profile/" + username)
+			.then((res2: AxiosResponse) => {
+				setUser(res2.data[0]);
+			});
 	}, [username]);
-	
+
 	// TODO: read in user profile picture dynamically
 	const profilePicture = "https://robohash.org/" + props.user._id;
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
-		uploadFile(props.user._id, profileInfo.profilePicture);
 		
-		const fileTypeArray = profileInfo.profilePicture.name.split(".")
-		const fileType = fileTypeArray[fileTypeArray.length-1]
-		const fullLink = props.user._id+"."+fileType;
+		uploadFile(props.user._id, profileInfo.profilePicture);
+		const fileTypeArray = profileInfo.profilePicture.name.split(".");
+		const fileType = fileTypeArray[fileTypeArray.length - 1];
+		const fullLink = props.user._id + "." + fileType;
 
 		axios.post(process.env.REACT_APP_API_HOST + "/profileImage", {location: profileInfo.location, password: profileInfo.password, image_link:fullLink, user_id:props.user._id}, {withCredentials: true})
 		window.location.assign("/editProfile");
+
 	};
 
 	const handleChange = (e: any) => {
@@ -96,7 +96,6 @@ export const EditProfile = (props: EditProfileProps) => {
 		}
 	};
 
-	
 	return (
 		<div>
 			<Jumbotron>
@@ -170,7 +169,7 @@ export const EditProfile = (props: EditProfileProps) => {
 									</Form.Group>
 									<Form.Group controlId="formPassword">
 										<Form.Label>Change password</Form.Label>
-										<Form.Control 
+										<Form.Control
 											name="password"
 											type="password"
 											placeholder="Enter new password"

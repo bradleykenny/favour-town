@@ -112,6 +112,21 @@ export const FavourInfo = (props: FavourInfoProps) => {
 			});
 	};
 
+	const handleComplete = (favour_id: string, requestor: string) => {
+		axios
+			.post(
+				process.env.REACT_APP_API_HOST + "/favours/complete",
+				{
+					favour_id: favour_id,
+					requestor: requestor,
+				},
+				{ withCredentials: true }
+			)
+			.then(() => {
+				window.location.assign("/favour/" + favour_id);
+			});
+	};
+
 	const profileLink = "/profile/" + favour.username;
 
 	return (
@@ -170,22 +185,37 @@ export const FavourInfo = (props: FavourInfoProps) => {
 									{favour.favour_coins}
 								</ListGroupItem>
 								{favour.favour_status === 1 && (
-									<ListGroupItem>
-										<i>Claimed by</i>{" "}
-										<Card.Link
-											href={
-												"/profile/" +
-												assignedUser.username
-											}
-										>
-											{assignedUser.f_name +
-												" " +
-												assignedUser.l_name +
-												"[@" +
-												assignedUser.username +
-												"]"}
-										</Card.Link>
-									</ListGroupItem>
+									<>
+										<ListGroupItem>
+											<i>Claimed by</i>{" "}
+											<Card.Link
+												href={
+													"/profile/" +
+													assignedUser.username
+												}
+											>
+												{assignedUser.f_name +
+													" " +
+													assignedUser.l_name +
+													"[@" +
+													assignedUser.username +
+													"]"}
+											</Card.Link>
+										</ListGroupItem>
+										<ListGroupItem>
+											<Card.Link
+												onClick={() =>
+													handleComplete(
+														favour._id,
+														favour.assigned_user_id ||
+															""
+													)
+												}
+											>
+												Mark as complete
+											</Card.Link>
+										</ListGroupItem>
+									</>
 								)}
 								{favour.favour_status === 2 && (
 									<ListGroupItem>
