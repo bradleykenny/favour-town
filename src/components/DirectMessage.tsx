@@ -173,6 +173,7 @@ export class DirectMessage extends React.Component {
 													receiverId={
 														this.state.receiverID
 													}
+													yourId={this.state.yourId}
 												/>
 											))}
 									</ListGroup>

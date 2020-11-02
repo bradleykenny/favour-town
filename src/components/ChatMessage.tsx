@@ -13,11 +13,21 @@ type messageProps = {
 	};
 	senderId: string;
 	receiverId: string;
+	yourId: string;
 };
 
 export const ChatMessage = (props: messageProps) => {
+	var cardPosition: string;
+	if (props.message.authorId === props.yourId) {
+		cardPosition = "chatMessageCardRight";
+	} else {
+		cardPosition = "chatMessageCardLeft";
+	}
 	return (
-		<li className="chat-message d-flex justify-content-between mb-4 mt-1">
+		<li
+			className="chat-message d-flex justify-content-between mb-4 mt-1"
+			style={{ float: "right" }}
+		>
 			<img
 				className="img-circle mr-2 z-depth-1"
 				src={props.message.avatar}
@@ -25,7 +35,7 @@ export const ChatMessage = (props: messageProps) => {
 				style={{ width: "3rem", height: "3rem" }}
 			/>
 			<Col>
-				<Card className="chatMessageLeft">
+				<Card className={cardPosition} style={{ width: "30rem" }}>
 					<Card.Body>
 						<div>
 							<strong className="primary-font">
