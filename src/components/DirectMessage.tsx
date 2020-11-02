@@ -103,7 +103,7 @@ export class DirectMessage extends React.Component {
 			author: this.state.yourUsername,
 			avatar: "https://robohash.org/" + this.state.yourUsername,
 			reciever: this.state.receiverID,
-			when: "now",
+			when: moment().format("MMMM Do, h:mm a"),
 			message: this.state.newMessage,
 		};
 		socket.emit("send", message);
