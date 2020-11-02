@@ -108,8 +108,7 @@ export const EditProfile = (props: EditProfileProps) => {
 			<Jumbotron>
 				<Image
 					src={profilePicture}
-					roundedCircle
-					className="profileImage"
+					className="profileImage editProfileImage"
 				/>
 				<h1>@{props.user.username}</h1>
 				<h3>{props.user.email_addr}</h3>

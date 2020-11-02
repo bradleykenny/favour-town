@@ -46,11 +46,7 @@ export const Profile = (props: ProfileProps) => {
 	return (
 		<div>
 			<Jumbotron>
-				<Image
-					src={profilePicture}
-					roundedCircle
-					className="profileImage"
-				/>
+				<Image src={profilePicture} className="profileImage" />
 				<h1>
 					{user.f_name} {user.l_name}
 				</h1>
@@ -89,7 +85,11 @@ export const Profile = (props: ProfileProps) => {
 				</div>
 				<p>
 					{props.user._id === user._id && (
-						<Button variant="primary" onClick={handleEdit}>
+						<Button
+							variant="primary"
+							onClick={handleEdit}
+							className="editBtn"
+						>
 							Edit
 						</Button>
 					)}
@@ -122,7 +122,7 @@ export const Profile = (props: ProfileProps) => {
 								id="text"
 								className="form-control pl-2 my-0"
 							/>
-							<Button variant="primary" type="submit">
+							<Button variant="primary" type="submit" size="sm">
 								Message
 							</Button>
 						</Form>
