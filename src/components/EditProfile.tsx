@@ -15,15 +15,13 @@ import axios, { AxiosResponse } from "axios";
 import "../style/Profile.css";
 import { ProfileType, ExtProfileType } from "../types/Profile";
 import { uploadFile } from "./FileUpload";
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
-
+import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 
 type EditProfileProps = {
 	user: ProfileType;
 };
 
 export const EditProfile = (props: EditProfileProps) => {
-	
 	const { username } = useParams<{ username: string }>();
 	const [profileInfo, setProfileInfo] = useState({
 		location: "",
@@ -55,15 +53,23 @@ export const EditProfile = (props: EditProfileProps) => {
 	const profilePicture = "https://robohash.org/" + props.user._id;
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
-		
+
 		uploadFile(props.user._id, profileInfo.profilePicture);
 		const fileTypeArray = profileInfo.profilePicture.name.split(".");
 		const fileType = fileTypeArray[fileTypeArray.length - 1];
 		const fullLink = props.user._id + "." + fileType;
 
-		axios.post(process.env.REACT_APP_API_HOST + "/profileImage", {location: profileInfo.location, password: profileInfo.password, image_link:fullLink, user_id:props.user._id}, {withCredentials: true})
-		window.location.assign("/editProfile");
-
+		axios.post(
+			process.env.REACT_APP_API_HOST + "/profileImage",
+			{
+				location: profileInfo.location,
+				password: profileInfo.password,
+				image_link: fullLink,
+				user_id: props.user._id,
+			},
+			{ withCredentials: true }
+		);
+		window.location.assign("/edit/profile");
 	};
 
 	const handleChange = (e: any) => {
@@ -150,13 +156,15 @@ export const EditProfile = (props: EditProfileProps) => {
 								<Form onSubmit={handleSubmit}>
 									<Form.Group controlId="formLocation">
 										<Form.Label>Change location</Form.Label>
-										<GooglePlacesAutocomplete apiKey="AIzaSyBT2ahmrpwBI5acSuxtIa-js55Ah33YVkM" 
-										autocompletionRequest={{
-											types: ['(cities)'],
-											componentRestrictions: {
-												country: ['au'],
-											}
-										}}>
+										<GooglePlacesAutocomplete
+											apiKey="AIzaSyBT2ahmrpwBI5acSuxtIa-js55Ah33YVkM"
+											autocompletionRequest={{
+												types: ["(cities)"],
+												componentRestrictions: {
+													country: ["au"],
+												},
+											}}
+										>
 											<Form.Control
 												id="location"
 												name="location"
